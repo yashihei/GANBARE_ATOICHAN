@@ -1,13 +1,12 @@
 #include <Siv3D.hpp>
+#include "GameManager.h"
 
 void Main()
 {
-	const Font font(30);
-
+	auto gm = std::make_shared<GameManager>();
 	while (System::Update())
 	{
-		font.draw(L"‚æ‚¤‚±‚»ASiv3D ‚Ì¢ŠE‚ÖI");
-
-		Circle(Mouse::Pos(), 50).draw({ 255, 0, 0, 127 });
+		gm->move();
+		gm->draw();
 	}
 }

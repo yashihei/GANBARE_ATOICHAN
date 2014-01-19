@@ -85,7 +85,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="ShotManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="engine\assets\circle.png" />
@@ -141,6 +144,7 @@
     <None Include="engine\shaders\d3d11\VS.SIV3D" />
     <None Include="engine\Siv3DVersion" />
     <None Include="Example\Prokofiev.mid" />
+    <None Include="ShotManager" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Example\素材について.txt" />
@@ -159,6 +163,11 @@
     <Font Include="engine\fonts\mplus\mplus-1p-thin.ttf" />
     <Font Include="engine\fonts\umeplus-p-gothic.ttf" />
     <Font Include="Example\YomogiFont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="ShotManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

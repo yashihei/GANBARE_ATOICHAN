@@ -42,6 +42,15 @@
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico">
@@ -195,6 +204,7 @@
     <None Include="engine\shaders\d3d11\FXAA_Q20.ps">
       <Filter>リソース ファイル\engine\shaders\d3d11</Filter>
     </None>
+    <None Include="ShotManager" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Example\素材について.txt">
@@ -237,5 +247,16 @@
     <Font Include="engine\fonts\mplus\mplus-1p-thin.ttf">
       <Filter>リソース ファイル\engine\fonts\mplus</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
