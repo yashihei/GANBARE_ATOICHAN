@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Ship.cpp" />
@@ -144,7 +145,6 @@
     <None Include="engine\shaders\d3d11\VS.SIV3D" />
     <None Include="engine\Siv3DVersion" />
     <None Include="Example\Prokofiev.mid" />
-    <None Include="ShotManager" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Example\素材について.txt" />
@@ -165,6 +165,7 @@
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShotManager.h" />

@@ -9,15 +9,22 @@ class Shot
 {
 public:
 	Shot();
-	Circle core;
+	void move();
+	void draw();
 private:
+	int speed;
+	int rad;//“–‚½‚è”»’è‚Ì”¼Œa
+	Vec2 pos;
+public:
+	void setPos(Vec2 pos) { this->pos = pos; };
+	Vec2 getPos() { return pos; };
 };
 
 class ShotManager
 {
 public:
 	ShotManager();
-	void createShot(Ship* ship);
+	void create(Ship* ship);
 	void clear();
 	void move();
 	void draw();

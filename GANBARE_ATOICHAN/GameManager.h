@@ -3,6 +3,7 @@
 
 class Ship;
 class ShotManager;
+class EnemyManager;
 
 class GameManager
 {
@@ -13,4 +14,5 @@ public:
 private:
 	std::shared_ptr<Ship> ship;
 	std::shared_ptr<ShotManager> shotManager;
+	std::shared_ptr<EnemyManager> enemyManager;
 };

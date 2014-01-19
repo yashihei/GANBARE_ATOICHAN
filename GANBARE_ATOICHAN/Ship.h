@@ -7,15 +7,15 @@ class ShotManager;
 class Ship
 {
 public:
-	//using Circle::draw;
 	Ship(std::shared_ptr<ShotManager> shotManager);
 	void move();
 	void draw();
-
-	Circle core;//hitpoint and movecontrol
 private:
 	std::shared_ptr<ShotManager> shotManager;
-	int cnt;
+	int rad;
+	Vec2 pos;
+
+	int cnt;//“à•”ƒJƒEƒ“ƒ^
 public:
-	//Circle getCore() { return core; };
+	Vec2 getPos() { return pos; };
 };

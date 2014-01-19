@@ -3,11 +3,10 @@
 #include "ShotManager.h"
 
 Ship::Ship(std::shared_ptr<ShotManager> shotManager) {
-	const int size = 10;
-	core.setPos({ size , Window::Height() / 2 });
-	core.setSize(size);
-
+	rad = 10;
 	this->shotManager = shotManager;
+
+	pos.set({ rad, Window::Height() / 2 });
 	cnt = 0;
 }
 
@@ -22,17 +21,17 @@ void Ship::move() {
 		vel.x *= 0.707;
 		vel.y *= 0.707;
 	}
-	core.moveBy(vel);
+	pos.moveBy(vel);
 	//TODO: ウィンドウから出ないように
 
-	if (Input::KeyZ.pressed && cnt % 10 == 0) {
-		shotManager->createShot(this);
+	if (Input::KeyZ.pressed && cnt % 3 == 0) {
+		shotManager->create(this);
 	}
-	if (Input::KeyC.pressed) shotManager->clear();
 	cnt++;
 }
 
 void Ship::draw() {
-	core.draw(Palette::Red);
-	core.drawFrame(2, 0, Palette::White);
+	Circle c(pos, rad);
+	c.draw(Palette::Red);
+	c.drawFrame(2, 0, Palette::White);
 }

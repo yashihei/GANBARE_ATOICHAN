@@ -51,6 +51,9 @@
     <ClCompile Include="ShotManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico">
@@ -204,7 +207,6 @@
     <None Include="engine\shaders\d3d11\FXAA_Q20.ps">
       <Filter>リソース ファイル\engine\shaders\d3d11</Filter>
     </None>
-    <None Include="ShotManager" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Example\素材について.txt">
@@ -256,6 +258,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ShotManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

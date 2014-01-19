@@ -3,34 +3,44 @@
 #include "Ship.h";
 
 Shot::Shot() {
-	core.setSize(5);
+	speed = 30;
+	rad = 5;
+}
+
+void Shot::move() {
+	pos.moveBy({ speed, 0 });
+}
+
+void Shot::draw() {
+	Circle c(pos, rad);
+	c.draw();
 }
 
 ShotManager::ShotManager() {
 }
 
-void ShotManager::createShot(Ship* ship) {
+void ShotManager::create(Ship* ship) {
 	auto s = std::make_shared<Shot>();
-	s->core.center = ship->core.center;
+	s->setPos(ship->getPos());
 	shots.push_back(s);
 }
 
 void ShotManager::move() {
 	for (auto shot : shots) {
-		shot->core.moveBy({ 10, 0 });
+		shot->move();
 	}
 	autoRemove();
 }
 
 void ShotManager::draw() {
 	for (auto shot : shots) {
-		shot->core.draw();
+		shot->draw();
 	}
 }
 
 void ShotManager::autoRemove() {
 	for (auto it = shots.begin(); it != shots.end();) {
-		if ((*it)->core.x > Window::Width()) {
+		if ((*it)->getPos().x > Window::Width()) {
 			it = shots.erase(it);
 			continue;
 		}
