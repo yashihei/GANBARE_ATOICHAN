@@ -3,7 +3,7 @@
 #include "ShotManager.h"
 
 Ship::Ship(std::shared_ptr<ShotManager> shotManager) {
-	rad = 10;
+	rad = 10.0;
 	this->shotManager = shotManager;
 
 	pos.set({ rad, Window::Height() / 2 });
@@ -25,7 +25,7 @@ void Ship::move() {
 	//TODO: ウィンドウから出ないように
 
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
-		shotManager->create(this);
+		shotManager->create(pos);
 	}
 	cnt++;
 }

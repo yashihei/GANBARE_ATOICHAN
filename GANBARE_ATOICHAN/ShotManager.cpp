@@ -3,8 +3,8 @@
 #include "Ship.h";
 
 Shot::Shot() {
-	speed = 30;
-	rad = 5;
+	speed = 30.0;
+	rad = 5.0;
 }
 
 void Shot::move() {
@@ -19,21 +19,22 @@ void Shot::draw() {
 ShotManager::ShotManager() {
 }
 
-void ShotManager::create(Ship* ship) {
+void ShotManager::create(const Vec2 pos)
+{
 	auto s = std::make_shared<Shot>();
-	s->setPos(ship->getPos());
+	s->setPos(pos);
 	shots.push_back(s);
 }
 
 void ShotManager::move() {
-	for (auto shot : shots) {
+	for (auto& shot : shots) {
 		shot->move();
 	}
 	autoRemove();
 }
 
 void ShotManager::draw() {
-	for (auto shot : shots) {
+	for (auto& shot : shots) {
 		shot->draw();
 	}
 }

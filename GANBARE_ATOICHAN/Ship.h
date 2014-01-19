@@ -12,7 +12,7 @@ public:
 	void draw();
 private:
 	std::shared_ptr<ShotManager> shotManager;
-	int rad;
+	double rad;
 	Vec2 pos;
 
 	int cnt;//“à•”ƒJƒEƒ“ƒ^
