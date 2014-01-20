@@ -1,5 +1,5 @@
-#include <Siv3D.hpp>
 #include "ShotManager.h"
+
 #include "Ship.h";
 
 Shot::Shot() {

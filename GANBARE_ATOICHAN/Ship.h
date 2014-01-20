@@ -1,17 +1,15 @@
 #pragma once
 #include <Siv3D.hpp>
-#include <memory>
-
-class ShotManager;
+#include "TypeDef.h"
 
 class Ship
 {
 public:
-	Ship(std::shared_ptr<ShotManager> shotManager);
+	Ship(ShotManagerPtr shotManager);
 	void move();
 	void draw();
 private:
-	std::shared_ptr<ShotManager> shotManager;
+	ShotManagerPtr shotManager;
 	double rad;
 	Vec2 pos;
 

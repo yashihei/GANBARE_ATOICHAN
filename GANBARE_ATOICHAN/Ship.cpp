@@ -1,8 +1,8 @@
-#include <Siv3D.hpp>
 #include "Ship.h"
+
 #include "ShotManager.h"
 
-Ship::Ship(std::shared_ptr<ShotManager> shotManager) {
+Ship::Ship(ShotManagerPtr shotManager) {
 	rad = 10.0;
 	this->shotManager = shotManager;
 

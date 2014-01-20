@@ -1,7 +1,7 @@
 #pragma once
 #include <Siv3D.hpp>
-#include <memory>
 #include <list>
+#include "TypeDef.h"
 
 class Enemy
 {
@@ -25,5 +25,5 @@ public:
 	void draw();
 	void move();
 private:
-	std::list<std::shared_ptr<Enemy>> enemies;
+	std::list<EnemyPtr> enemies;
 };

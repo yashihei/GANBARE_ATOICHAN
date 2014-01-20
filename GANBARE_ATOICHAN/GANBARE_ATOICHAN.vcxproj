@@ -169,6 +169,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShotManager.h" />
+    <ClInclude Include="TypeDef.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

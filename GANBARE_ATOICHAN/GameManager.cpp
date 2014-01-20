@@ -1,8 +1,9 @@
 #include "GameManager.h"
+
+#include <Siv3D.hpp>
 #include "Ship.h"
 #include "ShotManager.h"
 #include "EnemyManager.h"
-#include <Siv3D.hpp>
 
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();

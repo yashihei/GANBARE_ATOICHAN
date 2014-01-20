@@ -37,5 +37,5 @@ void EnemyManager::move() {
 	for (auto& enemy : enemies) {
 		enemy->move();
 	}
-	if (Random(0, 20) == 0) create({ Window::Width(), Random(0, Window::Height()) });
+	if (Random(0, 50) == 0) create({ Window::Width(), Random(0, Window::Height()) });
 }

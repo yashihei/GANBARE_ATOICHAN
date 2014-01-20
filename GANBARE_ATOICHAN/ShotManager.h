@@ -1,7 +1,7 @@
 #pragma once
 #include <Siv3D.hpp>
 #include <list>
-#include <memory>
+#include "TypeDef.h"
 
 class Shot
 {
@@ -27,6 +27,6 @@ public:
 	void move();
 	void draw();
 private:
-	std::list<std::shared_ptr<Shot>> shots;
+	std::list<ShotPtr> shots;
 	void autoRemove();
 };
