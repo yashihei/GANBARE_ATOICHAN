@@ -1,6 +1,10 @@
 #pragma once
 #include <memory>
 
+/*
+1‰ÓŠ‚Å‚µ‚©ŒÄ‚Î‚ê‚È‚¢shared_ptr‚É‚Â‚¢‚Ä‚ÍAtypedef‚µ‚È‚¢‚©‚à
+*/
+
 class Ship;
 class Enemy;
 class EnemyManager;

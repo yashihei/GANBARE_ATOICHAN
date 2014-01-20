@@ -1,11 +1,11 @@
-#include "EnemyManager.h"
+#include "Enemy.h"
 
 Enemy::Enemy() {
 	rad = 15.0;
 }
 
 void Enemy::move() {
-	pos.moveBy({ -4.0, 0 });//âº
+	pos.moveBy({ -4.0, 0 });
 }
 
 void Enemy::draw() {
@@ -21,6 +21,7 @@ void EnemyManager::create(Vec2 pos) {
 	auto e = std::make_shared<Enemy>();
 	e->setPos(pos);
 	enemies.push_back(e);
+	//TODO:ÉPÅ[ÉXÇ‡ÇÁÇ¡ÇƒswitchÇ≈ê∂ê¨
 }
 
 void EnemyManager::clear() {

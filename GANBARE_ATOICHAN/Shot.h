@@ -22,7 +22,7 @@ class ShotManager
 {
 public:
 	ShotManager();
-	void create(const Vec2 pos);
+	void create(Vec2 pos);
 	void clear();
 	void move();
 	void draw();

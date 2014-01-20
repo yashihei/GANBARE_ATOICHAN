@@ -5,7 +5,7 @@
 class Ship
 {
 public:
-	Ship(ShotManagerPtr shotManager);
+	Ship(ShotManagerPtr);
 	void move();
 	void draw();
 private:

@@ -1,6 +1,6 @@
 #include "Ship.h"
 
-#include "ShotManager.h"
+#include "Shot.h"
 
 Ship::Ship(ShotManagerPtr shotManager) {
 	rad = 10.0;

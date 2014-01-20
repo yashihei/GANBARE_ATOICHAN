@@ -1,4 +1,4 @@
-#include "ShotManager.h"
+#include "Shot.h"
 
 #include "Ship.h";
 
@@ -19,7 +19,7 @@ void Shot::draw() {
 ShotManager::ShotManager() {
 }
 
-void ShotManager::create(const Vec2 pos)
+void ShotManager::create(Vec2 pos)
 {
 	auto s = std::make_shared<Shot>();
 	s->setPos(pos);
