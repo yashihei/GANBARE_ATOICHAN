@@ -27,25 +27,19 @@ void ShotManager::create(Vec2 pos)
 }
 
 void ShotManager::move() {
-	for (auto& shot : shots) {
-		shot->move();
-	}
-	autoRemove();
-}
-
-void ShotManager::draw() {
-	for (auto& shot : shots) {
-		shot->draw();
-	}
-}
-
-void ShotManager::autoRemove() {
 	for (auto it = shots.begin(); it != shots.end();) {
+		(*it)->move();
 		if ((*it)->getPos().x > Window::Width()) {
 			it = shots.erase(it);
 			continue;
 		}
 		it++;
+	}
+}
+
+void ShotManager::draw() {
+	for (auto& shot : shots) {
+		shot->draw();
 	}
 }
 
