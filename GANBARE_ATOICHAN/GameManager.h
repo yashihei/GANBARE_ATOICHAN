@@ -1,5 +1,9 @@
 #pragma once
-#include "TypeDef.h"
+#include <memory>
+
+class Ship;
+class ShotManager;
+class EnemyManager;
 
 class GameManager
 {
@@ -8,7 +12,7 @@ public:
 	void move();
 	void draw();
 private:
-	ShipPtr ship;
-	ShotManagerPtr shotManager;
-	EnemyManagerPtr enemyManager;
+	std::shared_ptr<Ship> ship;
+	std::shared_ptr<ShotManager> shotManager;
+	std::shared_ptr<EnemyManager> enemyManager;
 };

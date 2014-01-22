@@ -1,6 +1,7 @@
 #pragma once
 #include <Siv3D.hpp>
-#include "TypeDef.h"
+
+class ShotManager;
 
 class Ship
 {
