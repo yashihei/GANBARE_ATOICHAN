@@ -2,7 +2,7 @@
 
 #include "Shot.h"
 
-Ship::Ship(ShotManagerPtr shotManager) {
+Ship::Ship(ShotManager* shotManager) {
 	rad = 10.0;
 	this->shotManager = shotManager;
 

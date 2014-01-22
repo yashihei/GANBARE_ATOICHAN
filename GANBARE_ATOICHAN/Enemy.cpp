@@ -1,36 +1,42 @@
 #include "Enemy.h"
 
-void EnemyMove1::move(Vec2* pos, int cnt) {
-	if (cnt < 60) {
-		pos->moveBy({ -3.0, 0.0 });
-	} else if (cnt > 180) {
-		pos->moveBy({ 6.0, 0.0 });
-	}
-}
-
-Enemy::Enemy(Vec2 pos) : pos(pos) {
-	enemyMove = std::make_shared<EnemyMove1>();
+Enemy::Enemy() {
 	rad = 15.0;
 	cnt = 0;
 }
 
-void Enemy::move() {
-	enemyMove->move(&pos, cnt);
-	cnt++;
-}
-
 void Enemy::draw() {
 	Circle c(pos, rad);
-	c.draw(palette);
+	c.draw(color);
 	c.drawFrame(2.0, 0.0, Palette::White);
+}
+
+Enemy1::Enemy1() {
+	rad = 20;
+	color = Color(100, 100, 100, 127);
+}
+
+void Enemy1::move() {
+	if (cnt < 60) {
+		pos.moveBy({ -3.0, 0.0 });
+	} else if (cnt > 180) {
+		pos.moveBy({ 6.0, 0.0 });
+	}
+	cnt++;
 }
 
 EnemyManager::EnemyManager() {
 }
 
-void EnemyManager::create(Vec2 pos)
+void EnemyManager::create(Vec2 pos, int type)
 {
-	auto e = std::make_shared<Enemy>(pos);
+	std::shared_ptr<Enemy> e;
+	switch (type) {
+	case 1:
+		e = std::make_shared<Enemy1>();
+		break;
+	}
+	e->setPos(pos);
 	enemies.push_back(e);
 }
 
@@ -55,5 +61,5 @@ void EnemyManager::move() {
 		}
 		it++;
 	}
-	if (Random(0, 50) == 0) create({ Window::Width(), Random(0, Window::Height()) });
+	if (Random(0, 50) == 0) create({ Window::Width(), Random(0, Window::Height()) }, 1);
 }

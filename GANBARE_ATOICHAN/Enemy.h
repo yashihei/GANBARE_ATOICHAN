@@ -3,32 +3,26 @@
 #include <list>
 #include "TypeDef.h"
 
-// Strategy Pattern
-class EnemyMove {
-public:
-	virtual ~EnemyMove(){};
-	virtual void move(Vec2* pos, int cnt) = 0;
-};
-
-class EnemyMove1 : public EnemyMove {
-	void move(Vec2* pos, int cnt) override;
-};
-
 class Enemy
 {
 public:
-	Enemy(Vec2 pos);
-	void move();
+	Enemy();
+	virtual void move() = 0;
 	void draw();
 protected:
 	Vec2 pos;
 	double rad;
-	Palette palette;
-	std::shared_ptr<EnemyMove> enemyMove;
+	Color color;
 	int cnt;
 public:
 	void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() { return this->pos; };
+};
+
+class Enemy1 : public Enemy {
+public:
+	Enemy1();
+	void move() override;
 };
 
 //敵の集合体、別のデザパタが適用出来ないか模索
@@ -36,7 +30,7 @@ class EnemyManager
 {
 public:
 	EnemyManager();
-	void create(Vec2 pos);//場所と、タイプ
+	void create(Vec2 pos, int type);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();

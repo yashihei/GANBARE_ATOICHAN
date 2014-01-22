@@ -5,11 +5,11 @@
 class Ship
 {
 public:
-	Ship(ShotManagerPtr);
+	Ship(ShotManager*);
 	void move();
 	void draw();
 private:
-	ShotManagerPtr shotManager;
+	ShotManager* shotManager;
 	double rad;
 	Vec2 pos;
 
