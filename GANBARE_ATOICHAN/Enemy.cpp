@@ -1,6 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy() {
+#include "Bullet.h"
+
+Enemy::Enemy(BulletManager* bulletManager) :
+bulletManager(bulletManager)
+{
 	rad = 15.0;
 	cnt = 0;
 }
@@ -11,7 +15,7 @@ void Enemy::draw() {
 	c.drawFrame(2.0, 0.0, Palette::White);
 }
 
-Enemy1::Enemy1() {
+Enemy1::Enemy1(BulletManager* bm) : Enemy(bm) {
 	rad = 20;
 	color = Color(100, 100, 100, 127);
 }
@@ -22,18 +26,24 @@ void Enemy1::move() {
 	} else if (cnt > 180) {
 		pos.moveBy({ 6.0, 0.0 });
 	}
+	if (cnt > 60 && cnt % 3 == 0) {
+		bulletManager->create(pos, { -2.0, 0.0 });
+	}
 	cnt++;
 }
 
-EnemyManager::EnemyManager() {
+EnemyManager::EnemyManager(BulletManager* bulletManager) :
+bulletManager(bulletManager)
+{
 }
 
 void EnemyManager::create(Vec2 pos, int type)
 {
+	//TODO: Œp³‚æ‚èˆÙó‚Å
 	std::shared_ptr<Enemy> e;
 	switch (type) {
 	case 1:
-		e = std::make_shared<Enemy1>();
+		e = std::make_shared<Enemy1>(bulletManager);
 		break;
 	}
 	e->setPos(pos);
