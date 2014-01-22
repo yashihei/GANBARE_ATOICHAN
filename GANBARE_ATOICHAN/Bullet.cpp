@@ -2,7 +2,7 @@
 
 Bullet::Bullet(Vec2 pos, Vec2 vel) :pos(pos), vel(vel) {
 	rad = 5.0;
-	color = Color(Palette::Wheat);
+	color = Color(0,255,255,200);
 } 
 
 void Bullet::move() {
