@@ -5,12 +5,14 @@
 #include "Shot.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "StageManager.h"
 
 GameManager::GameManager() {
 	bulletManager = std::make_shared<BulletManager>();
 	shotManager = std::make_shared<ShotManager>();
 	ship = std::make_shared<Ship>(shotManager.get());
-	enemyManager = std::make_shared<EnemyManager>(bulletManager.get(), ship.get());
+	enemyManager = std::make_shared<EnemyManager>();
+	stageManager = std::make_shared<StageManager>(enemyManager.get());
 }
 
 void GameManager::move() {
@@ -18,6 +20,7 @@ void GameManager::move() {
 	shotManager->move();
 	enemyManager->move();
 	bulletManager->move();
+	stageManager->move();
 }
 
 void GameManager::draw() {

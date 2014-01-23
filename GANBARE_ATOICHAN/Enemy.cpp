@@ -1,13 +1,22 @@
 #include "Enemy.h"
 
-#include "Bullet.h"
-#include "Ship.h"
+#include "EnemyMove.h"
 
-Enemy::Enemy(BulletManager* bulletManager, Ship* ship) :
-bulletManager(bulletManager), ship(ship)
-{
+Enemy::Enemy() {
+	//ˆê‰‰¼ TODO:init‚Åset‚·‚é
 	rad = 15.0;
-	cnt = 0;
+	color = Color(100, 100, 100, 127);
+}
+
+void Enemy::init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove)
+{
+	this->enemyMove = enemyMove;
+	this->pos = pos;
+}
+
+void Enemy::move() {
+	enemyMove->move(&pos, cnt);
+	cnt++;
 }
 
 void Enemy::draw() {
@@ -16,40 +25,15 @@ void Enemy::draw() {
 	c.drawFrame(2.0, 0.0, Palette::White);
 }
 
-Enemy1::Enemy1(BulletManager* bm, Ship* ship) : Enemy(bm, ship) {
-	rad = 20;
-	color = Color(100, 100, 100, 127);
+EnemyManager::EnemyManager() {
+	enemyMoveFactory = std::make_shared<EnemyMoveFactory>();
 }
 
-void Enemy1::move() {
-	if (cnt < 60) {
-		pos.moveBy({ -3.0, 0.0 });
-	} else if (cnt > 180) {
-		pos.moveBy({ 6.0, 0.0 });
-	}
-	if (cnt > 60 && cnt % 10 == 0 && cnt < 180) {
-		const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-		const double sp = 10.0;
-		bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp });
-	}
-	cnt++;
-}
-
-EnemyManager::EnemyManager(BulletManager* bulletManager, Ship* ship) :
-bulletManager(bulletManager), ship(ship)
-{
-}
-
-void EnemyManager::create(Vec2 pos, int type)
+void EnemyManager::create(Vec2 pos, int movePtn)
 {
 	//TODO: Œp³‚æ‚èˆÙó‚Å
-	std::shared_ptr<Enemy> e;
-	switch (type) {
-	case 1:
-		e = std::make_shared<Enemy1>(bulletManager, ship);
-		break;
-	}
-	e->setPos(pos);
+	auto e = std::make_shared<Enemy>();
+	e->init(pos, enemyMoveFactory->create(movePtn));
 	enemies.push_back(e);
 }
 
@@ -74,5 +58,4 @@ void EnemyManager::move() {
 		}
 		it++;
 	}
-	if (Random(0, 50) == 0) create({ Window::Width(), Random(0, Window::Height()) }, 1);
 }

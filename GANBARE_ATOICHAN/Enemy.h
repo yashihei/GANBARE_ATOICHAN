@@ -2,45 +2,46 @@
 #include <Siv3D.hpp>
 #include <list>
 
-class BulletManager;
-class Ship;
+class EnemyMove;
+class EnemyMoveFactory;
+
+/*
+ * Enemy.h
+ * 敵オブジェクトなの
+ * 敵の種類は継承ではなく、移譲によって表現するの
+ */
+
+typedef std::shared_ptr<EnemyMove> EnemyMovePtr;
 
 class Enemy
 {
 public:
-	//Enemy(){};
-	Enemy(BulletManager* bulletManager, Ship* ship);
-	virtual void move() = 0;
+	Enemy();
+	void init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove);
+	void move();
 	void draw();
-protected:
+private:
 	Vec2 pos;
 	//Vec2 vel;
 	double rad;
 	Color color;
-	int cnt;
-	BulletManager* bulletManager;
-	Ship* ship;
+	int cnt = 0;
+	EnemyMovePtr enemyMove;
+	//std::shared_ptr<danmakuPattern> hoge;
 public:
 	void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() { return this->pos; };
 };
 
-class Enemy1 : public Enemy {
-public:
-	Enemy1(BulletManager*, Ship*);
-	void move() override;
-};
-
 class EnemyManager
 {
 public:
-	EnemyManager(BulletManager* bulletManager, Ship* ship);
-	void create(Vec2 pos, int type);//場所と、タイプ
+	EnemyManager();
+	void create(Vec2 pos, int movePtn);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
-	BulletManager* bulletManager;
-	Ship* ship;
+	std::shared_ptr<EnemyMoveFactory> enemyMoveFactory;
 };
