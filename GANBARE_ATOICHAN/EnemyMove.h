@@ -2,6 +2,11 @@
 #include <Siv3D.hpp>
 #include <memory>
 
+enum class EnemyMovePtn {
+	NORMAL,
+	KUNEKUNE,
+};
+
 class EnemyMove
 {
 public:
@@ -13,10 +18,13 @@ class EnemyMove1 : public EnemyMove {
 	void move(Vec2* pos, int cnt) override;
 };
 
+class EnemyMove2 : public EnemyMove {
+};
+
 class EnemyMoveFactory
 {
 public:
-	std::shared_ptr<EnemyMove> create(int type);
+	std::shared_ptr<EnemyMove> create(EnemyMovePtn MovePtn);
 };
 
 

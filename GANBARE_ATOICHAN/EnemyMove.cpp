@@ -1,5 +1,7 @@
 #include "EnemyMove.h"
 
+//MovePtn:NORMAL
+//‚Ü‚Á‚·‚®i‚ñ‚Å‚¿‚å‚Á‚Æ‚µ‚½‚çˆø‚Á‚Ş‰Âˆ¤‚¢q
 void EnemyMove1::move(Vec2* pos, int cnt) {
 	if (cnt < 60) {
 		pos->moveBy({ -3.0, 0.0 });
@@ -8,10 +10,10 @@ void EnemyMove1::move(Vec2* pos, int cnt) {
 	}
 }
 
-std::shared_ptr<EnemyMove> EnemyMoveFactory::create(int type)
+std::shared_ptr<EnemyMove> EnemyMoveFactory::create(EnemyMovePtn MovePtn)
 {
-	switch (type) {
-	case 1:
+	switch (MovePtn) {
+	case EnemyMovePtn::NORMAL:
 		return std::make_shared<EnemyMove1>();
 		break;
 	default:

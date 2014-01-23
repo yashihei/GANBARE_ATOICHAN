@@ -4,6 +4,7 @@
 
 class EnemyMove;
 class EnemyMoveFactory;
+enum class EnemyMovePtn;
 
 /*
  * Enemy.h
@@ -37,7 +38,7 @@ class EnemyManager
 {
 public:
 	EnemyManager();
-	void create(Vec2 pos, int movePtn);//場所と、タイプ
+	void create(Vec2 pos, EnemyMovePtn movePtn);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();

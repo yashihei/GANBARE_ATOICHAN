@@ -29,7 +29,7 @@ EnemyManager::EnemyManager() {
 	enemyMoveFactory = std::make_shared<EnemyMoveFactory>();
 }
 
-void EnemyManager::create(Vec2 pos, int movePtn)
+void EnemyManager::create(Vec2 pos, EnemyMovePtn movePtn)
 {
 	//TODO: Œp³‚æ‚èˆÙó‚Å
 	auto e = std::make_shared<Enemy>();
