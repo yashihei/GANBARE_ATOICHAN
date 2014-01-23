@@ -1,21 +1,21 @@
 #pragma once
 #include <Siv3D.hpp>
+#include <memory>
 
 class BulletManager;
 
 class Barrage {
 public:
 	Barrage(){};
-	virtual void move(Vec2 ownerPos, Vec2 targetPos) = 0;
-private:
-	BulletManager* bulletManager;
+	virtual void move(Vec2 ownerPos, Vec2 targetPos, BulletManager* bulletManager) = 0;
 };
 
-class Barrage1 : Barrage {
-	void move(Vec2 ownerPos, Vec2 targetPos) override;
+class Barrage1 : public Barrage {
+	void move(Vec2 ownerPos, Vec2 targetPos, BulletManager* bulletManager) override;
 };
 
 class BarrageFactory {
+public:
 	BarrageFactory(){};
-	void create();
+	std::shared_ptr<Barrage> create(int type);
 };

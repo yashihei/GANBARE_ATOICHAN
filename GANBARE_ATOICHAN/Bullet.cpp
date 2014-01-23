@@ -34,7 +34,7 @@ void BulletManager::move() {
 	for (auto it = bullets.begin(); it != bullets.end();) {
 		(*it)->move();
 		//Žb’èA‚Í‚Ýo‚·‚Ì‚É­‚µ—]—TŽ‚½‚¹
-		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0) {
+		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 || (*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0) {
 			it = bullets.erase(it);
 			continue;
 		}

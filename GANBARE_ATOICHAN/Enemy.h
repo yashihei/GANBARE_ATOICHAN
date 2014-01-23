@@ -4,7 +4,10 @@
 
 class EnemyMove;
 class EnemyMoveFactory;
-enum class EnemyMovePtn;
+class BarrageFactory;
+class Barrage;
+class Ship;
+class BulletManager;
 
 /*
  * Enemy.h
@@ -12,13 +15,11 @@ enum class EnemyMovePtn;
  * 敵の種類は継承ではなく、移譲によって表現するの
  */
 
-typedef std::shared_ptr<EnemyMove> EnemyMovePtr;
-
 class Enemy
 {
 public:
-	Enemy();
-	void init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove);
+	Enemy(Ship* ship, BulletManager* bulletManager);
+	void init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
 	void move();
 	void draw();
 private:
@@ -27,7 +28,10 @@ private:
 	double rad;
 	Color color;
 	int cnt = 0;
-	EnemyMovePtr enemyMove;
+	std::shared_ptr<EnemyMove> enemyMove;
+	std::shared_ptr<Barrage> barrage;
+	Ship* ship;
+	BulletManager* bulletManager;
 	//std::shared_ptr<danmakuPattern> hoge;
 public:
 	void setPos(Vec2 pos) { this->pos = pos; };
@@ -37,12 +41,15 @@ public:
 class EnemyManager
 {
 public:
-	EnemyManager();
-	void create(Vec2 pos, EnemyMovePtn movePtn);//場所と、タイプ
+	EnemyManager(Ship* ship, BulletManager* bulletManager);
+	void create(Vec2 pos, int type, int barrageType);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	std::shared_ptr<EnemyMoveFactory> enemyMoveFactory;
+	std::shared_ptr<BarrageFactory> barrageFactory;
+	Ship* ship;
+	BulletManager* bulletManager;
 };

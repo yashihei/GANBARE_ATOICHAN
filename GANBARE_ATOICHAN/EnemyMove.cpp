@@ -10,10 +10,10 @@ void EnemyMove1::move(Vec2* pos, int cnt) {
 	}
 }
 
-std::shared_ptr<EnemyMove> EnemyMoveFactory::create(EnemyMovePtn MovePtn)
+std::shared_ptr<EnemyMove> EnemyMoveFactory::create(int type)
 {
-	switch (MovePtn) {
-	case EnemyMovePtn::NORMAL:
+	switch (type) {
+	case 1:
 		return std::make_shared<EnemyMove1>();
 		break;
 	default:
