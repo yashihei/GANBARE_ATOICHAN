@@ -7,11 +7,11 @@ class BulletManager;
 class Barrage {
 public:
 	Barrage(){};
-	virtual void move(Vec2 ownerPos, Vec2 targetPos, BulletManager* bulletManager) = 0;
+	virtual void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) = 0;
 };
 
 class Barrage1 : public Barrage {
-	void move(Vec2 ownerPos, Vec2 targetPos, BulletManager* bulletManager) override;
+	void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) override;
 };
 
 class BarrageFactory {

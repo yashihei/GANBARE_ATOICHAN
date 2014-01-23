@@ -21,7 +21,7 @@ void Enemy::init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr
 
 void Enemy::move() {
 	enemyMove->move(&pos, cnt);
-	barrage->move(pos, ship->getPos(), bulletManager);
+	barrage->move(pos, ship->getPos(), cnt, bulletManager);
 	cnt++;
 }
 
@@ -38,11 +38,10 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 	barrageFactory = std::make_shared<BarrageFactory>();
 }
 
-void EnemyManager::create(Vec2 pos, int type, int barrageType)
+void EnemyManager::create(Vec2 pos, int moveType, int barrageType)
 {
-	//TODO: Œp³‚æ‚èˆÙó‚Å
 	auto e = std::make_shared<Enemy>(ship, bulletManager);
-	e->init(pos, enemyMoveFactory->create(type), barrageFactory->create(barrageType));
+	e->init(pos, enemyMoveFactory->create(moveType), barrageFactory->create(barrageType));
 	enemies.push_back(e);
 }
 

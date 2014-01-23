@@ -42,7 +42,7 @@ class EnemyManager
 {
 public:
 	EnemyManager(Ship* ship, BulletManager* bulletManager);
-	void create(Vec2 pos, int type, int barrageType);//場所と、タイプ
+	void create(Vec2 pos, int moveType, int barrageType);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();

@@ -31,7 +31,7 @@ void Ship::move() {
 }
 
 void Ship::draw() {
-	Circle c(pos, rad);
-	c.draw(Palette::Red);
-	c.drawFrame(2, 0, Palette::White);
+	Triangle t({ pos.x - rad, pos.y + rad }, { pos.x + rad, pos.y }, { pos.x - rad, pos.y - rad });
+	t.draw({255, 0, 0, 200});
+	t.drawFrame(2, Palette::White);
 }
