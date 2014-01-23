@@ -24,6 +24,7 @@ class EnemyMove2 : public EnemyMove {
 class EnemyMoveFactory
 {
 public:
+	EnemyMoveFactory(){};
 	std::shared_ptr<EnemyMove> create(EnemyMovePtn MovePtn);
 };
 
