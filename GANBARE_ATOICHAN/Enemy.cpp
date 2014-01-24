@@ -2,6 +2,7 @@
 
 #include "Ship.h"
 #include "Bullet.h"
+#include "Shot.h"
 
 void Enemy::init(Vec2 pos, Ship* ship, BulletManager* bulletManager) {
 	this->pos = pos;
@@ -23,7 +24,7 @@ void Enemy1::move() {
 
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	const double sp = 10.0;
-	const int interval = 5;
+	const int interval = 10;
 	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp });
 	cnt++;
 }
@@ -41,7 +42,15 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 
 void EnemyManager::create(Vec2 pos, int type)
 {
-	auto e = std::make_shared<Enemy1>();
+	std::shared_ptr<Enemy> e;
+	switch (type)
+	{
+	case 1:
+		e = std::make_shared<Enemy1>();
+		break;
+	default:
+		LOG(L"default");
+	}
 	e->init(pos, ship, bulletManager);
 	enemies.push_back(e);
 }

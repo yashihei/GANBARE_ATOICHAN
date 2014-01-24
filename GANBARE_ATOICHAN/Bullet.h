@@ -11,6 +11,7 @@ public:
 	void move();
 	void draw();
 	Vec2 getPos() { return this->pos; };
+	double getRad() { return this->rad; };
 private:
 	Vec2 pos;
 	Vec2 vel;
@@ -27,6 +28,7 @@ public:
 	void draw();
 	void move();
 	void create(Vec2 pos, Vec2 vel);
+	std::list<std::shared_ptr<Bullet>>* getBullets() { return &bullets; };
 private:
 	std::list<std::shared_ptr<Bullet>> bullets;
 };

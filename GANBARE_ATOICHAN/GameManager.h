@@ -6,6 +6,7 @@ class ShotManager;
 class EnemyManager;
 class BulletManager;
 class StageManager;
+class CheckCollide;
 
 class GameManager
 {
@@ -19,4 +20,5 @@ private:
 	std::shared_ptr<EnemyManager> enemyManager;
 	std::shared_ptr<BulletManager> bulletManager;
 	std::shared_ptr<StageManager> stageManager;
+	std::shared_ptr<CheckCollide> checkCollide;
 };

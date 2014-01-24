@@ -4,6 +4,7 @@
 
 class Ship;
 class BulletManager;
+class ShotManager;
 
 /*
  * Enemy.h
@@ -28,8 +29,9 @@ protected:
 	Ship* ship;
 	BulletManager* bulletManager;
 public:
-	void setPos(Vec2 pos) { this->pos = pos; };
+	//void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() { return this->pos; };
+	double getRad() { return this->rad; };
 };
 
 class Enemy1 : public Enemy
@@ -48,8 +50,10 @@ public:
 	void clear();
 	void draw();
 	void move();
+	std::list<std::shared_ptr<Enemy>>* getEnemies() { return &enemies; };
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	Ship* ship;
 	BulletManager* bulletManager;
+	ShotManager* shotManager;
 };

@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="Barrage.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CheckCollide.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMove.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Barrage.h" />
+    <ClInclude Include="CheckCollide.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMove.h" />
     <ClInclude Include="GameManager.h" />

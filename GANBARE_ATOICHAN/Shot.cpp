@@ -1,14 +1,15 @@
 #include "Shot.h"
 
-#include "Ship.h";
+#include "Ship.h"
 
 Shot::Shot() {
 	speed = 30.0;
 	rad = 5.0;
+	vel = { 30.0, 0.0 };
 }
 
 void Shot::move() {
-	pos.moveBy({ speed, 0 });
+	pos.moveBy(vel);
 }
 
 void Shot::draw() {
