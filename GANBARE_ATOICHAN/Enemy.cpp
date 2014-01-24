@@ -1,31 +1,34 @@
 #include "Enemy.h"
 
-#include "EnemyMove.h"
-#include "Barrage.h"
 #include "Ship.h"
+#include "Bullet.h"
 
-Enemy::Enemy(Ship* ship, BulletManager* bulletManager)
-:ship(ship), bulletManager(bulletManager)
-{
-	//ˆê‰ž‰¼ TODO:init‚Åset‚·‚é
+void Enemy::init(Vec2 pos, Ship* ship, BulletManager* bulletManager) {
+	this->pos = pos;
+	this->ship = ship;
+	this->bulletManager = bulletManager;
+}
+
+Enemy1::Enemy1() {
 	rad = 15.0;
 	color = Color(100, 100, 100, 127);
 }
 
-void Enemy::init(Vec2 pos, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage)
-{
-	this->enemyMove = enemyMove;
-	this->pos = pos;
-	this->barrage = barrage;
-}
+void Enemy1::move() {
+	if (cnt < 60) {
+		pos.moveBy({ -3.0, 0.0 });
+	} else if (cnt > 180) {
+		pos.moveBy({ 6.0, 0.0 });
+	}
 
-void Enemy::move() {
-	enemyMove->move(&pos, cnt);
-	barrage->move(pos, ship->getPos(), cnt, bulletManager);
+	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	const double sp = 10.0;
+	const int interval = 5;
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp });
 	cnt++;
 }
 
-void Enemy::draw() {
+void Enemy1::draw() {
 	Circle c(pos, rad);
 	c.draw(color);
 	c.drawFrame(2.0, 0.0, Palette::White);
@@ -34,14 +37,12 @@ void Enemy::draw() {
 EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 :ship(ship), bulletManager(bulletManager)
 {
-	enemyMoveFactory = std::make_shared<EnemyMoveFactory>();
-	barrageFactory = std::make_shared<BarrageFactory>();
 }
 
-void EnemyManager::create(Vec2 pos, int moveType, int barrageType)
+void EnemyManager::create(Vec2 pos, int type)
 {
-	auto e = std::make_shared<Enemy>(ship, bulletManager);
-	e->init(pos, enemyMoveFactory->create(moveType), barrageFactory->create(barrageType));
+	auto e = std::make_shared<Enemy1>();
+	e->init(pos, ship, bulletManager);
 	enemies.push_back(e);
 }
 
