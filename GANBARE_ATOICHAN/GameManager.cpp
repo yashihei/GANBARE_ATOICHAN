@@ -14,7 +14,8 @@ GameManager::GameManager() {
 	ship = std::make_shared<Ship>(shotManager.get());
 	enemyManager = std::make_shared<EnemyManager>(ship.get(), bulletManager.get());
 	stageManager = std::make_shared<StageManager>(enemyManager.get());
-	checkCollide = std::make_shared<CheckCollide>(shotManager.get(), bulletManager.get(), ship.get(), enemyManager.get());
+	//checkCollide = std::make_shared<CheckCollide>(shotManager.get(), bulletManager.get(), ship.get(), enemyManager.get());
+	checkCollide = std::make_shared<CheckCollide>(std::make_tuple(shotManager.get(), bulletManager.get(), enemyManager.get(), ship.get()));
 }
 
 void GameManager::move() {

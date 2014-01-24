@@ -27,7 +27,7 @@ public:
 	void clear();
 	void move();
 	void draw();
-	std::list<std::shared_ptr<Shot>>* getShots() { return &shots; };
+	const std::list<std::shared_ptr<Shot>>* getShots() { return &shots; };
 private:
 	std::list<std::shared_ptr<Shot>> shots;
 };

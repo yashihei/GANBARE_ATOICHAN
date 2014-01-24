@@ -13,6 +13,10 @@ void Shot::move() {
 }
 
 void Shot::draw() {
+	//Quad q({ pos.x - 10, pos.y + 7 }, { pos.x + 10, pos.y + 5 }, { pos.x + 10, pos.y - 5 }, { pos.x - 10, pos.y - 7 });
+	//q.draw(Color(255, 255, 0, 127));
+	//q.drawFrame(2.0, Palette::White);
+	//Line(pos, pos+vel).draw(Palette::White);
 	Circle c(pos, rad);
 	c.draw();
 }

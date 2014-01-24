@@ -18,20 +18,25 @@ class Enemy
 public:
 	Enemy(){};
 	void init(Vec2 pos, Ship* ship, BulletManager* bulletManager);
-	virtual void move() = 0;
+	virtual void move();
 	virtual void draw() = 0;
+	virtual void damage();
 protected:
 	Vec2 pos;
 	//Vec2 vel;
 	double rad;
 	Color color;
 	int cnt = 0;
+	int subCnt = 3;//”ñƒ_ƒ•\¦—p
+	int hp;
+	bool enable = true;
 	Ship* ship;
 	BulletManager* bulletManager;
 public:
 	//void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() { return this->pos; };
 	double getRad() { return this->rad; };
+	bool isEnable() { return this->enable; };
 };
 
 class Enemy1 : public Enemy
@@ -50,7 +55,7 @@ public:
 	void clear();
 	void draw();
 	void move();
-	std::list<std::shared_ptr<Enemy>>* getEnemies() { return &enemies; };
+	const std::list<std::shared_ptr<Enemy>>* getEnemies() { return &enemies; };
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	Ship* ship;

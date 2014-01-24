@@ -21,8 +21,17 @@ void Ship::move() {
 		vel.x *= 0.707;
 		vel.y *= 0.707;
 	}
+	//slow move
+	if (Input::KeyShift.pressed) {
+		vel.x *= 0.5;
+		vel.y *= 0.5;
+	}
 	pos.moveBy(vel);
-	//TODO: ウィンドウから出ないように
+	//move control
+	if (pos.x < 0) pos.x = 0;
+	else if (pos.x > Window::Width()) pos.x = Window::Width();
+	else if (pos.y < 0) pos.y = 0;
+	else if (pos.y > Window::Height()) pos.y = Window::Height();
 
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
 		shotManager->create(pos);
@@ -34,4 +43,8 @@ void Ship::draw() {
 	Triangle t({ pos.x - rad, pos.y + rad }, { pos.x + rad, pos.y }, { pos.x - rad, pos.y - rad });
 	t.draw({255, 0, 0, 200});
 	t.drawFrame(2, Palette::White);
+}
+
+void Ship::damage()
+{
 }
