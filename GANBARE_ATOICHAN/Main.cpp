@@ -17,6 +17,7 @@ void Main()
 	}
 	Window::SetFullscreen(true, targetSize);
 	*/
+	Window::Resize(450, 600);
 
 	auto gm = std::make_shared<GameManager>();
 	while (System::Update())

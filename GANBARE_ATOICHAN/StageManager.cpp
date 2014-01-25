@@ -10,5 +10,5 @@ StageManager::StageManager(EnemyManager* enemyManager)
 
 void StageManager::move() {
 	cnt++;
-	if (cnt % 100 == 0) enemyManager->create({ Window::Width(), Random(0, Window::Height()) }, 1);
+	if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 1);
 }

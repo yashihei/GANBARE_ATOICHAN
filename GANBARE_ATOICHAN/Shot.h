@@ -9,7 +9,6 @@ public:
 	void move();
 	void draw();
 private:
-	double speed;
 	double rad;//“–‚½‚è”»’è‚Ì”¼Œa
 	Vec2 vel;
 	Vec2 pos;

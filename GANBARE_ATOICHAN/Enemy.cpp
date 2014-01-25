@@ -29,10 +29,10 @@ Enemy1::Enemy1() {
 
 void Enemy1::move() {
 	Enemy::move();
-	if (cnt < 60) {
-		pos.moveBy({ -3.0, 0.0 });
+	if (cnt < 40) {
+		pos.moveBy({ 0.0, 3.0 });
 	} else if (cnt > 180) {
-		pos.moveBy({ 6.0, 0.0 });
+		pos.moveBy({ 0.0, -6.0 });
 	}
 
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);

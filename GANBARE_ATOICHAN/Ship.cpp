@@ -3,16 +3,16 @@
 #include "Shot.h"
 
 Ship::Ship(ShotManager* shotManager) {
-	rad = 10.0;
+	rad = 5.0;
 	this->shotManager = shotManager;
 
-	pos.set({ rad, Window::Height() / 2 });
+	pos.set({ Window::Width() / 2, Window::Height() - rad });
 	cnt = 0;
 }
 
 void Ship::move() {
 	Vec2 vel = { 0, 0 };
-	const double speed = 3.5;
+	const double speed = 5.5;
 	if (Input::KeyLeft.pressed) vel.x -= speed;
 	if (Input::KeyRight.pressed) vel.x = speed;
 	if (Input::KeyUp.pressed) vel.y -= speed;
@@ -40,7 +40,8 @@ void Ship::move() {
 }
 
 void Ship::draw() {
-	Triangle t({ pos.x - rad, pos.y + rad }, { pos.x + rad, pos.y }, { pos.x - rad, pos.y - rad });
+	int num = rad * 3;
+	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
 	t.draw({255, 0, 0, 200});
 	t.drawFrame(2, Palette::White);
 }

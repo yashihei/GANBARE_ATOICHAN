@@ -3,9 +3,8 @@
 #include "Ship.h"
 
 Shot::Shot() {
-	speed = 30.0;
 	rad = 5.0;
-	vel = { 30.0, 0.0 };
+	vel = { 0.0, -30.0 };
 }
 
 void Shot::move() {
@@ -13,10 +12,6 @@ void Shot::move() {
 }
 
 void Shot::draw() {
-	//Quad q({ pos.x - 10, pos.y + 7 }, { pos.x + 10, pos.y + 5 }, { pos.x + 10, pos.y - 5 }, { pos.x - 10, pos.y - 7 });
-	//q.draw(Color(255, 255, 0, 127));
-	//q.drawFrame(2.0, Palette::White);
-	//Line(pos, pos+vel).draw(Palette::White);
 	Circle c(pos, rad);
 	c.draw();
 }
@@ -34,7 +29,9 @@ void ShotManager::create(Vec2 pos)
 void ShotManager::move() {
 	for (auto it = shots.begin(); it != shots.end();) {
 		(*it)->move();
-		if ((*it)->getPos().x > Window::Width()) {
+		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
+			(*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0)
+		{
 			it = shots.erase(it);
 			continue;
 		}

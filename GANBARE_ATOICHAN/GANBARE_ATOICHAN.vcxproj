@@ -177,6 +177,7 @@
     <ClInclude Include="EnemyMove.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="ImportCsvData.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="StageManager.h" />
