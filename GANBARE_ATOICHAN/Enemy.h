@@ -34,9 +34,9 @@ protected:
 	BulletManager* bulletManager;
 public:
 	//void setPos(Vec2 pos) { this->pos = pos; };
-	Vec2 getPos() { return this->pos; };
-	double getRad() { return this->rad; };
-	bool isEnable() { return this->enable; };
+	Vec2 getPos() const { return this->pos; };
+	double getRad() const { return this->rad; };
+	bool isEnable() const { return this->enable; };
 };
 
 class Enemy1 : public Enemy
@@ -55,7 +55,7 @@ public:
 	void clear();
 	void draw();
 	void move();
-	const std::list<std::shared_ptr<Enemy>>* getEnemies() { return &enemies; };
+	const std::list<std::shared_ptr<Enemy>>* getEnemies() const { return &enemies; };
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	Ship* ship;

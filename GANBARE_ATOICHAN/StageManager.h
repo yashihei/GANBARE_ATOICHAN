@@ -15,5 +15,6 @@ public:
 	void move();
 private:
 	int cnt = 0;
+	int stage;
 	EnemyManager* enemyManager;
 };

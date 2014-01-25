@@ -14,6 +14,10 @@ class Barrage1 : public Barrage {
 	void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) override;
 };
 
+class Barrage2 : public Barrage {
+	void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) override;
+};
+
 class BarrageFactory {
 public:
 	BarrageFactory(){};

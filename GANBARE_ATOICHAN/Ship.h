@@ -9,7 +9,7 @@ public:
 	Ship(ShotManager*);
 	void move();
 	void draw();
-	void damage();
+	void destory();
 
 	Vec2 getPos() { return pos; };
 	double getRad() { return rad; };

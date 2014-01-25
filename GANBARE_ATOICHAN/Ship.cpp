@@ -46,6 +46,6 @@ void Ship::draw() {
 	t.drawFrame(2, Palette::White);
 }
 
-void Ship::damage()
+void Ship::destory()
 {
 }

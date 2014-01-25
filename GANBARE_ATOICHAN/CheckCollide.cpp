@@ -31,7 +31,6 @@ void CheckCollide::move()
 			Circle circle((*e)->getPos(), (*e)->getRad());
 			if (Geometry::Intersect(line, circle)) {
 				(*e)->damage();
-				LOG(L"atatta!");
 			}
 		}
 	}
@@ -40,8 +39,7 @@ void CheckCollide::move()
 		Line line((*b)->getPos(), (*b)->getPos() + (*b)->getVel());
 		Circle circle(ship->getPos(), ship->getRad());
 		if (Geometry::Intersect(line, circle)) {
-			ship->damage();
-			LOG(L"jibun ni atatta");
+			ship->destory();
 		}
 	}
 }
