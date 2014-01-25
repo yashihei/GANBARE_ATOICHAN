@@ -12,7 +12,7 @@ public:
 	void draw();
 	Vec2 getPos() const { return this->pos; };
 	double getRad() const { return this->rad; };
-	Vec2 getVel() const { return vel; }
+	Vec2 getVel() const { return this->vel; }
 private:
 	Vec2 pos;
 	Vec2 vel;

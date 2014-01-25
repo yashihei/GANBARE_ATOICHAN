@@ -1,25 +1,29 @@
 #pragma once
 #include <Siv3D.hpp>
 #include <list>
+#include <memory>
 
 class Ship;
 class BulletManager;
 class ShotManager;
+class EnemyMove;
+class Barrage;
+class EnemyMoveFactory;
+class BarrageFactory;
 
 /*
  * Enemy.h
  * 敵オブジェクトなの
- * 敵の種類は継承ではなく、移譲によって表現するの
- * なんていったな、あれは嘘だ
+ * 敵の行動は継承ではなく、移譲によって表現するの
  */
 
 class Enemy
 {
 public:
-	Enemy(){};
-	void init(Vec2 pos, Ship* ship, BulletManager* bulletManager);
+	Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
+	//void init(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
 	virtual void move();
-	virtual void draw() = 0;
+	virtual void draw();
 	virtual void damage();
 protected:
 	Vec2 pos;
@@ -32,6 +36,8 @@ protected:
 	bool enable = true;
 	Ship* ship;
 	BulletManager* bulletManager;
+	std::shared_ptr<EnemyMove> enemyMove;
+	std::shared_ptr<Barrage> barrage;
 public:
 	//void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() const { return this->pos; };
@@ -51,7 +57,7 @@ class EnemyManager
 {
 public:
 	EnemyManager(Ship* ship, BulletManager* bulletManager);
-	void create(Vec2 pos, int type);//場所と、タイプ
+	void create(Vec2 pos, int enemyType, int moveType, int barrageType);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
@@ -61,4 +67,6 @@ private:
 	Ship* ship;
 	BulletManager* bulletManager;
 	ShotManager* shotManager;
+	std::shared_ptr<EnemyMoveFactory> enemyMoveFactory;
+	std::shared_ptr<BarrageFactory> barrageFactory;
 };
