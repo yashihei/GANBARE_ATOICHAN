@@ -43,9 +43,9 @@ void Ship::move() {
 void Ship::draw() {
 	double num = rad * 3;
 	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
-	t.draw({255, 0, 0, 200});
-	t.drawFrame(2, Palette::White);
-	if (Input::KeyShift.pressed) Circle(pos, rad).draw(Palette::White);
+	t.draw({255, 50, 50, 255});
+	t.drawFrame(2.0, Palette::White);
+	if (Input::KeyShift.pressed) Circle(pos, rad).draw({100, 255, 255, 255});
 }
 
 void Ship::destory()

@@ -1,6 +1,8 @@
 #pragma once
 #include <Siv3D.hpp>
 #include <memory>
+#include <hash_map>
+#include <string>
 
 class BulletManager;
 
@@ -8,6 +10,8 @@ class Barrage {
 public:
 	Barrage(){};
 	virtual void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) = 0;
+protected:
+	int cnt;
 };
 
 class Barrage1 : public Barrage {
@@ -20,6 +24,8 @@ class Barrage2 : public Barrage {
 
 class BarrageFactory {
 public:
-	BarrageFactory(){};
-	std::shared_ptr<Barrage> create(int type);
+	BarrageFactory();
+	std::shared_ptr<Barrage> create(std::string type);
+private:
+	std::hash_map<std::string, std::shared_ptr<Barrage>> barrageList;
 };

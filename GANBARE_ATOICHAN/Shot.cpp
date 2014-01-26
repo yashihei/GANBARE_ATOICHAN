@@ -13,8 +13,8 @@ void Shot::move() {
 }
 
 void Shot::draw() {
-	Circle c(pos, rad);
-	c.draw();
+	Line l(pos, pos + Vec2(0.0, 10.0));
+	l.draw(3.0, Palette::White);
 }
 
 void Shot::burn()
@@ -33,7 +33,7 @@ void ShotManager::move() {
 	for (auto it = shots.begin(); it != shots.end();) {
 		(*it)->move();
 		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
-			(*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0 ||
+			(*it)->getPos().y > Window::Height() || (*it)->getPos().y < -100 ||
 			!(*it)->getEnable())
 		{
 			it = shots.erase(it);

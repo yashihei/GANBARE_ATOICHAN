@@ -23,17 +23,12 @@ void Barrage2::move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulle
 	}
 }
 
-std::shared_ptr<Barrage> BarrageFactory::create(int type)
+BarrageFactory::BarrageFactory()
 {
-	switch (type)
-	{
-	case 0:
-		return std::make_shared<Barrage1>(); break;
-	case 1:
-		return std::make_shared<Barrage2>(); break;
-	default:
-		LOG(L"defalut");
-		return nullptr;
-	}
+	barrageList["Barrage1"] = std::make_shared<Barrage1>();
+	barrageList["Barrage2"] = std::make_shared<Barrage2>();
 }
 
+std::shared_ptr<Barrage> BarrageFactory::create(std::string type) {
+	return barrageList[type];
+}

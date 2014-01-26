@@ -2,6 +2,7 @@
 #include <Siv3D.hpp>
 #include <list>
 #include <memory>
+#include <hash_map>
 
 class Ship;
 class BulletManager;
