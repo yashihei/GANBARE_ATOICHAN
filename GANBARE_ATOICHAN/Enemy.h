@@ -22,9 +22,9 @@ class Enemy
 public:
 	Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
 	//void init(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
-	virtual void move();
-	virtual void draw();
-	virtual void damage();
+	void move();
+	void draw();
+	void damage();
 protected:
 	Vec2 pos;
 	//Vec2 vel;
@@ -43,14 +43,6 @@ public:
 	Vec2 getPos() const { return this->pos; };
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
-};
-
-class Enemy1 : public Enemy
-{
-public:
-	Enemy1();
-	void move() override;
-	void draw() override;
 };
 
 class EnemyManager

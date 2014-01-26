@@ -15,8 +15,11 @@ void StageManager::move() {
 	switch (stage)
 	{
 	case 1:
-		if (cnt == 0) enemyManager->create({ 50, 0 }, 0, 0, 1);
+		if (cnt == 0) enemyManager->create({ 0, 50 }, 0, 1, 0);
 		if (cnt == 0) enemyManager->create({ 400, 0 }, 0, 0, 1);
+		if (cnt == 30) enemyManager->create({ 0, 50 }, 0, 1, 0);
+		if (cnt == 50) enemyManager->create({ 0, 50 }, 0, 1, 0);
+		if (cnt == 80) enemyManager->create({ 0, 50 }, 0, 1, 0);
 	default:
 		break;
 	}

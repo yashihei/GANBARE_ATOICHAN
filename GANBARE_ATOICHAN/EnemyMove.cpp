@@ -9,16 +9,21 @@ void EnemyMove1::move(Vec2* pos, int cnt) {
 	else if (cnt > 180) {
 		pos->moveBy({ 0.0, -6.0 });
 	}
+}
 
+void EnemyMove2::move(Vec2* pos, int cnt) {
+	pos->moveBy({ 2.0, 0.0 });
 }
 
 std::shared_ptr<EnemyMove> EnemyMoveFactory::create(int type)
 {
 	switch (type) {
 	case 0:
-		return std::make_shared<EnemyMove1>();
-		break;
+		return std::make_shared<EnemyMove1>(); break;
+	case 1:
+		return std::make_shared<EnemyMove2>(); break;
 	default:
+		LOG(L"defalut");
 		return nullptr;
 	}
 }

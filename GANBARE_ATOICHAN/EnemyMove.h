@@ -14,6 +14,7 @@ class EnemyMove1 : public EnemyMove {
 };
 
 class EnemyMove2 : public EnemyMove {
+	void move(Vec2* pos, int cnt) override;
 };
 
 class EnemyMoveFactory

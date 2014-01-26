@@ -5,16 +5,16 @@
 void Barrage1::move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager)
 {
 	const double rad = Atan2(targetPos.x - ownerPos.x, targetPos.y - ownerPos.y);
-	const double sp = 10.0;
-	const int interval = 5;
+	const double sp = 4.0;
+	const int interval = 10;
 	if (cnt % interval == 0) bulletManager->create(ownerPos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200));
 }
 
 void Barrage2::move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager)
 {
 	const double rad = Atan2(targetPos.x - ownerPos.x, targetPos.y - ownerPos.y);
-	const double sp = 5.0;
-	const int interval = 5;
+	const double sp = 3.0;
+	const int interval = 10;
 	const int sep = 20;
 	if (cnt % interval == 0 && cnt > 40) {
 		for (int i = 0; i < sep; i++) {
@@ -33,7 +33,7 @@ std::shared_ptr<Barrage> BarrageFactory::create(int type)
 		return std::make_shared<Barrage2>(); break;
 	default:
 		LOG(L"defalut");
-		return nullptr; break;
+		return nullptr;
 	}
 }
 

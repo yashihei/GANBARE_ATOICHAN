@@ -31,6 +31,7 @@ void CheckCollide::move()
 			Circle circle((*e)->getPos(), (*e)->getRad());
 			if (Geometry::Intersect(line, circle)) {
 				(*e)->damage();
+				(*s)->burn();
 			}
 		}
 	}
