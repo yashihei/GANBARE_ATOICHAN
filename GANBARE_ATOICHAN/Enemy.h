@@ -3,6 +3,8 @@
 #include <list>
 #include <memory>
 #include <hash_map>
+#include <string>
+#include <tuple>
 
 class Ship;
 class BulletManager;
@@ -11,6 +13,8 @@ class EnemyMove;
 class Barrage;
 class EnemyMoveFactory;
 class BarrageFactory;
+class EnemyDataFactory;
+struct EnemyData;
 
 /*
  * Enemy.h
@@ -21,7 +25,7 @@ class BarrageFactory;
 class Enemy
 {
 public:
-	Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
+	Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage, EnemyData enemyData);
 	//void init(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
 	void move();
 	void draw();
@@ -50,7 +54,7 @@ class EnemyManager
 {
 public:
 	EnemyManager(Ship* ship, BulletManager* bulletManager);
-	void create(Vec2 pos, int enemyType, int moveType, int barrageType);//場所と、タイプ
+	void create(Vec2 pos, std::string enemyType, std::string moveType, std::string barrageType);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
@@ -62,4 +66,5 @@ private:
 	ShotManager* shotManager;
 	std::shared_ptr<EnemyMoveFactory> enemyMoveFactory;
 	std::shared_ptr<BarrageFactory> barrageFactory;
+	std::shared_ptr<EnemyDataFactory> enemyDataFactory;
 };

@@ -5,14 +5,14 @@
 #include "Shot.h"
 #include "EnemyMove.h"
 #include "Barrage.h"
+#include "EnemyData.h"
 
-Enemy::Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage)
+Enemy::Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage, EnemyData enemyData)
 :pos(pos), ship(ship), bulletManager(bulletManager), enemyMove(enemyMove), barrage(barrage)
 {
-	//test data
-	rad = 15.0;
-	color = Color(100, 100, 100, 127);
-	hp = 10;
+	rad = enemyData.rad;
+	color = enemyData.color;
+	hp = enemyData.hp;
 }
 
 void Enemy::move() {
@@ -40,12 +40,13 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 {
 	barrageFactory = std::make_shared<BarrageFactory>();
 	enemyMoveFactory = std::make_shared<EnemyMoveFactory>();
+	enemyDataFactory = std::make_shared<EnemyDataFactory>();
 }
 
-void EnemyManager::create(Vec2 pos, int enemyType, int moveType, int barrageType)
+void EnemyManager::create(Vec2 pos, std::string enemyType, std::string moveType, std::string barrageType)
 {
 	std::shared_ptr<Enemy> e;
-	e = std::make_shared<Enemy>(pos, ship, bulletManager, enemyMoveFactory->create(moveType), barrageFactory->create(barrageType));
+	e = std::make_shared<Enemy>(pos, ship, bulletManager, enemyMoveFactory->create(moveType), barrageFactory->create(barrageType), enemyDataFactory->create(enemyType));
 	enemies.push_back(e);
 }
 

@@ -12,19 +12,20 @@ void EnemyMove1::move(Vec2* pos, int cnt) {
 }
 
 void EnemyMove2::move(Vec2* pos, int cnt) {
-	pos->moveBy({ 2.0, 0.0 });
+	pos->moveBy({ 2.0 * dir, 0.0 });
 }
 
-std::shared_ptr<EnemyMove> EnemyMoveFactory::create(int type)
+EnemyMoveFactory::EnemyMoveFactory() {
+	moveList["Normal"] = std::make_shared<EnemyMove1>();
+	moveList["slowR"] = std::make_shared<EnemyMove2>();
+	auto t = std::make_shared<EnemyMove2>();
+	t->turnDir();
+	moveList["slowL"] = t;
+}
+
+std::shared_ptr<EnemyMove> EnemyMoveFactory::create(std::string type)
 {
-	switch (type) {
-	case 0:
-		return std::make_shared<EnemyMove1>(); break;
-	case 1:
-		return std::make_shared<EnemyMove2>(); break;
-	default:
-		LOG(L"defalut");
-		return nullptr;
-	}
+	if (moveList[type].get() == nullptr);
+	return moveList[type];
 }
 

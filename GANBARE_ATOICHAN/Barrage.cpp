@@ -2,6 +2,9 @@
 
 #include "Bullet.h"
 
+const double PI = 3.14;
+const double PI2 = 6.28;
+
 void Barrage1::move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager)
 {
 	const double rad = Atan2(targetPos.x - ownerPos.x, targetPos.y - ownerPos.y);
@@ -18,7 +21,7 @@ void Barrage2::move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulle
 	const int sep = 20;
 	if (cnt % interval == 0 && cnt > 40) {
 		for (int i = 0; i < sep; i++) {
-			bulletManager->create(ownerPos, { Sin(rad + 6.28 / sep * i)*sp, Cos(rad + 6.28 / sep * i)*sp }, Color(0, 255, 255, 200));
+			bulletManager->create(ownerPos, { Sin(rad + PI2 / sep * i)*sp, Cos(rad + PI2 / sep * i)*sp }, Color(0, 255, 255, 200));
 		}
 	}
 }
