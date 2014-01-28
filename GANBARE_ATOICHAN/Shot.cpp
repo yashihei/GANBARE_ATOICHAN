@@ -2,10 +2,10 @@
 
 #include "Ship.h"
 
-Shot::Shot() {
-	rad = 5.0;
-	vel = { 0.0, -30.0 };
-	enable = true;
+Shot::Shot(Vec2 pos, Vec2 vel)
+{
+	this->pos = pos;
+	this->vel = vel;
 }
 
 void Shot::move() {
@@ -22,10 +22,9 @@ void Shot::burn()
 	enable = false;
 }
 
-void ShotManager::create(Vec2 pos)
+void ShotManager::create(Vec2 pos, Vec2 vel)
 {
-	auto s = std::make_shared<Shot>();
-	s->setPos(pos);
+	auto s = std::make_shared<Shot>(pos, vel);
 	shots.push_back(s);
 }
 

@@ -6,7 +6,7 @@ void EnemyMove1::move(Vec2* pos, int cnt) {
 	if (cnt < 40) {
 		pos->moveBy({ 0.0, 3.0 });
 	}
-	else if (cnt > 180) {
+	else if (cnt > 200) {
 		pos->moveBy({ 0.0, -6.0 });
 	}
 }
@@ -17,10 +17,10 @@ void EnemyMove2::move(Vec2* pos, int cnt) {
 
 EnemyMoveFactory::EnemyMoveFactory() {
 	moveList["Normal"] = std::make_shared<EnemyMove1>();
-	moveList["slowR"] = std::make_shared<EnemyMove2>();
+	moveList["slowL"] = std::make_shared<EnemyMove2>();
 	auto t = std::make_shared<EnemyMove2>();
 	t->turnDir();
-	moveList["slowL"] = t;
+	moveList["slowR"] = t;
 }
 
 std::shared_ptr<EnemyMove> EnemyMoveFactory::create(std::string type)

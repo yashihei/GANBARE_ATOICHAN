@@ -34,8 +34,10 @@ void Ship::move() {
 	else if (pos.y > Window::Height()) pos.y = Window::Height();
 
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
-		shotManager->create(pos + Vec2(-10.0, 0.0));
-		shotManager->create(pos + Vec2(10.0, 0.0));
+		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
+		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
+		//shotManager->create(pos , { -5.0, -30.0 });
+		//shotManager->create(pos , { 5.0, -30.0 });
 	}
 	cnt++;
 }

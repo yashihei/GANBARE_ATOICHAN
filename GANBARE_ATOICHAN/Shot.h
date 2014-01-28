@@ -5,7 +5,7 @@
 class Shot
 {
 public:
-	Shot();
+	Shot(Vec2 pos, Vec2 vel);
 	void move();
 	void draw();
 	void burn();
@@ -15,7 +15,6 @@ private:
 	Vec2 pos;
 	bool enable;
 public:
-	void setPos(Vec2 pos) { this->pos = pos; };
 	Vec2 getPos() { return this->pos; };
 	Vec2 getVel() { return this->vel; };
 	bool getEnable() { return this->enable; };
@@ -25,7 +24,7 @@ class ShotManager
 {
 public:
 	ShotManager(){};
-	void create(Vec2 pos);
+	void create(Vec2 pos, Vec2 vel);
 	void clear();
 	void move();
 	void draw();
