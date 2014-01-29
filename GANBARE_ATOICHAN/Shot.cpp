@@ -2,10 +2,9 @@
 
 #include "Ship.h"
 
-Shot::Shot(Vec2 pos, Vec2 vel)
+Shot::Shot(Vec2 pos, Vec2 vel):
+pos(pos), vel(vel)
 {
-	this->pos = pos;
-	this->vel = vel;
 }
 
 void Shot::move() {

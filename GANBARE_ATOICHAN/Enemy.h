@@ -19,7 +19,6 @@ struct EnemyData;
 /*
  * Enemy.h
  * 敵オブジェクトなの
- * 敵の行動は継承ではなく、移譲によって表現するの
  */
 
 class Enemy
@@ -30,6 +29,7 @@ public:
 	void setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager);
 	virtual void move() = 0;
 	virtual void draw();
+	void defalutMove();
 	void damage();
 	//getter
 	Vec2 getPos() const { return this->pos; };
@@ -55,7 +55,6 @@ class Enemy1 : public Enemy
 public:
 	Enemy1();
 	void move() override;
-	void draw() override;
 };
 
 class EnemyManager

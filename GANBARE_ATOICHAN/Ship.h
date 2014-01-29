@@ -17,6 +17,7 @@ private:
 	ShotManager* shotManager;
 	double rad;
 	Vec2 pos;
+	int zanki;
 
 	int cnt;//“à•”ƒJƒEƒ“ƒ^
 };

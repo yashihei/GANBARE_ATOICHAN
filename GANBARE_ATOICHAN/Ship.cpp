@@ -5,8 +5,8 @@
 Ship::Ship(ShotManager* shotManager) {
 	rad = 5.0;
 	this->shotManager = shotManager;
-
-	pos.set({ Window::Width() / 2, Window::Height() - 100 });
+	zanki = 3;
+	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
 }
 
@@ -36,8 +36,8 @@ void Ship::move() {
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
 		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
 		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
-		shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
-		shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
+		//shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
+		//shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
 	}
 	cnt++;
 }
@@ -52,4 +52,6 @@ void Ship::draw() {
 
 void Ship::destory()
 {
+	LOG(L"ship destory!!");
+	pos = { Window::Width() / 2, Window::Height() - 100 };
 }

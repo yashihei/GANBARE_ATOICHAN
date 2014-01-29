@@ -35,6 +35,9 @@
     <Filter Include="ヘッダファイル">
       <UniqueIdentifier>{40c21a9e-8df6-4094-b834-3b526d86507f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="yami">
+      <UniqueIdentifier>{92c2803e-0ca6-4545-9f8d-1afab6cca949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico">
@@ -232,9 +235,6 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Barrage.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -242,12 +242,6 @@
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyData.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyMove.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
@@ -265,14 +259,17 @@
     <ClCompile Include="StageManager.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Barrage.cpp">
+      <Filter>yami</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyData.cpp">
+      <Filter>yami</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMove.cpp">
+      <Filter>yami</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Barrage.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>ヘッダファイル</Filter>
     </ClInclude>
@@ -282,16 +279,7 @@
     <ClInclude Include="Enemy.h">
       <Filter>ヘッダファイル</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyData.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyMove.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ImportCsvData.h">
       <Filter>ヘッダファイル</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
@@ -302,6 +290,21 @@
     </ClInclude>
     <ClInclude Include="StageManager.h">
       <Filter>ヘッダファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Barrage.h">
+      <Filter>yami</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyData.h">
+      <Filter>yami</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMove.h">
+      <Filter>yami</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportCsvData.h">
+      <Filter>yami</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>yami</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

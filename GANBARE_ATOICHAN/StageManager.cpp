@@ -16,12 +16,13 @@ void StageManager::move() {
 	switch (stage)
 	{
 	case 1:
-		if (cnt == 0) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");
-		if (cnt == 30) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");
-		if (cnt == 60) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");
-		if (cnt == 0) enemyManager->create({ Window::Width(), 100 }, "zako", "slowR", "jikinerai");
-		if (cnt == 30) enemyManager->create({ Window::Width(), 100 }, "zako", "slowR", "jikinerai");
-		if (cnt == 60) enemyManager->create({ Window::Width(), 100 }, "zako", "slowR", "jikinerai");
+		if (cnt == 0) enemyManager->create({ 30, 0 }, 0, 1);
+		if (cnt == 10) enemyManager->create({ 80, 0 }, 0, 1);
+		if (cnt == 20) enemyManager->create({ 130, 0 }, 0, 1);
+
+		if (cnt == 100) enemyManager->create({ 420, 0 }, 0, 1);
+		if (cnt == 110) enemyManager->create({ 370, 0 }, 0, 1);
+		if (cnt == 120) enemyManager->create({ 320, 0 }, 0, 1);
 	default:
 		break;
 	}

@@ -27,6 +27,12 @@ void Enemy::damage() {
 	subCnt = 0;
 }
 
+void Enemy::defalutMove() {
+	cnt++;
+	subCnt++;
+	if (hp < 0) enable = false;
+}
+
 Enemy1::Enemy1() {
 	hp = 10;
 	rad = 15.0;
@@ -34,6 +40,18 @@ Enemy1::Enemy1() {
 }
 
 void Enemy1::move() {
+	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	double sp = 6.5;
+	const int interval = 10;
+	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0);
+
+	if (cnt < 40) {
+		pos.moveBy({ 0.0, 3.0 });
+	}
+	else if (cnt > 250) {
+		pos.moveBy({ 0.0, -6.0 });
+	}
+	Enemy::defalutMove();
 }
 
 EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
@@ -44,7 +62,13 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 void EnemyManager::create(Vec2 pos, int type, int dir)
 {
 	std::shared_ptr<Enemy> e;
-	e = std::make_shared<Enemy>();
+	switch (type) {
+	case 0:
+		e = std::make_shared<Enemy1>(); break;
+	default:
+		LOG(L"defalut");
+		e = nullptr;
+	}
 	e->setParam(pos, dir, ship, bulletManager);
 	enemies.push_back(e);
 }
