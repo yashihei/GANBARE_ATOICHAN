@@ -1,9 +1,8 @@
 #include "Bullet.h"
 
-Bullet::Bullet(Vec2 pos, Vec2 vel, Color color)
-:pos(pos), vel(vel), color(color)
+Bullet::Bullet(Vec2 pos, Vec2 vel, Color color, double rad)
+:pos(pos), vel(vel), color(color), rad(rad)
 {
-	rad = 5.0;
 } 
 
 void Bullet::move() {
@@ -15,9 +14,9 @@ void Bullet::draw() {
 	c.draw(color);
 }
 
-void BulletManager::create(Vec2 pos, Vec2 vel, Color color)
+void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad)
 {
-	auto b = std::make_shared<Bullet>(pos, vel, color);
+	auto b = std::make_shared<Bullet>(pos, vel, color, rad);
 	bullets.push_back(b);
 }
 

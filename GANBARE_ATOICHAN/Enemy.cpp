@@ -7,12 +7,20 @@
 #include "Barrage.h"
 #include "EnemyData.h"
 
-Enemy::Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage, EnemyData enemyData)
-:pos(pos), ship(ship), bulletManager(bulletManager), enemyMove(enemyMove), barrage(barrage)
+Enemy::Enemy(Ship* ship, BulletManager* bulletManager)
+:ship(ship), bulletManager(bulletManager)
 {
+}
+
+void Enemy::setParam(Vec2 pos, EnemyData enemyData, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage)
+{
+	this->pos = pos;
 	rad = enemyData.rad;
 	color = enemyData.color;
 	hp = enemyData.hp;
+	limit = enemyData.limit;
+	this->enemyMove = enemyMove;
+	this->barrage = barrage;
 }
 
 void Enemy::move() {
@@ -20,7 +28,7 @@ void Enemy::move() {
 	subCnt++;
 	if (hp < 0) enable = false;
 	enemyMove->move(&pos, cnt);
-	barrage->move(pos, ship->getPos(), cnt, bulletManager);
+	if (cnt > limit) barrage->move(pos, ship->getPos(), cnt, bulletManager);
 }
 
 void Enemy::draw() {
@@ -46,7 +54,8 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 void EnemyManager::create(Vec2 pos, std::string enemyType, std::string moveType, std::string barrageType)
 {
 	std::shared_ptr<Enemy> e;
-	e = std::make_shared<Enemy>(pos, ship, bulletManager, enemyMoveFactory->create(moveType), barrageFactory->create(barrageType), enemyDataFactory->create(enemyType));
+	e = std::make_shared<Enemy>(ship, bulletManager);
+	e->setParam(pos, enemyDataFactory->create(enemyType), enemyMoveFactory->create(moveType), barrageFactory->create(barrageType));
 	enemies.push_back(e);
 }
 

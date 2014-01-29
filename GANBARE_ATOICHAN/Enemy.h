@@ -25,11 +25,15 @@ struct EnemyData;
 class Enemy
 {
 public:
-	Enemy(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage, EnemyData enemyData);
-	//void init(Vec2 pos, Ship* ship, BulletManager* bulletManager, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
+	Enemy(Ship* ship, BulletManager* bulletManager);
+	void setParam(Vec2 pos, EnemyData enemyData, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
 	void move();
 	void draw();
 	void damage();
+	//getter
+	Vec2 getPos() const { return this->pos; };
+	double getRad() const { return this->rad; };
+	bool isEnable() const { return this->enable; };
 protected:
 	Vec2 pos;
 	//Vec2 vel;
@@ -39,15 +43,11 @@ protected:
 	int subCnt = 3;//”ñƒ_ƒ•\¦—p
 	int hp;
 	bool enable = true;
+	int limit;
 	Ship* ship;
 	BulletManager* bulletManager;
 	std::shared_ptr<EnemyMove> enemyMove;
 	std::shared_ptr<Barrage> barrage;
-public:
-	//void setPos(Vec2 pos) { this->pos = pos; };
-	Vec2 getPos() const { return this->pos; };
-	double getRad() const { return this->rad; };
-	bool isEnable() const { return this->enable; };
 };
 
 class EnemyManager

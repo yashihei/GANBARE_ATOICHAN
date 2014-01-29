@@ -7,7 +7,7 @@
 class Bullet
 {
 public:
-	Bullet(Vec2 pos, Vec2 vel, Color color);
+	Bullet(Vec2 pos, Vec2 vel, Color color, double rad);
 	void move();
 	void draw();
 	Vec2 getPos() const { return this->pos; };
@@ -28,7 +28,7 @@ public:
 	void clear();
 	void draw();
 	void move();
-	void create(Vec2 pos, Vec2 vel, Color color);
+	void create(Vec2 pos, Vec2 vel, Color color, double rad);
 	const std::list<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
 private:
 	std::list<std::shared_ptr<Bullet>> bullets;

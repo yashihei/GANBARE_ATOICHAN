@@ -16,8 +16,6 @@ void StageManager::move() {
 	switch (stage)
 	{
 	case 1:
-		if (cnt == 0) enemyManager->create({ 50, 0 }, "futu", "Normal", "wayway");
-		if (cnt == 0) enemyManager->create({ 400, 0 }, "futu", "Normal", "wayway");
 		if (cnt == 0) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");
 		if (cnt == 30) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");
 		if (cnt == 60) enemyManager->create({ 0, 100 }, "zako", "slowL", "jikinerai");

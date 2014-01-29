@@ -10,10 +10,6 @@ class Barrage {
 public:
 	Barrage(){};
 	virtual void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) = 0;
-	void setDelay(int delay) { this->delay = delay; };
-protected:
-	int cnt;
-	int delay=40;
 };
 
 class Barrage1 : public Barrage {

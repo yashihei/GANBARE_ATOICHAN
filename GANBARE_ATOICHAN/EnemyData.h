@@ -9,6 +9,7 @@ struct EnemyData {
 	Color color;
 	double rad;
 	int score;
+	int limit;
 };
 
 class EnemyDataFactory
