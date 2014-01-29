@@ -7,28 +7,12 @@
 #include "Barrage.h"
 #include "EnemyData.h"
 
-Enemy::Enemy(Ship* ship, BulletManager* bulletManager)
-:ship(ship), bulletManager(bulletManager)
-{
-}
-
-void Enemy::setParam(Vec2 pos, EnemyData enemyData, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage)
+void Enemy::setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager)
 {
 	this->pos = pos;
-	rad = enemyData.rad;
-	color = enemyData.color;
-	hp = enemyData.hp;
-	limit = enemyData.limit;
-	this->enemyMove = enemyMove;
-	this->barrage = barrage;
-}
-
-void Enemy::move() {
-	cnt++;
-	subCnt++;
-	if (hp < 0) enable = false;
-	enemyMove->move(&pos, cnt);
-	if (cnt > limit) barrage->move(pos, ship->getPos(), cnt, bulletManager);
+	this->dir = dir;
+	this->ship = ship;
+	this->bulletManager = bulletManager;
 }
 
 void Enemy::draw() {
@@ -43,19 +27,25 @@ void Enemy::damage() {
 	subCnt = 0;
 }
 
+Enemy1::Enemy1() {
+	hp = 10;
+	rad = 15.0;
+	color = Color{ 255, 0, 0, 200 };
+}
+
+void Enemy1::move() {
+}
+
 EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 :ship(ship), bulletManager(bulletManager)
 {
-	barrageFactory = std::make_shared<BarrageFactory>();
-	enemyMoveFactory = std::make_shared<EnemyMoveFactory>();
-	enemyDataFactory = std::make_shared<EnemyDataFactory>();
 }
 
-void EnemyManager::create(Vec2 pos, std::string enemyType, std::string moveType, std::string barrageType)
+void EnemyManager::create(Vec2 pos, int type, int dir)
 {
 	std::shared_ptr<Enemy> e;
-	e = std::make_shared<Enemy>(ship, bulletManager);
-	e->setParam(pos, enemyDataFactory->create(enemyType), enemyMoveFactory->create(moveType), barrageFactory->create(barrageType));
+	e = std::make_shared<Enemy>();
+	e->setParam(pos, dir, ship, bulletManager);
 	enemies.push_back(e);
 }
 

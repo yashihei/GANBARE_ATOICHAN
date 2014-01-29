@@ -25,10 +25,11 @@ struct EnemyData;
 class Enemy
 {
 public:
-	Enemy(Ship* ship, BulletManager* bulletManager);
-	void setParam(Vec2 pos, EnemyData enemyData, std::shared_ptr<EnemyMove> enemyMove, std::shared_ptr<Barrage> barrage);
-	void move();
-	void draw();
+	//Enemy(Ship* ship, BulletManager* bulletManager);
+	Enemy(){};
+	void setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager);
+	virtual void move() = 0;
+	virtual void draw();
 	void damage();
 	//getter
 	Vec2 getPos() const { return this->pos; };
@@ -43,18 +44,25 @@ protected:
 	int subCnt = 3;//非ダメ表示用
 	int hp;
 	bool enable = true;
+	int dir = 1;
 	int limit;
 	Ship* ship;
 	BulletManager* bulletManager;
-	std::shared_ptr<EnemyMove> enemyMove;
-	std::shared_ptr<Barrage> barrage;
+};
+
+class Enemy1 : public Enemy
+{
+public:
+	Enemy1();
+	void move() override;
+	void draw() override;
 };
 
 class EnemyManager
 {
 public:
 	EnemyManager(Ship* ship, BulletManager* bulletManager);
-	void create(Vec2 pos, std::string enemyType, std::string moveType, std::string barrageType);//場所と、タイプ
+	void create(Vec2 pos, int type, int dir);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
@@ -63,8 +71,4 @@ private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	Ship* ship;
 	BulletManager* bulletManager;
-	ShotManager* shotManager;
-	std::shared_ptr<EnemyMoveFactory> enemyMoveFactory;
-	std::shared_ptr<BarrageFactory> barrageFactory;
-	std::shared_ptr<EnemyDataFactory> enemyDataFactory;
 };

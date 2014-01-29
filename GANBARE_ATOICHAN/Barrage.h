@@ -10,6 +10,8 @@ class Barrage {
 public:
 	Barrage(){};
 	virtual void move(Vec2 ownerPos, Vec2 targetPos, int cnt, BulletManager* bulletManager) = 0;
+protected:
+	int cnt=0;
 };
 
 class Barrage1 : public Barrage {

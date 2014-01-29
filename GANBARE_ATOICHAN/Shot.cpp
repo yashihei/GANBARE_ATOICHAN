@@ -13,8 +13,8 @@ void Shot::move() {
 }
 
 void Shot::draw() {
-	Line l(pos, pos + Vec2(0.0, 10.0));
-	l.draw(3.0, Palette::White);
+	Line l(pos, pos + vel);
+	l.draw(3.0, { 255, 255, 255, 200 });
 }
 
 void Shot::burn()
