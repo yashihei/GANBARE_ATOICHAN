@@ -51,6 +51,25 @@ void Enemy1::move() {
 	Enemy::defalutMove();
 }
 
+Tossin::Tossin() {
+	hp = 5;
+	rad = 15.0;
+	color = Color{ 255, 255, 255, 200 };
+}
+
+void Tossin::move() {
+	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	double sp = 7.0;
+	const int interval = 5;
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0);
+
+	sp = 5.0;
+	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
+	pos.moveBy(vel);
+
+	Enemy::defalutMove();
+}
+
 EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager):
 ship(ship), bulletManager(bulletManager)
 {
@@ -61,6 +80,8 @@ void EnemyManager::create(Vec2 pos, std::string type, int dir)
 	std::shared_ptr<Enemy> e;
 	if (type == "zako") {
 		e = std::make_shared<Enemy1>();
+	} else if (type == "tossin") {
+		e = std::make_shared<Tossin>();
 	} else {
 		LOG(L"name miss");
 	}

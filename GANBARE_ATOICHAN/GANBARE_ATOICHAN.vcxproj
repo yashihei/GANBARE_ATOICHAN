@@ -158,12 +158,8 @@
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Barrage.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="CheckCollide.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyData.cpp" />
-    <ClCompile Include="EnemyMove.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Ship.cpp" />
@@ -171,15 +167,9 @@
     <ClCompile Include="StageManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Barrage.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="CheckCollide.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyData.h" />
-    <ClInclude Include="EnemyMove.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="ImportCsvData.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="StageManager.h" />

@@ -66,4 +66,5 @@ void Ship::destory()
 	LOG(L"ship destory!!");
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	life--;
+	bulletManager->clear();
 }

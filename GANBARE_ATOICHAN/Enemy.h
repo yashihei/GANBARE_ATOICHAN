@@ -49,6 +49,21 @@ public:
 	void move() override;
 };
 
+class Tossin : public Enemy
+{
+public:
+	Tossin();
+	void move() override;
+private:
+	Vec2 vel;
+};
+
+class Middle : public Enemy
+{
+public:
+
+};
+
 class EnemyManager
 {
 public:

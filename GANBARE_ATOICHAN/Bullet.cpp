@@ -10,8 +10,9 @@ void Bullet::move() {
 }
 
 void Bullet::draw() {
-	Circle c(pos, rad);
+	Circle c(pos, rad*1.5);
 	c.draw(color);
+	c.drawFrame(1.0, 0.0, Palette::White);
 }
 
 void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad)

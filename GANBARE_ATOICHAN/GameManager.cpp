@@ -55,6 +55,7 @@ void GameManager::checkHit() {
 		Circle circle(ship->getPos(), ship->getRad());
 		if (Geometry::Intersect(line, circle)) {
 			ship->destory();
+			break;
 		}
 	}
 }
