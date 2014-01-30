@@ -2,11 +2,12 @@
 #include <Siv3D.hpp>
 
 class ShotManager;
+class BulletManager;
 
 class Ship
 {
 public:
-	Ship(ShotManager*);
+	Ship(ShotManager*, BulletManager*);
 	void move();
 	void draw();
 	void destory();
@@ -15,9 +16,11 @@ public:
 	double getRad() { return rad; };
 private:
 	ShotManager* shotManager;
+	BulletManager* bulletManager;
 	double rad;
 	Vec2 pos;
-	int zanki;
+	int life;
+	bool slowMove;
 
 	int cnt;//“à•”ƒJƒEƒ“ƒ^
 };

@@ -15,6 +15,7 @@ class EnemyMoveFactory;
 class BarrageFactory;
 class EnemyDataFactory;
 struct EnemyData;
+class EnemyPatternFactory;
 
 /*
  * Enemy.h
@@ -28,7 +29,7 @@ public:
 	Enemy(){};
 	void setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager);
 	virtual void move() = 0;
-	virtual void draw();
+	void draw();
 	void defalutMove();
 	void damage();
 	//getter
@@ -70,4 +71,5 @@ private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	Ship* ship;
 	BulletManager* bulletManager;
+	//std::shared_ptr<EnemyPatternFactory> enemyPatternFactory;
 };

@@ -268,6 +268,9 @@
     <ClCompile Include="EnemyMove.cpp">
       <Filter>yami</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyPattern.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h">
@@ -305,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>yami</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyPattern.h">
+      <Filter>ヘッダファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

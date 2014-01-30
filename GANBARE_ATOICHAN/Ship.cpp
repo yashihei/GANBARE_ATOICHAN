@@ -1,16 +1,21 @@
 #include "Ship.h"
 
 #include "Shot.h"
+#include "Bullet.h"
 
-Ship::Ship(ShotManager* shotManager) {
+Ship::Ship(ShotManager* shotManager, BulletManager* bulletManager)
+:shotManager(shotManager), bulletManager(bulletManager)
+{
 	rad = 5.0;
-	this->shotManager = shotManager;
-	zanki = 3;
+	life = 3;
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
 }
 
 void Ship::move() {
+	if (Input::KeyShift.pressed) slowMove = true;
+	else slowMove = false;
+
 	Vec2 vel = { 0, 0 };
 	const double speed = 5.5;
 	if (Input::KeyLeft.pressed) vel.x -= speed;
@@ -22,7 +27,7 @@ void Ship::move() {
 		vel.y *= 0.707;
 	}
 	//slow move
-	if (Input::KeyShift.pressed) {
+	if (slowMove) {
 		vel.x *= 0.5;
 		vel.y *= 0.5;
 	}
@@ -36,8 +41,13 @@ void Ship::move() {
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
 		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
 		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
-		//shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
-		//shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
+		if (slowMove) {
+			shotManager->create(pos + Vec2(-15.0, 0.0), { 0.0, -30.0 });
+			shotManager->create(pos + Vec2(15.0, 0.0), { 0.0, -30.0 });
+		} else {
+			shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
+			shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
+		}
 	}
 	cnt++;
 }
@@ -47,7 +57,7 @@ void Ship::draw() {
 	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
 	t.draw({255, 50, 50, 255});
 	t.drawFrame(2.0, Palette::White);
-	if (Input::KeyShift.pressed) Circle(pos, rad).draw({100, 255, 255, 255});
+	if (slowMove) Circle(pos, rad).draw({100, 255, 255, 255});
 }
 
 void Ship::destory()

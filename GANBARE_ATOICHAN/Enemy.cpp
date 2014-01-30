@@ -6,6 +6,7 @@
 #include "EnemyMove.h"
 #include "Barrage.h"
 #include "EnemyData.h"
+#include "EnemyPattern.h"
 
 void Enemy::setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager)
 {
@@ -62,6 +63,7 @@ EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
 void EnemyManager::create(Vec2 pos, int type, int dir)
 {
 	std::shared_ptr<Enemy> e;
+	//TODO: switchÅ®if else(string)
 	switch (type) {
 	case 0:
 		e = std::make_shared<Enemy1>(); break;
