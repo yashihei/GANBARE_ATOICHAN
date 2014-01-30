@@ -1,13 +1,12 @@
 #pragma once
 #include <Siv3D.hpp>
 
-class ShotManager;
-class BulletManager;
+class GameManager;
 
 class Ship
 {
 public:
-	Ship(ShotManager*, BulletManager*);
+	Ship(GameManager* gm);
 	void move();
 	void draw();
 	void destory();
@@ -15,12 +14,11 @@ public:
 	Vec2 getPos() { return pos; };
 	double getRad() { return rad; };
 private:
-	ShotManager* shotManager;
-	BulletManager* bulletManager;
+	GameManager* gm;
 	double rad;
 	Vec2 pos;
 	int life;
 	bool slowMove;
 
-	int cnt;//内部カウンタ
+	int cnt;//ショット間隔用
 };

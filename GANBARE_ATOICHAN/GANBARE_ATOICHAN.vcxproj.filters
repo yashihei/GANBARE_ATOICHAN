@@ -238,9 +238,6 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CheckCollide.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -271,12 +268,12 @@
     <ClCompile Include="EnemyPattern.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="CheckCollide.cpp">
+      <Filter>yami</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h">
-      <Filter>ヘッダファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckCollide.h">
       <Filter>ヘッダファイル</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
@@ -311,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="EnemyPattern.h">
       <Filter>ヘッダファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckCollide.h">
+      <Filter>yami</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

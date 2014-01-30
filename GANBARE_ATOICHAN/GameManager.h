@@ -6,19 +6,27 @@ class ShotManager;
 class EnemyManager;
 class BulletManager;
 class StageManager;
-class CheckCollide;
 
 class GameManager
 {
 public:
+	enum class State {
+		TITLE,
+		IN_GAME,
+		PAUSE,
+		GAME_OVER,
+	};
+
 	GameManager();
 	void move();
 	void draw();
-private:
+public://“n‚·‚Ì‚¾‚é‚¢‚Ì‚Å
 	std::shared_ptr<Ship> ship;
 	std::shared_ptr<ShotManager> shotManager;
 	std::shared_ptr<EnemyManager> enemyManager;
 	std::shared_ptr<BulletManager> bulletManager;
 	std::shared_ptr<StageManager> stageManager;
-	std::shared_ptr<CheckCollide> checkCollide;
+private:
+	void checkHit();
+	State state;
 };

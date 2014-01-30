@@ -3,17 +3,14 @@
 #include "Ship.h"
 #include "Bullet.h"
 #include "Shot.h"
-#include "EnemyMove.h"
-#include "Barrage.h"
-#include "EnemyData.h"
 #include "EnemyPattern.h"
+#include "GameManager.h"
 
-void Enemy::setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager)
+void Enemy::setParam(GameManager* gm, Vec2 pos, int dir)
 {
+	this->gm = gm;
 	this->pos = pos;
 	this->dir = dir;
-	this->ship = ship;
-	this->bulletManager = bulletManager;
 }
 
 void Enemy::draw() {
@@ -41,10 +38,10 @@ Enemy1::Enemy1() {
 }
 
 void Enemy1::move() {
-	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	const double rad = Atan2(gm->ship->getPos().x - pos.x, gm->ship->getPos().y - pos.y);
 	double sp = 6.5;
 	const int interval = 10;
-	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0);
+	if (cnt % interval == 0 && cnt > 40) gm->bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0);
 
 	if (cnt < 40) {
 		pos.moveBy({ 0.0, 3.0 });
@@ -55,10 +52,8 @@ void Enemy1::move() {
 	Enemy::defalutMove();
 }
 
-EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager)
-:ship(ship), bulletManager(bulletManager)
-{
-}
+EnemyManager::EnemyManager(GameManager* gm):
+gm(gm) {}
 
 void EnemyManager::create(Vec2 pos, int type, int dir)
 {
@@ -71,7 +66,7 @@ void EnemyManager::create(Vec2 pos, int type, int dir)
 		LOG(L"defalut");
 		e = nullptr;
 	}
-	e->setParam(pos, dir, ship, bulletManager);
+	e->setParam(gm, pos, dir);
 	enemies.push_back(e);
 }
 

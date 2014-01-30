@@ -11,10 +11,10 @@
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
 	bulletManager = std::make_shared<BulletManager>();
-	ship = std::make_shared<Ship>(shotManager.get(), bulletManager.get());
-	enemyManager = std::make_shared<EnemyManager>(ship.get(), bulletManager.get());
+	ship = std::make_shared<Ship>(this);
+	enemyManager = std::make_shared<EnemyManager>(this);
 	stageManager = std::make_shared<StageManager>(enemyManager.get());
-	checkCollide = std::make_shared<CheckCollide>(std::make_tuple(shotManager.get(), bulletManager.get(), enemyManager.get(), ship.get()));
+	state = State::IN_GAME;
 }
 
 void GameManager::move() {
@@ -23,7 +23,7 @@ void GameManager::move() {
 	enemyManager->move();
 	bulletManager->move();
 	stageManager->move();
-	checkCollide->move();
+	checkHit();
 }
 
 void GameManager::draw() {
@@ -31,4 +31,30 @@ void GameManager::draw() {
 	shotManager->draw();
 	enemyManager->draw();
 	bulletManager->draw();
+}
+
+void GameManager::checkHit() {
+	auto shots = shotManager->getShots();
+	auto bullets = bulletManager->getBullets();
+	auto enemies = enemyManager->getEnemies();
+
+	//shots and enemies
+	for (auto s = shots->begin(); s != shots->end(); ++s) {
+		for (auto e = enemies->begin(); e != enemies->end(); ++e) {
+			Line line((*s)->getPos(), (*s)->getPos() + (*s)->getVel());
+			Circle circle((*e)->getPos(), (*e)->getRad());
+			if (Geometry::Intersect(line, circle)) {
+				(*e)->damage();
+				(*s)->burn();
+			}
+		}
+	}
+	//bullets and ship
+	for (auto b = bullets->begin(); b != bullets->end(); ++b) {
+		Line line((*b)->getPos(), (*b)->getPos() + (*b)->getVel());
+		Circle circle(ship->getPos(), ship->getRad());
+		if (Geometry::Intersect(line, circle)) {
+			ship->destory();
+		}
+	}
 }

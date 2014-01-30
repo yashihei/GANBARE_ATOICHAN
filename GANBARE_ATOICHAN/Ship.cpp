@@ -1,10 +1,11 @@
 #include "Ship.h"
 
+#include "GameManager.h"
 #include "Shot.h"
 #include "Bullet.h"
 
-Ship::Ship(ShotManager* shotManager, BulletManager* bulletManager)
-:shotManager(shotManager), bulletManager(bulletManager)
+Ship::Ship(GameManager* gm):
+gm(gm)
 {
 	rad = 5.0;
 	life = 3;
@@ -39,6 +40,7 @@ void Ship::move() {
 	else if (pos.y > Window::Height()) pos.y = Window::Height();
 
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
+		auto shotManager = gm->shotManager;
 		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
 		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
 		if (slowMove) {
@@ -64,4 +66,5 @@ void Ship::destory()
 {
 	LOG(L"ship destory!!");
 	pos = { Window::Width() / 2, Window::Height() - 100 };
+	life--;
 }

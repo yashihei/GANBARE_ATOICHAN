@@ -4,18 +4,12 @@
 #include <memory>
 #include <hash_map>
 #include <string>
-#include <tuple>
 
 class Ship;
 class BulletManager;
 class ShotManager;
-class EnemyMove;
-class Barrage;
-class EnemyMoveFactory;
-class BarrageFactory;
-class EnemyDataFactory;
-struct EnemyData;
 class EnemyPatternFactory;
+class GameManager;
 
 /*
  * Enemy.h
@@ -25,9 +19,8 @@ class EnemyPatternFactory;
 class Enemy
 {
 public:
-	//Enemy(Ship* ship, BulletManager* bulletManager);
 	Enemy(){};
-	void setParam(Vec2 pos, int dir, Ship* ship, BulletManager* bulletManager);
+	void setParam(GameManager* gm, Vec2 pos, int dir);
 	virtual void move() = 0;
 	void draw();
 	void defalutMove();
@@ -37,6 +30,7 @@ public:
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
 protected:
+	GameManager* gm;
 	Vec2 pos;
 	//Vec2 vel;
 	double rad;
@@ -47,8 +41,6 @@ protected:
 	bool enable = true;
 	int dir = 1;
 	int limit;
-	Ship* ship;
-	BulletManager* bulletManager;
 };
 
 class Enemy1 : public Enemy
@@ -61,15 +53,14 @@ public:
 class EnemyManager
 {
 public:
-	EnemyManager(Ship* ship, BulletManager* bulletManager);
+	EnemyManager(GameManager* gm);
 	void create(Vec2 pos, int type, int dir);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();
 	const std::list<std::shared_ptr<Enemy>>* getEnemies() const { return &enemies; };
 private:
+	GameManager* gm;
 	std::list<std::shared_ptr<Enemy>> enemies;
-	Ship* ship;
-	BulletManager* bulletManager;
 	//std::shared_ptr<EnemyPatternFactory> enemyPatternFactory;
 };
