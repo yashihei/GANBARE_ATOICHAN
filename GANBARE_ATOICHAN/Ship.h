@@ -8,6 +8,7 @@ class Ship
 {
 public:
 	Ship(ShotManager* shotManager, BulletManager* bulletManager);
+	void start();
 	void move();
 	void draw();
 	void destory();
@@ -20,7 +21,8 @@ private:
 	double rad;
 	Vec2 pos;
 	int life;
-	bool slowMove;
-
 	int cnt;//ショット間隔用
+	bool slowMove;
+	bool comeBack;
+	int comeBackCnt;
 };

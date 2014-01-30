@@ -59,6 +59,7 @@ Tossin::Tossin() {
 
 void Tossin::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	LOG(rad);
 	double sp = 7.0;
 	const int interval = 5;
 	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0);
@@ -67,6 +68,34 @@ void Tossin::move() {
 	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
 	pos.moveBy(vel);
 
+	Enemy::defalutMove();
+}
+
+Middle::Middle() {
+	hp = 100;
+	rad = 25.0;
+	color = Color{ 0, 0, 255, 200 };
+}
+
+void Middle::move() {
+	//‚®‚é‚®‚é‚Ü‚í‚·’e–‹
+	const double PI2 = 6.28;
+	const double rad = 0;
+	double sp = 5.0;
+	const int interval = 3;
+	const int sep = 10;
+	if (cnt > 30 && cnt % interval == 0) {
+		for (int i = 0; i < sep; i++) {
+			bulletManager->create(pos, { Sin(rad + PI2 / sep * i)*sp, Cos(rad + PI2 / sep * i)*sp }, Color(0, 255, 255, 200), 5.0);
+		}
+	}
+
+	if (cnt < 30) {
+		pos.moveBy({ 0.0, 3.0 });
+	}
+	else if (cnt > 300) {
+		pos.moveBy({ 0.0, -6.0 });
+	}
 	Enemy::defalutMove();
 }
 
@@ -82,6 +111,8 @@ void EnemyManager::create(Vec2 pos, std::string type, int dir)
 		e = std::make_shared<Enemy1>();
 	} else if (type == "tossin") {
 		e = std::make_shared<Tossin>();
+	} else if (type == "middle") {
+		e = std::make_shared<Middle>();
 	} else {
 		LOG(L"name miss");
 	}

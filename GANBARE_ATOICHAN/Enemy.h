@@ -61,7 +61,8 @@ private:
 class Middle : public Enemy
 {
 public:
-
+	Middle();
+	void move() override;
 };
 
 class EnemyManager

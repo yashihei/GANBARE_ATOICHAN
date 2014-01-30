@@ -8,12 +8,20 @@ Ship::Ship(ShotManager* shotManager, BulletManager* bulletManager):
 shotManager(shotManager), bulletManager(bulletManager)
 {
 	rad = 5.0;
+	start();
+}
+
+void Ship::start() {
 	life = 3;
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
+	comeBack = false;
+	comeBackCnt = 0;
 }
 
 void Ship::move() {
+	const double ROOT2 = 1.414;
+
 	if (Input::KeyShift.pressed) slowMove = true;
 	else slowMove = false;
 
@@ -24,8 +32,8 @@ void Ship::move() {
 	if (Input::KeyUp.pressed) vel.y -= speed;
 	if (Input::KeyDown.pressed) vel.y = speed;
 	if (vel.x != 0 && vel.y != 0) {
-		vel.x *= 0.707;
-		vel.y *= 0.707;
+		vel.x /= ROOT2;
+		vel.y /= ROOT2;
 	}
 	//slow move
 	if (slowMove) {

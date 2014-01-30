@@ -13,6 +13,7 @@ StageManager::StageManager(EnemyManager* enemyManager)
 }
 
 void StageManager::move() {
+	const int WIDTH = 450;
 	switch (stage)
 	{
 	case 1:
@@ -23,6 +24,8 @@ void StageManager::move() {
 		if (cnt == 100) enemyManager->create({ 420, 0 }, "tossin", 1);
 		if (cnt == 120) enemyManager->create({ 370, 0 }, "tossin", 1);
 		if (cnt == 140) enemyManager->create({ 320, 0 }, "tossin", 1);
+
+		if (cnt == 200) enemyManager->create({ WIDTH / 2, 0 }, "middle", 1);
 	default:
 		break;
 	}
