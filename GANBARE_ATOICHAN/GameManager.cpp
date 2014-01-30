@@ -11,8 +11,8 @@
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
 	bulletManager = std::make_shared<BulletManager>();
-	ship = std::make_shared<Ship>(this);
-	enemyManager = std::make_shared<EnemyManager>(this);
+	ship = std::make_shared<Ship>(shotManager.get(), bulletManager.get());
+	enemyManager = std::make_shared<EnemyManager>(ship.get(), bulletManager.get());
 	stageManager = std::make_shared<StageManager>(enemyManager.get());
 	state = State::IN_GAME;
 }
