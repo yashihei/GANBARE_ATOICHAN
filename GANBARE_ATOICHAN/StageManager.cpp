@@ -26,6 +26,13 @@ StageManager::StageManager(EnemyManager* enemyManager)
 		{ 340, { 320, 0 }, "tossin" },
 		//middle
 		{ 400, { WIDTH / 2, 0 }, "middle" },
+		//baramaki
+		{ 600, { 0, 100 }, "baramakiL" },
+		{ 640, { 0, 100 }, "baramakiL" },
+		{ 680, { 0, 100 }, "baramakiL" },
+		{ 600, { WIDTH, 100 }, "baramakiR" },
+		{ 640, { WIDTH, 100 }, "baramakiR" },
+		{ 680, { WIDTH, 100 }, "baramakiR" },
 	};
 }
 

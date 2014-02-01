@@ -5,21 +5,6 @@
 #include <functional>
 #include "Actor.h"
 
-class BulletMove
-{
-public:
-	BulletMove(){};
-	virtual void move(Vec2* pos, Vec2* vel) = 0;
-};
-
-class Tokasoku : public BulletMove {
-	void move(Vec2* pos, Vec2* vel) override;
-};
-
-class Juryoku : public BulletMove {
-	void move(Vec2* pos, Vec2* vel) override;
-};
-
 class Bullet
 {
 public:
@@ -35,7 +20,7 @@ private:
 	double rad;
 	Color color;
 	int cnt;
-	std::shared_ptr<BulletMove> bulletMove;
+	std::function<void(Vec2* pos, Vec2* vel)> bulletMove;
 };
 
 class BulletManager

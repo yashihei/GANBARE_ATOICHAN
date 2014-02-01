@@ -69,11 +69,12 @@ private:
 	double kakudo;
 };
 
-//’x‚¢’e‚Î‚çT‚­
+//‹Pjé‚T–Ê‚ÌG‹›•—
 class Baramaki : public Enemy
 {
 public:
 	Baramaki();
+	void move() override;
 };
 
 class EnemyManager
