@@ -1,13 +1,26 @@
 #include "Bullet.h"
 
-Bullet::Bullet(Vec2 pos, Vec2 vel, Color color, double rad)
+void Tokasoku::move(Vec2* pos, Vec2* vel) {
+	pos->moveBy(*vel);
+}
+
+void Juryoku::move(Vec2* pos, Vec2* vel) {
+	const int G = 9.8;
+	*vel += { 0, G };
+	pos->moveBy(*pos);
+}
+
+Bullet::Bullet(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
 :pos(pos), vel(vel), color(color), rad(rad)
 {
+	if (moveType == 0) bulletMove = std::make_shared<Tokasoku>();
+	else if (moveType == 1) bulletMove = std::make_shared<Juryoku>();
 	cnt = 0;
 }
 
 void Bullet::move() {
-	pos.moveBy(vel);
+	//pos.moveBy(vel);
+	bulletMove->move(&pos, &vel);
 	cnt++;
 }
 
@@ -19,7 +32,7 @@ void Bullet::draw() {
 
 void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
 {
-	auto b = std::make_shared<Bullet>(pos, vel, color, rad);
+	auto b = std::make_shared<Bullet>(pos, vel, color, rad, moveType);
 	bullets.push_back(b);
 }
 

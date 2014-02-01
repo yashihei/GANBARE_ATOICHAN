@@ -43,7 +43,7 @@ void Enemy1::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 6.5;
 	const int interval = 10;
-	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0, TODO);
+	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0, 0);
 
 	if (cnt < 40) {
 		pos.moveBy({ 0.0, 3.0 });
@@ -64,7 +64,7 @@ void Tossin::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 7.0;
 	const int interval = 5;
-	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0, TODO);
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0, 0);
 
 	sp = 5.0;
 	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
@@ -90,7 +90,7 @@ void Middle::move() {
 	const int sep = 10;
 	if (cnt > 30 && cnt % interval == 0) {
 		for (int i = 0; i < sep; i++) {
-			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, Color(0, 255, 255, 200), 5.0, TODO);
+			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, Color(0, 255, 255, 200), 5.0, 0);
 		}
 	}
 
