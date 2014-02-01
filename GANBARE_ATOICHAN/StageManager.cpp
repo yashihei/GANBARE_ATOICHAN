@@ -1,7 +1,5 @@
 #include "StageManager.h"
 
-#include <Siv3D.hpp>
-#include <string>
 #include "EnemyMove.h"
 #include "Enemy.h"
 
@@ -10,24 +8,32 @@ StageManager::StageManager(EnemyManager* enemyManager)
 {
 	stage = 1;
 	cnt = 0;
+	const int WIDTH = 450;
+	enemiesData = {
+		//tossin1
+		{ 0, { 30, 0 }, "tossin" },
+		{ 20, { 80, 0 }, "tossin" },
+		{ 40, { 130, 0 }, "tossin" },
+		{ 100, { 420, 0 }, "tossin" },
+		{ 120, { 370, 0 }, "tossin" },
+		{ 140, { 320, 0 }, "tossin" },
+		//tossin2
+		{ 200, { 30, 0 }, "tossin" },
+		{ 220, { 80, 0 }, "tossin" },
+		{ 240, { 130, 0 }, "tossin" },
+		{ 300, { 420, 0 }, "tossin" },
+		{ 320, { 370, 0 }, "tossin" },
+		{ 340, { 320, 0 }, "tossin" },
+		//middle
+		{ 400, { WIDTH / 2, 0 }, "middle" },
+	};
 }
 
 void StageManager::move() {
-	const int WIDTH = 450;
-	switch (stage)
-	{
-	case 1:
-		if (cnt == 0) enemyManager->create({ 30, 0 }, "tossin", 1);
-		if (cnt == 20) enemyManager->create({ 80, 0 }, "tossin", 1);
-		if (cnt == 40) enemyManager->create({ 130, 0 }, "tossin", 1);
-
-		if (cnt == 100) enemyManager->create({ 420, 0 }, "tossin", 1);
-		if (cnt == 120) enemyManager->create({ 370, 0 }, "tossin", 1);
-		if (cnt == 140) enemyManager->create({ 320, 0 }, "tossin", 1);
-
-		if (cnt == 200) enemyManager->create({ WIDTH / 2, 0 }, "middle", 1);
-	default:
-		break;
+	for (const auto& enemy : enemiesData) {
+		if (enemy.cnt == cnt) {
+			enemyManager->create(enemy.pos, enemy.name);
+		}
 	}
 	cnt++;
 	if (Input::KeyR.clicked) cnt = 0;//reset

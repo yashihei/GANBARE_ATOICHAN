@@ -3,19 +3,21 @@
 Bullet::Bullet(Vec2 pos, Vec2 vel, Color color, double rad)
 :pos(pos), vel(vel), color(color), rad(rad)
 {
-} 
+	cnt = 0;
+}
 
 void Bullet::move() {
 	pos.moveBy(vel);
+	cnt++;
 }
 
 void Bullet::draw() {
 	Circle c(pos, rad*1.5);
 	c.draw(color);
-	c.drawFrame(1.0, 0.0, Palette::White);
+	c.drawFrame(1.5, 0.0, Palette::White);
 }
 
-void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad)
+void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
 {
 	auto b = std::make_shared<Bullet>(pos, vel, color, rad);
 	bullets.push_back(b);

@@ -18,11 +18,12 @@ class Enemy
 {
 public:
 	Enemy(){};
-	void setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos, int dir);
+	void setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos);
 	virtual void move() = 0;
-	void draw();//これも仮想に
+	void draw();
 	void defalutMove();
 	void damage();
+	void turnDir();
 	//getter
 	Vec2 getPos() const { return this->pos; };
 	double getRad() const { return this->rad; };
@@ -39,7 +40,6 @@ protected:
 	int hp;
 	bool enable = true;
 	int dir = 1;
-	int limit;
 };
 
 class Enemy1 : public Enemy
@@ -49,6 +49,7 @@ public:
 	void move() override;
 };
 
+//突っ込んでくる
 class Tossin : public Enemy
 {
 public:
@@ -58,18 +59,28 @@ private:
 	Vec2 vel;
 };
 
+//結構ばらまく
 class Middle : public Enemy
 {
 public:
 	Middle();
 	void move() override;
+private:
+	double kakudo;
+};
+
+//遅い弾ばら撒く
+class Baramaki : public Enemy
+{
+public:
+	Baramaki();
 };
 
 class EnemyManager
 {
 public:
 	EnemyManager(Ship* ship, BulletManager* bulletManager);
-	void create(Vec2 pos, std::string type, int dir);//場所と、タイプ
+	void create(Vec2 pos, std::string type);//場所と、タイプ
 	void clear();
 	void draw();
 	void move();

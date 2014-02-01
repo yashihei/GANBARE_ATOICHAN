@@ -2,6 +2,7 @@
 #include <Siv3D.hpp>
 #include <list>
 #include <memory>
+#include <functional>
 #include "Actor.h"
 
 class Bullet
@@ -28,7 +29,7 @@ public:
 	void clear();
 	void draw();
 	void move();
-	void create(Vec2 pos, Vec2 vel, Color color, double rad);
+	void create(Vec2 pos, Vec2 vel, Color color, double rad, int moveType);
 	const std::list<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
 private:
 	std::list<std::shared_ptr<Bullet>> bullets;

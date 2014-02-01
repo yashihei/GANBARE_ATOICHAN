@@ -4,12 +4,11 @@
 #include "Bullet.h"
 #include "Shot.h"
 
-void Enemy::setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos, int dir)
+void Enemy::setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos)
 {
 	this->ship = ship;
 	this->bulletManager = bulletManager;
 	this->pos = pos;
-	this->dir = dir;
 }
 
 void Enemy::draw() {
@@ -30,6 +29,10 @@ void Enemy::defalutMove() {
 	if (hp < 0) enable = false;
 }
 
+void Enemy::turnDir() {
+	dir *= -1;
+}
+
 Enemy1::Enemy1() {
 	hp = 10;
 	rad = 15.0;
@@ -40,7 +43,7 @@ void Enemy1::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 6.5;
 	const int interval = 10;
-	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0);
+	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0, TODO);
 
 	if (cnt < 40) {
 		pos.moveBy({ 0.0, 3.0 });
@@ -59,10 +62,9 @@ Tossin::Tossin() {
 
 void Tossin::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-	LOG(rad);
 	double sp = 7.0;
 	const int interval = 5;
-	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0);
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(0, 255, 255, 200), 5.0, TODO);
 
 	sp = 5.0;
 	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
@@ -75,18 +77,20 @@ Middle::Middle() {
 	hp = 100;
 	rad = 25.0;
 	color = Color{ 0, 0, 255, 200 };
+	kakudo = 0.0;
 }
 
 void Middle::move() {
 	//‚®‚é‚®‚é‚Ü‚í‚·’e–‹
 	const double PI2 = 6.28;
-	const double rad = 0;
+	kakudo += 5.0;
+	double radian = Radians(kakudo);
 	double sp = 5.0;
 	const int interval = 3;
 	const int sep = 10;
 	if (cnt > 30 && cnt % interval == 0) {
 		for (int i = 0; i < sep; i++) {
-			bulletManager->create(pos, { Sin(rad + PI2 / sep * i)*sp, Cos(rad + PI2 / sep * i)*sp }, Color(0, 255, 255, 200), 5.0);
+			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, Color(0, 255, 255, 200), 5.0, TODO);
 		}
 	}
 
@@ -99,12 +103,15 @@ void Middle::move() {
 	Enemy::defalutMove();
 }
 
+Baramaki::Baramaki() {
+}
+
 EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager):
 ship(ship), bulletManager(bulletManager)
 {
 }
 
-void EnemyManager::create(Vec2 pos, std::string type, int dir)
+void EnemyManager::create(Vec2 pos, std::string type)
 {
 	std::shared_ptr<Enemy> e;
 	if (type == "zako") {
@@ -116,7 +123,7 @@ void EnemyManager::create(Vec2 pos, std::string type, int dir)
 	} else {
 		LOG(L"name miss");
 	}
-	e->setParam(ship, bulletManager, pos, dir);
+	e->setParam(ship, bulletManager, pos);
 	enemies.push_back(e);
 }
 
