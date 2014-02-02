@@ -57,6 +57,7 @@ public:
 	void move() override;
 private:
 	Vec2 vel;
+	//double rad;
 };
 
 //Œ‹\‚Î‚ç‚Ü‚­

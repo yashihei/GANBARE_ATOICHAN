@@ -12,6 +12,8 @@ public:
 	void move();
 	void draw();
 	void destory();
+	void moveControl();
+	void comeBackControl();
 
 	Vec2 getPos() { return pos; };
 	double getRad() { return rad; };
@@ -25,4 +27,6 @@ private:
 	bool slowMove;
 	bool comeBack;
 	int comeBackCnt;
+	bool muteki;
+	int mutekiCnt;
 };

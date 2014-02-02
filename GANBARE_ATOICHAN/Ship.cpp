@@ -16,10 +16,52 @@ void Ship::start() {
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
 	comeBack = false;
-	comeBackCnt = 0;
+	muteki = false;
 }
 
 void Ship::move() {
+	if (comeBack) comeBackControl();
+	else moveControl();
+	mutekiCnt++;
+	if (mutekiCnt > 200) muteki = false;
+
+	//fire
+	if (Input::KeyZ.pressed && cnt % 3 == 0) {
+		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
+		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
+		if (slowMove) {
+			shotManager->create(pos + Vec2(-15.0, 0.0), { 0.0, -30.0 });
+			shotManager->create(pos + Vec2(15.0, 0.0), { 0.0, -30.0 });
+		} else {
+			shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
+			shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
+		}
+	}
+	cnt++;
+}
+
+void Ship::draw() {
+	double num = rad * 3;
+	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
+	if (muteki) t.draw({ 255, 50, 50, 100 });
+	else t.draw({255, 50, 50, 255});
+	t.drawFrame(2.0, Palette::White);
+	if (slowMove) Circle(pos, rad).draw({100, 255, 255, 255});
+}
+
+void Ship::destory() {
+	if (muteki) return;
+	LOG(L"ship destory!!");
+	pos = { Window::Width() / 2, Window::Height() + rad };
+	life--;
+	bulletManager->clear();
+	comeBack = true;
+	comeBackCnt = 0;
+	muteki = true;
+	mutekiCnt = 0;
+}
+
+void Ship::moveControl() {
 	const double ROOT2 = 1.414;
 
 	if (Input::KeyShift.pressed) slowMove = true;
@@ -46,33 +88,12 @@ void Ship::move() {
 	else if (pos.x > Window::Width()) pos.x = Window::Width();
 	else if (pos.y < 0) pos.y = 0;
 	else if (pos.y > Window::Height()) pos.y = Window::Height();
+}
 
-	if (Input::KeyZ.pressed && cnt % 3 == 0) {
-		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
-		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
-		if (slowMove) {
-			shotManager->create(pos + Vec2(-15.0, 0.0), { 0.0, -30.0 });
-			shotManager->create(pos + Vec2(15.0, 0.0), { 0.0, -30.0 });
-		} else {
-			shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
-			shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
-		}
+void Ship::comeBackControl() {
+	comeBackCnt++;
+	if (comeBackCnt > 50) {
+		comeBack = false;
 	}
-	cnt++;
-}
-
-void Ship::draw() {
-	double num = rad * 3;
-	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
-	t.draw({255, 50, 50, 255});
-	t.drawFrame(2.0, Palette::White);
-	if (slowMove) Circle(pos, rad).draw({100, 255, 255, 255});
-}
-
-void Ship::destory()
-{
-	LOG(L"ship destory!!");
-	pos = { Window::Width() / 2, Window::Height() - 100 };
-	life--;
-	bulletManager->clear();
+	pos += {0.0, -2.0};
 }
