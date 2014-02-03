@@ -8,6 +8,7 @@
 class Ship;
 class BulletManager;
 class ShotManager;
+class GameManager;
 
 /*
  * Enemy.h
@@ -18,7 +19,7 @@ class Enemy
 {
 public:
 	Enemy(){};
-	void setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos);
+	void setParam(GameManager* gameManager, Ship* ship, BulletManager* bulletManager, Vec2 pos);
 	virtual void move() = 0;
 	void draw();
 	void defalutMove();
@@ -29,6 +30,7 @@ public:
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
 protected:
+	GameManager* gameManager;
 	BulletManager* bulletManager;
 	Ship* ship;
 	Vec2 pos;
@@ -41,6 +43,7 @@ protected:
 	int hpMax;
 	bool enable = true;
 	int dir = 1;
+	int score;
 	bool isBoss = false;//hpバー表示?
 };
 
@@ -90,7 +93,7 @@ public:
 class EnemyManager
 {
 public:
-	EnemyManager(Ship* ship, BulletManager* bulletManager);
+	EnemyManager(GameManager* gameManager, Ship* ship, BulletManager* bulletManager);
 	void create(Vec2 pos, std::string type);//場所と、タイプ
 	void clear();
 	void draw();
@@ -100,4 +103,5 @@ private:
 	std::list<std::shared_ptr<Enemy>> enemies;
 	BulletManager* bulletManager;
 	Ship* ship;
+	GameManager* gameManager;
 };

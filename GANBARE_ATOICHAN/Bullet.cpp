@@ -6,7 +6,7 @@ namespace EnemyMove {
 	}
 
 	void juryoku(Vec2* pos, Vec2* vel) {
-		const double G = 0.05;
+		const double G = 0.03;
 		*vel += {0, G};
 		pos->moveBy(*vel);
 	}
@@ -52,7 +52,9 @@ void BulletManager::move() {
 	for (auto it = bullets.begin(); it != bullets.end();) {
 		(*it)->move();
 		//TODO:Žb’èA‚Í‚Ýo‚·‚Ì‚É­‚µ—]—TŽ‚½‚¹
-		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 || (*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0) {
+		double r = (*it)->getRad();
+		if ((*it)->getPos().x > Window::Width() + r || (*it)->getPos().x < 0 - r ||
+			(*it)->getPos().y > Window::Height() + r || (*it)->getPos().y < 0 - r) {
 			it = bullets.erase(it);
 			continue;
 		}

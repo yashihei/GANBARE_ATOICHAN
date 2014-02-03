@@ -17,6 +17,7 @@ public:
 
 	Vec2 getPos() { return pos; };
 	double getRad() { return rad; };
+	int getLife() { return life; };
 private:
 	ShotManager* shotManager;
 	BulletManager* bulletManager;

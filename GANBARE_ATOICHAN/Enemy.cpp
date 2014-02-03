@@ -3,9 +3,11 @@
 #include "Ship.h"
 #include "Bullet.h"
 #include "Shot.h"
+#include "GameManager.h"
 
-void Enemy::setParam(Ship* ship, BulletManager* bulletManager, Vec2 pos)
+void Enemy::setParam(GameManager* gameManager, Ship* ship, BulletManager* bulletManager, Vec2 pos)
 {
+	this->gameManager = gameManager;
 	this->ship = ship;
 	this->bulletManager = bulletManager;
 	this->pos = pos;
@@ -18,9 +20,9 @@ void Enemy::draw() {
 	c.drawFrame(2.0, 0.0, Palette::White);
 	if (isBoss) {
 		double t = (double)hp / (double)hpMax;
-		Rect hpBar({ 30, 30 }, { 400 * t, 30 });
-		hpBar.draw({ 255, 255, 255, 200 });
-		//hpBar.draw(HSV(60 * t, 1.0, 1.0));
+		Rect hpBar({ 25, 25 }, { 400 * t, 15 });
+		//hpBar.draw({ 255, 255, 255, 200 });
+		hpBar.draw(HSV(60 * t, 1.0, 1.0));
 		hpBar.drawFrame(0.0, 1.5, Palette::White);
 	}
 }
@@ -33,7 +35,10 @@ void Enemy::damage() {
 void Enemy::defalutMove() {
 	cnt++;
 	subCnt++;
-	if (hp < 0) enable = false;
+	if (hp < 0) {
+		enable = false;
+		gameManager->addScore(score);
+	}
 }
 
 void Enemy::turnDir() {
@@ -65,6 +70,7 @@ Tossin::Tossin() {
 	hp = 5;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
+	score = 3939;
 }
 
 void Tossin::move() {
@@ -88,6 +94,7 @@ Middle::Middle() {
 	rad = 25.0;
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
+	score = 50000;
 }
 
 void Middle::move() {
@@ -116,13 +123,14 @@ Baramaki::Baramaki() {
 	hp = 10;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
+	score = 5000;
 }
 
 void Baramaki::move() {
 	const int interval = 10;
 	//TODO:äpìxè≠Ç»Ç≠
 	if (cnt % interval == 0) {
-		/*for (int i = 0; i < 3; i++)*/ bulletManager->create(pos, { Random(-0.5, 0.5) , -2.5 }, { 0, 255, 255, 200 }, 5.0, 1);
+		/*for (int i = 0; i < 3; i++)*/ bulletManager->create(pos, { Random(-1.5, 1.5) , -2.0 }, { 0, 255, 255, 200 }, 5.0, 1);
 	}
 
 	pos.moveBy({ 1.0 * dir, 0.0 });
@@ -134,11 +142,10 @@ Chubosu::Chubosu() {
 	rad = 30.0;
 	color = Color{ 255, 255, 0, 200 };
 	isBoss = true;
+	score = 100000;
 }
 
 void Chubosu::move() {
-
-
 	if (cnt < 30) {
 		pos.moveBy({ 0.0, 3.0 });
 	} else if (cnt > 750) {
@@ -148,8 +155,8 @@ void Chubosu::move() {
 	Enemy::defalutMove();
 }
 
-EnemyManager::EnemyManager(Ship* ship, BulletManager* bulletManager):
-ship(ship), bulletManager(bulletManager)
+EnemyManager::EnemyManager(GameManager* gameManager, Ship* ship, BulletManager* bulletManager):
+gameManager(gameManager), ship(ship), bulletManager(bulletManager)
 {
 }
 
@@ -173,7 +180,7 @@ void EnemyManager::create(Vec2 pos, std::string type)
 		LOG(L"name miss");
 		return;
 	}
-	e->setParam(ship, bulletManager, pos);
+	e->setParam(gameManager, ship, bulletManager, pos);
 	enemies.push_back(e);
 }
 

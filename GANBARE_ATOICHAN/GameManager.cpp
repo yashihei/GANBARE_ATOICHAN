@@ -12,9 +12,11 @@ GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
 	bulletManager = std::make_shared<BulletManager>();
 	ship = std::make_shared<Ship>(shotManager.get(), bulletManager.get());
-	enemyManager = std::make_shared<EnemyManager>(ship.get(), bulletManager.get());
+	enemyManager = std::make_shared<EnemyManager>(this, ship.get(), bulletManager.get());
 	stageManager = std::make_shared<StageManager>(enemyManager.get());
 	state = State::IN_GAME;
+	score = 0;
+	FontAsset::Register(L"scoreFont", 20, Typeface::Black);
 }
 
 void GameManager::move() {
@@ -31,6 +33,7 @@ void GameManager::draw() {
 	shotManager->draw();
 	enemyManager->draw();
 	bulletManager->draw();
+	drawState();
 }
 
 void GameManager::checkHit() {
@@ -58,4 +61,18 @@ void GameManager::checkHit() {
 			break;
 		}
 	}
+}
+
+void GameManager::drawState() {
+	//life num
+	for (int i = 0; i < ship->getLife(); i++) {
+		double n = ship->getRad() * 3;
+		double x = (n + 20) * i + 30;
+		double y = Window::Height() - 30;
+		Triangle t({ x, y - n }, { x + n, y + n }, { x - n, y + n });
+		t.draw({ 255, 50, 50, 255 });
+		t.drawFrame(2.0, Palette::White);
+	}
+	//score
+	FontAsset(L"scoreFont").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::White);
 }

@@ -20,6 +20,8 @@ public:
 	GameManager();
 	void move();
 	void draw();
+	void addScore(int val) { this->score += val; };
+	//TODO:getter
 private:
 	std::shared_ptr<Ship> ship;
 	std::shared_ptr<ShotManager> shotManager;
@@ -28,5 +30,7 @@ private:
 	std::shared_ptr<StageManager> stageManager;
 private:
 	void checkHit();
+	void drawState();
 	State state;
+	int score;
 };
