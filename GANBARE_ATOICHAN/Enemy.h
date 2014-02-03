@@ -40,6 +40,7 @@ protected:
 	int hp;
 	bool enable = true;
 	int dir = 1;
+	bool isBoss = false;//hpƒo[•\¦?
 };
 
 class Enemy1 : public Enemy

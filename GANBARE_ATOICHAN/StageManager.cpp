@@ -33,6 +33,14 @@ StageManager::StageManager(EnemyManager* enemyManager)
 		{ 600, { WIDTH, 100 }, "baramakiR" },
 		{ 640, { WIDTH, 100 }, "baramakiR" },
 		{ 680, { WIDTH, 100 }, "baramakiR" },
+		//bramaki2
+		{ 750, { 0, 100 }, "baramakiL" },
+		{ 790, { 0, 100 }, "baramakiL" },
+		{ 820, { 0, 100 }, "baramakiL" },
+		{ 750, { WIDTH, 100 }, "baramakiR" },
+		{ 790, { WIDTH, 100 }, "baramakiR" },
+		{ 820, { WIDTH, 100 }, "baramakiR" },
+		//chubosu
 	};
 }
 

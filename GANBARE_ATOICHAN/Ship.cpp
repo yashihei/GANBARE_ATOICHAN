@@ -22,8 +22,10 @@ void Ship::start() {
 void Ship::move() {
 	if (comeBack) comeBackControl();
 	else moveControl();
-	mutekiCnt++;
-	if (mutekiCnt > 200) muteki = false;
+	if (muteki) {
+		mutekiCnt++;
+		if (mutekiCnt > 200) muteki = false;
+	}
 
 	//fire
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {

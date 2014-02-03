@@ -16,6 +16,7 @@ void Enemy::draw() {
 	c.draw(color);
 	if (subCnt < 3) c.draw(Palette::White);
 	c.drawFrame(2.0, 0.0, Palette::White);
+	if (isBoss) Rect({ 30, 30 }, { hp, 30 }).draw(Palette::White);
 }
 
 void Enemy::damage() {
@@ -63,11 +64,13 @@ Tossin::Tossin() {
 void Tossin::move() {
 	//TODO:ˆê’è‚ÌU‚ê•‚É
 	double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	rad += Random(-0.2, 0.2);
 	double sp = 7.0;
 	const int interval = 5;
 	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, { 0, 255, 255, 200 }, 5.0, 0);
 
 	sp = 5.0;
+	rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
 	pos.moveBy(vel);
 
@@ -104,7 +107,7 @@ void Middle::move() {
 }
 
 Baramaki::Baramaki() {
-	hp = 10;
+	hp = 15;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 }
@@ -112,10 +115,10 @@ Baramaki::Baramaki() {
 void Baramaki::move() {
 	const int interval = 10;
 	if (cnt % interval == 0) {
-		for (int i = 0; i < 3; i++) bulletManager->create(pos, { Random(-1.5, 1.5) , -2.5 }, { 0, 255, 255, 200 }, 5.0, 1);
+		/*for (int i = 0; i < 3; i++)*/ bulletManager->create(pos, { Random(-1.5, 1.5) , -2.5 }, { 0, 255, 255, 200 }, 5.0, 1);
 	}
 
-	pos.moveBy({ 0.5 * dir, 0.0 });
+	pos.moveBy({ 1.0 * dir, 0.0 });
 	Enemy::defalutMove();
 }
 
