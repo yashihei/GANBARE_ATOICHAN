@@ -38,6 +38,7 @@ protected:
 	int cnt = 0;
 	int subCnt = 3;//非ダメ表示用
 	int hp;
+	int hpMax;
 	bool enable = true;
 	int dir = 1;
 	bool isBoss = false;//hpバー表示?
@@ -76,6 +77,13 @@ class Baramaki : public Enemy
 {
 public:
 	Baramaki();
+	void move() override;
+};
+
+class Chubosu : public Enemy
+{
+public:
+	Chubosu();
 	void move() override;
 };
 
