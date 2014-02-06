@@ -16,7 +16,7 @@ GameManager::GameManager() {
 	stageManager = std::make_shared<StageManager>(enemyManager.get());
 	state = State::IN_GAME;
 	score = 0;
-	FontAsset::Register(L"scoreFont", 20, Typeface::Black);
+	FontAsset::Register(L"scoreFont", 15, Typeface::Black);
 }
 
 void GameManager::move() {

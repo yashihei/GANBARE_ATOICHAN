@@ -88,6 +88,8 @@ class Chubosu : public Enemy
 public:
 	Chubosu();
 	void move() override;
+private:
+	double kakudo;
 };
 
 class EnemyManager

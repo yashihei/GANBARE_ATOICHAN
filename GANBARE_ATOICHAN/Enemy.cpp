@@ -20,7 +20,7 @@ void Enemy::draw() {
 	c.drawFrame(2.0, 0.0, Palette::White);
 	if (isBoss) {
 		double t = (double)hp / (double)hpMax;
-		Rect hpBar({ 25, 25 }, { 400 * t, 15 });
+		Rect hpBar({ 25, 50 }, { 400 * t, 15 });
 		//hpBar.draw({ 255, 255, 255, 200 });
 		hpBar.draw(HSV(60 * t, 1.0, 1.0));
 		hpBar.drawFrame(0.0, 1.5, Palette::White);
@@ -100,12 +100,12 @@ Middle::Middle() {
 void Middle::move() {
 	//ÇÆÇÈÇÆÇÈÇ‹ÇÌÇ∑íeñã
 	const double PI2 = 6.28;
-	kakudo += 5.0;
 	double radian = Radians(kakudo);
 	double sp = 5.0;
 	const int interval = 3;
 	const int sep = 10;
 	if (cnt > 30 && cnt % interval == 0) {
+		kakudo += 15.0;
 		for (int i = 0; i < sep; i++) {
 			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 5.0, 0);
 		}
@@ -130,7 +130,7 @@ void Baramaki::move() {
 	const int interval = 10;
 	//TODO:äpìxè≠Ç»Ç≠
 	if (cnt % interval == 0) {
-		/*for (int i = 0; i < 3; i++)*/ bulletManager->create(pos, { Random(-1.5, 1.5) , -2.0 }, { 0, 255, 255, 200 }, 5.0, 1);
+		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 255, 255, 200 }, 5.0, 1);
 	}
 
 	pos.moveBy({ 1.0 * dir, 0.0 });
@@ -143,9 +143,23 @@ Chubosu::Chubosu() {
 	color = Color{ 255, 255, 0, 200 };
 	isBoss = true;
 	score = 100000;
+	kakudo = 0;
 }
 
 void Chubosu::move() {
+	const double PI2 = 6.28;
+	double radian = Radians(kakudo);
+	double sp = 5.0;
+	const int interval = 8;
+	const int sep = 10;
+	if (cnt > 30 && cnt % interval == 0) {
+		kakudo += 5.0;
+		for (int i = 0; i < sep; i++) {
+			bulletManager->create(pos + Vec2(20.0, 0.0), { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 5.0, 0);
+			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 255, 255, 200}, 5.0, 0);
+		}
+	}
+
 	if (cnt < 30) {
 		pos.moveBy({ 0.0, 3.0 });
 	} else if (cnt > 750) {

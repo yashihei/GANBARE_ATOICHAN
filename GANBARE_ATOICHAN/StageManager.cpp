@@ -9,6 +9,9 @@ StageManager::StageManager(EnemyManager* enemyManager)
 	stage = 1;
 	cnt = 0;
 	const int WIDTH = 450;
+	//CSVReader csv(L"dat/stage.csv");
+	//for (int i = 0; i < csv.rows; i++) {
+	//}
 	enemiesData = {
 		//tossin1
 		{ 0, { 30, 0 }, "tossin" },
@@ -52,6 +55,7 @@ void StageManager::move() {
 		}
 	}
 	cnt++;
-	if (Input::KeyR.clicked) cnt = 900;//reset
+	if (Input::KeyR.clicked) cnt = 1000;//reset
+	if (Input::Key1.clicked) enemyManager->create({ 300, 0 }, "middle");
 	//if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 0);
 }
