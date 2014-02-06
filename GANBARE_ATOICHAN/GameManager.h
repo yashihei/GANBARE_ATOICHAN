@@ -22,6 +22,7 @@ public:
 	void draw();
 	void addScore(int val) { this->score += val; };
 	//TODO:getter
+	Ship* getShip() { return ship.get(); };
 private:
 	std::shared_ptr<Ship> ship;
 	std::shared_ptr<ShotManager> shotManager;

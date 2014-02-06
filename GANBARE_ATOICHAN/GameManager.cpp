@@ -7,6 +7,7 @@
 #include "Bullet.h"
 #include "StageManager.h"
 #include "CheckCollide.h"
+#include "Actor.h"
 
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();

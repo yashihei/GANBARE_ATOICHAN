@@ -273,5 +273,8 @@
     <ClInclude Include="StageManager.h">
       <Filter>ヘッダファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>ヘッダファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
