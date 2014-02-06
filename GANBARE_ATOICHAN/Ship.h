@@ -3,11 +3,12 @@
 
 class ShotManager;
 class BulletManager;
+class GameManager;
 
 class Ship
 {
 public:
-	Ship(ShotManager* shotManager, BulletManager* bulletManager);
+	Ship(GameManager* gm);
 	void start();
 	void move();
 	void draw();
@@ -19,8 +20,7 @@ public:
 	double getRad() { return rad; };
 	int getLife() { return life; };
 private:
-	ShotManager* shotManager;
-	BulletManager* bulletManager;
+	GameManager* gm;
 	double rad;
 	Vec2 pos;
 	int life;

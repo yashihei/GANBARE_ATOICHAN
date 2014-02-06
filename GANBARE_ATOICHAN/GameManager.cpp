@@ -12,9 +12,9 @@
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
 	bulletManager = std::make_shared<BulletManager>();
-	ship = std::make_shared<Ship>(shotManager.get(), bulletManager.get());
-	enemyManager = std::make_shared<EnemyManager>(this, ship.get(), bulletManager.get());
-	stageManager = std::make_shared<StageManager>(enemyManager.get());
+	ship = std::make_shared<Ship>(this);
+	enemyManager = std::make_shared<EnemyManager>(this);
+	stageManager = std::make_shared<StageManager>(this);
 	state = State::IN_GAME;
 	score = 0;
 	FontAsset::Register(L"scoreFont", 15, Typeface::Black);

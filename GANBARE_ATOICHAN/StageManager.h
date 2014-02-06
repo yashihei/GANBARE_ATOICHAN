@@ -9,7 +9,7 @@
  * ‚Æ‚è‚ ‚¦‚¸”z—ñ‚Å‚Î[‚Á‚Æ
  */
 
-class EnemyManager;
+class GameManager;
 
 struct EnemiesData {
 	int cnt;
@@ -20,12 +20,12 @@ struct EnemiesData {
 class StageManager
 {
 public:
-	StageManager(EnemyManager* enemyManager);
+	StageManager(GameManager* gm);
 	//void init();
 	void move();
 private:
 	int cnt = 0;
 	int stage;
-	EnemyManager* enemyManager;
+	GameManager* gm;
 	std::vector<EnemiesData> enemiesData;
 };

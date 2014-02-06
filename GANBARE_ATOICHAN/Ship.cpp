@@ -4,8 +4,8 @@
 #include "Shot.h"
 #include "Bullet.h"
 
-Ship::Ship(ShotManager* shotManager, BulletManager* bulletManager):
-shotManager(shotManager), bulletManager(bulletManager)
+Ship::Ship(GameManager* gm):
+gm(gm)
 {
 	rad = 5.0;
 	start();
@@ -29,14 +29,15 @@ void Ship::move() {
 
 	//fire
 	if (Input::KeyZ.pressed && cnt % 3 == 0) {
-		shotManager->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
-		shotManager->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
+		auto shots = gm->getShots();
+		shots->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
+		shots->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
 		if (slowMove) {
-			shotManager->create(pos + Vec2(-15.0, 0.0), { 0.0, -30.0 });
-			shotManager->create(pos + Vec2(15.0, 0.0), { 0.0, -30.0 });
+			shots->create(pos + Vec2(-15.0, 0.0), { 0.0, -30.0 });
+			shots->create(pos + Vec2(15.0, 0.0), { 0.0, -30.0 });
 		} else {
-			shotManager->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
-			shotManager->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
+			shots->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
+			shots->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
 		}
 	}
 	cnt++;
@@ -56,7 +57,7 @@ void Ship::destory() {
 	LOG(L"ship destory!!");
 	pos = { Window::Width() / 2, Window::Height() + rad };
 	life--;
-	bulletManager->clear();
+	gm->getBullets()->clear();
 	comeBack = true;
 	comeBackCnt = 0;
 	muteki = true;

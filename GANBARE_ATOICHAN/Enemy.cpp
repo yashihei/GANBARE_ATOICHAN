@@ -5,11 +5,11 @@
 #include "Shot.h"
 #include "GameManager.h"
 
-void Enemy::setParam(GameManager* gameManager, Ship* ship, BulletManager* bulletManager, Vec2 pos)
+void Enemy::setParam(GameManager* gm, Vec2 pos)
 {
-	this->gameManager = gameManager;
-	this->ship = ship;
-	this->bulletManager = bulletManager;
+	this->gm = gm;
+	this->ship = gm->getShip();
+	this->bulletManager = gm->getBullets();
 	this->pos = pos;
 }
 
@@ -37,7 +37,7 @@ void Enemy::defalutMove() {
 	subCnt++;
 	if (hp < 0) {
 		enable = false;
-		gameManager->addScore(score);
+		gm->addScore(score);
 	}
 }
 
@@ -169,8 +169,8 @@ void Chubosu::move() {
 	Enemy::defalutMove();
 }
 
-EnemyManager::EnemyManager(GameManager* gameManager, Ship* ship, BulletManager* bulletManager):
-gameManager(gameManager), ship(ship), bulletManager(bulletManager)
+EnemyManager::EnemyManager(GameManager* gm):
+gm(gm)
 {
 }
 
@@ -194,7 +194,7 @@ void EnemyManager::create(Vec2 pos, std::string type)
 		LOG(L"name miss");
 		return;
 	}
-	e->setParam(gameManager, ship, bulletManager, pos);
+	e->setParam(gm, pos);
 	enemies.push_back(e);
 }
 

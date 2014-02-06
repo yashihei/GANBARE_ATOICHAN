@@ -22,7 +22,10 @@ public:
 	void draw();
 	void addScore(int val) { this->score += val; };
 	//TODO:getter
-	Ship* getShip() { return ship.get(); };
+	Ship* getShip() { return ship.get(); }
+	ShotManager* getShots() { return shotManager.get(); }
+	BulletManager* getBullets() { return bulletManager.get(); }
+	EnemyManager* getEnemies() { return enemyManager.get(); }
 private:
 	std::shared_ptr<Ship> ship;
 	std::shared_ptr<ShotManager> shotManager;

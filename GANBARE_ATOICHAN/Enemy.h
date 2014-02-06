@@ -19,7 +19,7 @@ class Enemy
 {
 public:
 	Enemy(){};
-	void setParam(GameManager* gameManager, Ship* ship, BulletManager* bulletManager, Vec2 pos);
+	void setParam(GameManager* gm, Vec2 pos);
 	virtual void move() = 0;
 	void draw();
 	void defalutMove();
@@ -30,7 +30,7 @@ public:
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
 protected:
-	GameManager* gameManager;
+	GameManager* gm;
 	BulletManager* bulletManager;
 	Ship* ship;
 	Vec2 pos;
@@ -95,7 +95,7 @@ private:
 class EnemyManager
 {
 public:
-	EnemyManager(GameManager* gameManager, Ship* ship, BulletManager* bulletManager);
+	EnemyManager(GameManager* gm);
 	void create(Vec2 pos, std::string type);//場所と、タイプ
 	void clear();
 	void draw();
@@ -103,7 +103,5 @@ public:
 	const std::list<std::shared_ptr<Enemy>>* getEnemies() const { return &enemies; };
 private:
 	std::list<std::shared_ptr<Enemy>> enemies;
-	BulletManager* bulletManager;
-	Ship* ship;
-	GameManager* gameManager;
+	GameManager* gm;
 };

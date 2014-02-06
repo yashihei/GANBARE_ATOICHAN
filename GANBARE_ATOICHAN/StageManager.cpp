@@ -1,10 +1,10 @@
 #include "StageManager.h"
 
-#include "EnemyMove.h"
 #include "Enemy.h"
+#include "GameManager.h"
 
-StageManager::StageManager(EnemyManager* enemyManager)
-:enemyManager(enemyManager)
+StageManager::StageManager(GameManager* gm):
+gm(gm)
 {
 	stage = 1;
 	cnt = 0;
@@ -47,15 +47,13 @@ StageManager::StageManager(EnemyManager* enemyManager)
 		{ 1000, { WIDTH / 2, 0 }, "chubosu" },
 	};
 }
-
 void StageManager::move() {
 	for (const auto& enemy : enemiesData) {
 		if (enemy.cnt == cnt) {
-			enemyManager->create(enemy.pos, enemy.name);
+			gm->getEnemies()->create(enemy.pos, enemy.name);
 		}
 	}
 	cnt++;
 	if (Input::KeyR.clicked) cnt = 1000;//reset
-	if (Input::Key1.clicked) enemyManager->create({ 300, 0 }, "middle");
 	//if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 0);
 }
