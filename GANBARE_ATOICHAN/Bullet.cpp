@@ -12,18 +12,24 @@ namespace EnemyMove {
 	}
 }
 
-Bullet::Bullet(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
-:pos(pos), vel(vel), color(color), rad(rad)
-{
+void Bullet::init(Vec2 pos, Vec2 vel, Color color, double rad, int moveType) {
+	this->pos = pos;
+	this->vel = vel;
+	this->color = color;
+	this->rad = rad;
 	if (moveType == 0) bulletMove = EnemyMove::tokasoku;
 	else if (moveType == 1) bulletMove = EnemyMove::juryoku;
 	cnt = 0;
+	enable = true;
 }
 
 void Bullet::move() {
-	//pos.moveBy(vel);
 	bulletMove(&pos, &vel);
 	cnt++;
+	if (pos.x > Window::Width() + rad || pos.x < 0 - rad ||
+		pos.y > Window::Height() + rad || pos.y < 0 - rad) {
+		burn();
+	}
 }
 
 void Bullet::draw() {
@@ -32,32 +38,41 @@ void Bullet::draw() {
 	c.drawFrame(1.5, 0.0, Palette::White);
 }
 
+void Bullet::burn() {
+	enable = false;
+}
+
+BulletManager::BulletManager() {
+	bullets.resize(500);
+	for (auto& bullet : bullets) {
+		bullet = std::make_shared<Bullet>();
+	}
+}
+
 void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
 {
-	auto b = std::make_shared<Bullet>(pos, vel, color, rad, moveType);
-	bullets.push_back(b);
+	for (const auto& bullet : bullets) {
+		if (!bullet->getEnable()) {
+			bullet->init(pos, vel, color, rad, moveType);
+			break;
+		}
+	}
 }
 
 void BulletManager::clear() {
-	bullets.clear();
+	for (const auto& bullet : bullets) {
+		bullet->burn();
+	}
 }
 
 void BulletManager::draw() {
 	for (const auto& bullet : bullets) {
-		bullet->draw();
+		if (bullet->getEnable()) bullet->draw();
 	}
 }
 
 void BulletManager::move() {
-	for (auto it = bullets.begin(); it != bullets.end();) {
-		(*it)->move();
-		//TODO:Žb’èA‚Í‚Ýo‚·‚Ì‚É­‚µ—]—TŽ‚½‚¹
-		double r = (*it)->getRad();
-		if ((*it)->getPos().x > Window::Width() + r || (*it)->getPos().x < 0 - r ||
-			(*it)->getPos().y > Window::Height() + r || (*it)->getPos().y < 0 - r) {
-			it = bullets.erase(it);
-			continue;
-		}
-		it++;
+	for (const auto& bullet : bullets) {
+		if (bullet->getEnable()) bullet->move();
 	}
 }
