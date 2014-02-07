@@ -6,8 +6,6 @@
 StageManager::StageManager(GameManager* gm):
 gm(gm)
 {
-	stage = 1;
-	cnt = 0;
 	const int WIDTH = 450;
 	//CSVReader csv(L"dat/stage.csv");
 	//for (int i = 0; i < csv.rows; i++) {
@@ -43,13 +41,13 @@ gm(gm)
 		{ 650, { WIDTH, 100 }, "baramakiR" },
 		{ 690, { WIDTH, 100 }, "baramakiR" },
 		{ 720, { WIDTH, 100 }, "baramakiR" },
-		//chubosu
+		//chubosu(‚±‚ê‚³‚¢‚²
 		{ 1000, { WIDTH / 2, 0 }, "chubosu" },
 	};
 }
 
 void StageManager::init() {
-	cnt = 0;
+	cnt = -100;//delay
 }
 
 void StageManager::move() {
@@ -60,6 +58,4 @@ void StageManager::move() {
 	}
 	cnt++;
 	//if (Input::KeyR.clicked) cnt = 1000;//reset
-	if (gm->getEnemies()->getEnemies()->empty() && cnt > 1000) gm->startClear();//‚à‚¤‚È‚É‚±‚ê
-	//if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 0);
 }

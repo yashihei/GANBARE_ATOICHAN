@@ -184,6 +184,7 @@ void Chubosu::move() {
 	} else if (cnt > 750) {
 		pos.moveBy({ 0.0, -6.0 });
 	}
+	if (hp < 0) gm->startClear();//“|‚µ‚½‚çƒQ[ƒ€ƒNƒŠƒA
 
 	Enemy::defalutMove();
 }

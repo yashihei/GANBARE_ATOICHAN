@@ -19,6 +19,7 @@ GameManager::GameManager() {
 	cnt = 0;
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 30, Typeface::Black);
+	FontAsset::Register(L"metaFont", 10, Typeface::Black);
 }
 
 void GameManager::move() {
@@ -41,16 +42,16 @@ void GameManager::move() {
 	case State::GAME_OVER:
 		enemyManager->move();
 		bulletManager->move();
-		stageManager->move();
-		if (Input::KeyZ.clicked) state = State::TITLE;
+		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
+		cnt++;
 		break;
 	case State::GAME_CLEAR:
 		ship->move();
 		shotManager->move();
 		enemyManager->move();
 		bulletManager->move();
-		stageManager->move();
-		if (Input::KeyZ.clicked) state = State::TITLE;
+		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
+		cnt++;
 		break;
 	}
 }
@@ -60,6 +61,7 @@ void GameManager::draw() {
 	case State::TITLE:
 		FontAsset(L"titleFont").draw(L"atoi(0141)", { 10, 300 }, Palette::White);
 		if (cnt % 2 == 0) FontAsset(L"font").draw(L"PUSH SHOT BUTTON", { 10, 350 }, Palette::White);
+		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		enemyManager->draw();
 		bulletManager->draw();
 		break;
@@ -73,14 +75,15 @@ void GameManager::draw() {
 	case State::GAME_OVER:
 		enemyManager->draw();
 		bulletManager->draw();
-		FontAsset(L"font").draw(L"GAME OVER", { 160, 300 }, Palette::White);
+		FontAsset(L"font").drawCenter(L"GAME OVER", { Window::Width()/2, 300 }, Palette::White);
 		break;
 	case State::GAME_CLEAR:
 		ship->draw();
 		shotManager->draw();
 		enemyManager->draw();
 		bulletManager->draw();
-		FontAsset(L"font").draw(L"GAME CLEAR", { 160, 300 }, Palette::White);
+		FontAsset(L"font").drawCenter(L"GAME CLEAR", { Window::Width()/2, 300 }, Palette::White);
+		break;
 	}
 }
 
@@ -90,15 +93,18 @@ void GameManager::startInGame() {
 	enemyManager->clear();
 	bulletManager->clear();
 	stageManager->init();
+	score = 0;
 	state = State::IN_GAME;
 }
 
 void GameManager::startGameOver() {
 	state = State::GAME_OVER;
+	cnt = 0;
 }
 
 void GameManager::startClear() {
 	state = State::GAME_CLEAR;
+	cnt = 0;
 }
 
 void GameManager::checkHit() {
