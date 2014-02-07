@@ -54,6 +54,6 @@ void StageManager::move() {
 		}
 	}
 	cnt++;
-	if (Input::KeyR.clicked) cnt = 1000;//reset
+	if (Input::KeyR.clicked) cnt = 0;//reset
 	//if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 0);
 }

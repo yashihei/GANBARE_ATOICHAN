@@ -6,7 +6,7 @@ namespace EnemyMove {
 	}
 
 	void juryoku(Vec2* pos, Vec2* vel) {
-		const double G = 0.03;
+		const double G = 0.02;
 		*vel += {0, G};
 		pos->moveBy(*vel);
 	}
@@ -35,7 +35,7 @@ void Bullet::move() {
 void Bullet::draw() {
 	Circle c(pos, rad*1.5);
 	c.draw(color);
-	c.drawFrame(1.5, 0.0, Palette::White);
+	c.drawFrame(1.5, 0.0, Palette::White);//‚±‚ê‚ÌƒRƒXƒg‘å‚«‚¢
 }
 
 void Bullet::burn() {

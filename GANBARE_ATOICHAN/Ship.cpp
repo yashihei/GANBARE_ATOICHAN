@@ -49,7 +49,7 @@ void Ship::draw() {
 	if (muteki) t.draw({ 255, 50, 50, 100 });
 	else t.draw({255, 50, 50, 255});
 	t.drawFrame(2.0, Palette::White);
-	if (slowMove) Circle(pos, rad).draw({100, 255, 255, 255});
+	if (slowMove) Circle(pos, rad).draw({255, 255, 255, 255});
 }
 
 void Ship::destory() {
@@ -67,6 +67,7 @@ void Ship::destory() {
 void Ship::moveControl() {
 	const double ROOT2 = 1.414;
 
+	//Joypad j(0);
 	if (Input::KeyShift.pressed) slowMove = true;
 	else slowMove = false;
 

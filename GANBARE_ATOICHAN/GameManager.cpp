@@ -1,6 +1,5 @@
 #include "GameManager.h"
 
-#include <Siv3D.hpp>
 #include "Ship.h"
 #include "Shot.h"
 #include "Enemy.h"
@@ -17,7 +16,7 @@ GameManager::GameManager() {
 	stageManager = std::make_shared<StageManager>(this);
 	state = State::IN_GAME;
 	score = 0;
-	FontAsset::Register(L"scoreFont", 15, Typeface::Black);
+	FontAsset::Register(L"font", 15, Typeface::Black);
 }
 
 void GameManager::move() {
@@ -55,6 +54,7 @@ void GameManager::checkHit() {
 	}
 	//bullets and ship
 	for (auto b = bullets->begin(); b != bullets->end(); ++b) {
+		if (!(*b)->getEnable()) continue;
 		Line line((*b)->getPos(), (*b)->getPos() + (*b)->getVel());
 		Circle circle(ship->getPos(), ship->getRad());
 		if (Geometry::Intersect(line, circle)) {
@@ -75,5 +75,6 @@ void GameManager::drawState() {
 		t.drawFrame(2.0, Palette::White);
 	}
 	//score
-	FontAsset(L"scoreFont").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::White);
+	FontAsset(L"font").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::White);
+	FontAsset(L"font").draw(Format(L"FPS:", Profiler::FPS()), { Window::Width() - 100, Window::Height() - 50 }, Palette::White);
 }

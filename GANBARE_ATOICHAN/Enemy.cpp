@@ -90,11 +90,11 @@ void Tossin::move() {
 }
 
 Middle::Middle() {
-	hp = hpMax = 100;
+	hp = hpMax = 50;
 	rad = 25.0;
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
-	score = 50000;
+	score = 10000;
 }
 
 void Middle::move() {
@@ -104,6 +104,7 @@ void Middle::move() {
 	double sp = 5.0;
 	const int interval = 3;
 	const int sep = 10;
+
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 15.0;
 		for (int i = 0; i < sep; i++) {
@@ -143,14 +144,15 @@ Chubosu::Chubosu() {
 	color = Color{ 255, 255, 0, 200 };
 	isBoss = true;
 	score = 100000;
+	shotCnt = 0;
 	kakudo = 0;
 }
 
 void Chubosu::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
-	double sp = 5.0;
-	const int interval = 8;
+	double sp = 4.0;
+	const int interval = 7;
 	const int sep = 10;
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 5.0;
@@ -159,6 +161,23 @@ void Chubosu::move() {
 			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 255, 255, 200}, 5.0, 0);
 		}
 	}
+	/*
+	if (cnt > 30 && cnt % interval == 0) {
+		if (shotCnt % 5 == 0) kakudo += 10;
+		if (shotCnt % 10 < 5) {
+			kakudo += 1;
+			for (int i = 0; i < sep; i++) {
+				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, { 255, 0, 200, 200 }, 5.0, 0);
+			}
+		} else {
+			kakudo -= 1;
+			for (int i = 0; i < sep; i++) {
+				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, { 0, 255, 255, 200 }, 5.0, 0);
+			}
+		}
+		shotCnt++;
+	}
+	*/
 
 	if (cnt < 30) {
 		pos.moveBy({ 0.0, 3.0 });

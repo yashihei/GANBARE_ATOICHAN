@@ -38,5 +38,4 @@ public:
 	const std::vector<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
 private:
 	std::vector<std::shared_ptr<Bullet>> bullets;
-	int index;
 };

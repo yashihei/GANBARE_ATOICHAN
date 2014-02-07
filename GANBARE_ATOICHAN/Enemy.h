@@ -34,7 +34,6 @@ protected:
 	BulletManager* bulletManager;
 	Ship* ship;
 	Vec2 pos;
-	//Vec2 vel;
 	double rad;
 	Color color;
 	int cnt = 0;
@@ -90,6 +89,7 @@ public:
 	void move() override;
 private:
 	double kakudo;
+	int shotCnt;
 };
 
 class EnemyManager
