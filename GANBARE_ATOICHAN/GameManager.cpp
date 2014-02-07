@@ -14,26 +14,91 @@ GameManager::GameManager() {
 	ship = std::make_shared<Ship>(this);
 	enemyManager = std::make_shared<EnemyManager>(this);
 	stageManager = std::make_shared<StageManager>(this);
-	state = State::IN_GAME;
+	state = State::TITLE;
 	score = 0;
+	cnt = 0;
 	FontAsset::Register(L"font", 15, Typeface::Black);
+	FontAsset::Register(L"titleFont", 30, Typeface::Black);
 }
 
 void GameManager::move() {
-	ship->move();
-	shotManager->move();
-	enemyManager->move();
-	bulletManager->move();
-	stageManager->move();
-	checkHit();
+	switch (state) {
+	case State::TITLE:
+		if (cnt % 1000 == 0) enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
+		cnt++;
+		enemyManager->move();
+		bulletManager->move();
+		if (Input::KeyZ.clicked) startInGame();
+		break;
+	case State::IN_GAME:
+		ship->move();
+		shotManager->move();
+		enemyManager->move();
+		bulletManager->move();
+		stageManager->move();
+		checkHit();
+		break;
+	case State::GAME_OVER:
+		enemyManager->move();
+		bulletManager->move();
+		stageManager->move();
+		if (Input::KeyZ.clicked) state = State::TITLE;
+		break;
+	case State::GAME_CLEAR:
+		ship->move();
+		shotManager->move();
+		enemyManager->move();
+		bulletManager->move();
+		stageManager->move();
+		if (Input::KeyZ.clicked) state = State::TITLE;
+		break;
+	}
 }
 
 void GameManager::draw() {
-	ship->draw();
-	shotManager->draw();
-	enemyManager->draw();
-	bulletManager->draw();
-	drawState();
+	switch (state) {
+	case State::TITLE:
+		FontAsset(L"titleFont").draw(L"atoi(0141)", { 10, 300 }, Palette::White);
+		if (cnt % 2 == 0) FontAsset(L"font").draw(L"PUSH SHOT BUTTON", { 10, 350 }, Palette::White);
+		enemyManager->draw();
+		bulletManager->draw();
+		break;
+	case State::IN_GAME:
+		ship->draw();
+		shotManager->draw();
+		enemyManager->draw();
+		bulletManager->draw();
+		drawState();
+		break;
+	case State::GAME_OVER:
+		enemyManager->draw();
+		bulletManager->draw();
+		FontAsset(L"font").draw(L"GAME OVER", { 160, 300 }, Palette::White);
+		break;
+	case State::GAME_CLEAR:
+		ship->draw();
+		shotManager->draw();
+		enemyManager->draw();
+		bulletManager->draw();
+		FontAsset(L"font").draw(L"GAME CLEAR", { 160, 300 }, Palette::White);
+	}
+}
+
+void GameManager::startInGame() {
+	ship->init();
+	shotManager->clear();
+	enemyManager->clear();
+	bulletManager->clear();
+	stageManager->init();
+	state = State::IN_GAME;
+}
+
+void GameManager::startGameOver() {
+	state = State::GAME_OVER;
+}
+
+void GameManager::startClear() {
+	state = State::GAME_CLEAR;
 }
 
 void GameManager::checkHit() {

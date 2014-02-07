@@ -8,10 +8,10 @@ Ship::Ship(GameManager* gm):
 gm(gm)
 {
 	rad = 5.0;
-	start();
+	init();
 }
 
-void Ship::start() {
+void Ship::init() {
 	life = 3;
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
@@ -62,13 +62,14 @@ void Ship::destory() {
 	comeBackCnt = 0;
 	muteki = true;
 	mutekiCnt = 0;
+	if (life < 0) gm->startGameOver();
 }
 
 void Ship::moveControl() {
 	const double ROOT2 = 1.414;
 
-	//Joypad j(0);
-	if (Input::KeyShift.pressed) slowMove = true;
+	Joypad j(0);
+	if (Input::KeyShift.pressed || j.button(6).pressed) slowMove = true;
 	else slowMove = false;
 
 	Vec2 vel = { 0, 0 };

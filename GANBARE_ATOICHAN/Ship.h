@@ -9,7 +9,7 @@ class Ship
 {
 public:
 	Ship(GameManager* gm);
-	void start();
+	void init();
 	void move();
 	void draw();
 	void destory();

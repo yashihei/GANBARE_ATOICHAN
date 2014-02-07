@@ -55,7 +55,7 @@ void Enemy1::move() {
 	const double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 6.5;
 	const int interval = 10;
-	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 5.0, 0);
+	if (cnt % interval == 0 && cnt > 40) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, Color(255, 0, 255, 200), 0);
 
 	if (cnt < 40) {
 		pos.moveBy({ 0.0, 3.0 });
@@ -79,7 +79,7 @@ void Tossin::move() {
 	rad += Random(-0.2, 0.2);
 	double sp = 7.0;
 	const int interval = 5;
-	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, { 0, 255, 255, 200 }, 5.0, 0);
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, { 0, 255, 255, 200 }, 0);
 
 	sp = 5.0;
 	rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
@@ -108,7 +108,7 @@ void Middle::move() {
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 15.0;
 		for (int i = 0; i < sep; i++) {
-			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 5.0, 0);
+			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 0);
 		}
 	}
 
@@ -131,7 +131,7 @@ void Baramaki::move() {
 	const int interval = 10;
 	//TODO:Šp“x­‚È‚­
 	if (cnt % interval == 0) {
-		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 255, 255, 200 }, 5.0, 1);
+		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 255, 255, 200 }, 1);
 	}
 
 	pos.moveBy({ 1.0 * dir, 0.0 });
@@ -151,14 +151,14 @@ Chubosu::Chubosu() {
 void Chubosu::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
-	double sp = 4.0;
+	double sp = 3.0;
 	const int interval = 7;
 	const int sep = 10;
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 5.0;
 		for (int i = 0; i < sep; i++) {
-			bulletManager->create(pos + Vec2(20.0, 0.0), { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 5.0, 0);
-			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 255, 255, 200}, 5.0, 0);
+			bulletManager->create(pos + Vec2(20.0, 0.0), { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 0);
+			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 255, 255, 200}, 0);
 		}
 	}
 	/*

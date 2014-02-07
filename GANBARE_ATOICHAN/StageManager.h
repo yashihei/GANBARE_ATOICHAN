@@ -21,7 +21,7 @@ class StageManager
 {
 public:
 	StageManager(GameManager* gm);
-	//void init();
+	void init();
 	void move();
 private:
 	int cnt = 0;

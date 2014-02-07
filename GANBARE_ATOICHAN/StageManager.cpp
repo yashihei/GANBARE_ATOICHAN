@@ -47,6 +47,11 @@ gm(gm)
 		{ 1000, { WIDTH / 2, 0 }, "chubosu" },
 	};
 }
+
+void StageManager::init() {
+	cnt = 0;
+}
+
 void StageManager::move() {
 	for (const auto& enemy : enemiesData) {
 		if (enemy.cnt == cnt) {
@@ -54,6 +59,7 @@ void StageManager::move() {
 		}
 	}
 	cnt++;
-	if (Input::KeyR.clicked) cnt = 0;//reset
+	//if (Input::KeyR.clicked) cnt = 1000;//reset
+	if (gm->getEnemies()->getEnemies()->empty() && cnt > 1000) gm->startClear();//‚à‚¤‚È‚É‚±‚ê
 	//if (cnt % 100 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, 0);
 }

@@ -16,12 +16,15 @@ public:
 		IN_GAME,
 		PAUSE,
 		GAME_OVER,
+		GAME_CLEAR,
 	};
 
 	GameManager();
 	void move();
 	void draw();
 	void addScore(int val) { this->score += val; };
+	void startGameOver();
+	void startClear();
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }
 	ShotManager* getShots() { return shotManager.get(); }
@@ -36,6 +39,8 @@ private:
 private:
 	void checkHit();
 	void drawState();
+	void startInGame();
 	State state;
 	int score;
+	int cnt;
 };

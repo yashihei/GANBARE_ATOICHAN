@@ -12,14 +12,14 @@ namespace EnemyMove {
 	}
 }
 
-void Bullet::init(Vec2 pos, Vec2 vel, Color color, double rad, int moveType) {
+void Bullet::init(Vec2 pos, Vec2 vel, Color color, int moveType) {
 	this->pos = pos;
 	this->vel = vel;
 	this->color = color;
-	this->rad = rad;
 	if (moveType == 0) bulletMove = EnemyMove::tokasoku;
 	else if (moveType == 1) bulletMove = EnemyMove::juryoku;
 	cnt = 0;
+	rad = 1.0;
 	enable = true;
 }
 
@@ -33,7 +33,7 @@ void Bullet::move() {
 }
 
 void Bullet::draw() {
-	Circle c(pos, rad*1.5);
+	Circle c(pos, 8.0);
 	c.draw(color);
 	c.drawFrame(1.5, 0.0, Palette::White);//‚±‚ê‚ÌƒRƒXƒg‘å‚«‚¢
 }
@@ -49,11 +49,11 @@ BulletManager::BulletManager() {
 	}
 }
 
-void BulletManager::create(Vec2 pos, Vec2 vel, Color color, double rad, int moveType)
+void BulletManager::create(Vec2 pos, Vec2 vel, Color color, int moveType)
 {
 	for (const auto& bullet : bullets) {
 		if (!bullet->getEnable()) {
-			bullet->init(pos, vel, color, rad, moveType);
+			bullet->init(pos, vel, color, moveType);
 			break;
 		}
 	}
