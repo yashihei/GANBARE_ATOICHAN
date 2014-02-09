@@ -68,8 +68,8 @@ void Ship::destory() {
 void Ship::moveControl() {
 	const double ROOT2 = 1.414;
 
-	Joypad j(0);
-	if (Input::KeyShift.pressed || j.button(6).pressed) slowMove = true;
+	Joypad j(0);//âºèÛë‘
+	if (Input::KeyShift.pressed || j.button(7).pressed) slowMove = true;
 	else slowMove = false;
 
 	Vec2 vel = { 0, 0 };

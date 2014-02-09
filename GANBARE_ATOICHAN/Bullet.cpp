@@ -6,7 +6,7 @@ namespace EnemyMove {
 	}
 
 	void juryoku(Vec2* pos, Vec2* vel) {
-		const double G = 0.02;
+		const double G = 0.025;
 		*vel += {0, G};
 		pos->moveBy(*vel);
 	}

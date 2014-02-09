@@ -18,7 +18,7 @@ GameManager::GameManager() {
 	score = 0;
 	cnt = 0;
 	FontAsset::Register(L"font", 15, Typeface::Black);
-	FontAsset::Register(L"titleFont", 30, Typeface::Black);
+	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
 }
 
@@ -26,7 +26,6 @@ void GameManager::move() {
 	switch (state) {
 	case State::TITLE:
 		if (cnt % 1000 == 0) enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
-		cnt++;
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked) startInGame();
@@ -43,7 +42,6 @@ void GameManager::move() {
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
-		cnt++;
 		break;
 	case State::GAME_CLEAR:
 		ship->move();
@@ -51,16 +49,16 @@ void GameManager::move() {
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
-		cnt++;
 		break;
 	}
+	cnt++;
 }
 
 void GameManager::draw() {
 	switch (state) {
 	case State::TITLE:
-		FontAsset(L"titleFont").draw(L"atoi(0141)", { 10, 300 }, Palette::White);
-		if (cnt % 2 == 0) FontAsset(L"font").draw(L"PUSH SHOT BUTTON", { 10, 350 }, Palette::White);
+		FontAsset(L"titleFont").draw(L"Ç™ÇÒÇŒÇÍÅIÇ†Ç∆Ç¢ÇøÇ·ÇÒ", { 10, 300 }, Palette::White);
+		if (cnt % 20 < 10) FontAsset(L"font").draw(L"PUSH SHOT BUTTON", { 10, 350 }, Palette::White);
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		enemyManager->draw();
 		bulletManager->draw();

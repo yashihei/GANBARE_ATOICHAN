@@ -61,7 +61,8 @@ public:
 	void move() override;
 private:
 	Vec2 vel;
-	//double rad;
+	double radian;
+	bool setRadian=false;
 };
 
 //åãç\ÇŒÇÁÇ‹Ç≠
@@ -90,6 +91,20 @@ public:
 private:
 	double kakudo;
 	int shotCnt;
+};
+
+class Nerai : public Enemy
+{
+public:
+	Nerai();
+	void move() override;
+};
+
+class ThreeWay : public Enemy
+{
+public:
+	ThreeWay();
+	void move() override;
 };
 
 class EnemyManager

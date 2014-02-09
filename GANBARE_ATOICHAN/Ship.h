@@ -1,8 +1,6 @@
 #pragma once
 #include <Siv3D.hpp>
 
-class ShotManager;
-class BulletManager;
 class GameManager;
 
 class Ship

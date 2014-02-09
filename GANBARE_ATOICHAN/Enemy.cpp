@@ -75,26 +75,26 @@ Tossin::Tossin() {
 
 void Tossin::move() {
 	//TODO:ˆê’è‚ÌU‚ê•‚É
-	double rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-	rad += Random(-0.2, 0.2);
+	double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	radian += Random(-0.2, 0.2);
 	double sp = 7.0;
 	const int interval = 5;
-	if (cnt % interval == 0) bulletManager->create(pos, { Sin(rad)*sp, Cos(rad)*sp }, { 0, 255, 255, 200 }, 0);
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, { 0, 255, 255, 200 }, 0);
 
 	sp = 5.0;
-	rad = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-	if (pos.y + 100 < ship->getPos().y) vel = { Sin(rad)*sp, Cos(rad)*sp };
+	radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	if (pos.y + 100 < ship->getPos().y) vel = { Sin(radian)*sp, Cos(radian)*sp };
 	pos.moveBy(vel);
 
 	Enemy::defalutMove();
 }
 
 Middle::Middle() {
-	hp = hpMax = 50;
+	hp = hpMax = 100;
 	rad = 25.0;
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
-	score = 10000;
+	score = 30000;
 }
 
 void Middle::move() {
@@ -128,7 +128,7 @@ Baramaki::Baramaki() {
 }
 
 void Baramaki::move() {
-	const int interval = 10;
+	const int interval = 15;
 	//TODO:Šp“x­‚È‚­
 	if (cnt % interval == 0) {
 		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 255, 255, 200 }, 1);
@@ -189,6 +189,54 @@ void Chubosu::move() {
 	Enemy::defalutMove();
 }
 
+Nerai::Nerai() {
+	hp = 30;
+	rad = 20.0;
+	color = Color{ 255, 0, 0, 200 };
+	score = 10000;
+}
+
+void Nerai::move() {
+	const double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	double sp = 2.0 + (cnt - 30) / 10;
+	if (sp > 10.0) sp = 10.0;
+	const int interval = 5;
+	if (cnt % interval == 0 &&
+		cnt > 30 && cnt < 150)
+		bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, Color(255, 0, 200, 200), 0);
+
+	if (cnt < 30) {
+		pos.moveBy({ 0.0, 3.0 });
+	}
+	else if (cnt > 200) {
+		pos.moveBy({ 0.0, -6.0 });
+	}
+	Enemy::defalutMove();
+}
+
+ThreeWay::ThreeWay() {
+	hp = 10;
+	rad = 15.0;
+	color = Color{ 255, 255, 255, 200 };
+	score = 10000;
+}
+
+void ThreeWay::move() {
+	const double PI = 3.14;
+	const double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
+	double sp = 7.0;
+	const int interval = 5;
+	if (cnt % interval == 0 &&
+		cnt % 50 < 25) {
+		for (int i = -1; i < 2; i++) {
+			bulletManager->create(pos, { Sin(radian + (PI/3) / 3 * i)*sp, Cos(radian + (PI/3) / 3 * i)*sp }, Color(255, 0, 200, 200), 0);
+		}
+	}
+
+	pos.moveBy({ 2.0 * dir, 0.0 });
+	Enemy::defalutMove();
+}
+
 EnemyManager::EnemyManager(GameManager* gm):
 gm(gm)
 {
@@ -210,6 +258,13 @@ void EnemyManager::create(Vec2 pos, std::string type)
 		e->turnDir();
 	} else if (type == "chubosu") {
 		e = std::make_shared<Chubosu>();
+	} else if (type == "nerai") {
+		e = std::make_shared<Nerai>();
+	} else if (type == "threewayL") {
+		e = std::make_shared<ThreeWay>();
+	} else if (type == "threewayR") {
+		e = std::make_shared<ThreeWay>();
+		e->turnDir();
 	} else {
 		LOG(L"name miss");
 		return;
