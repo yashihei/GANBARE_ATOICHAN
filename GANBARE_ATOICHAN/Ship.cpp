@@ -40,6 +40,8 @@ void Ship::move() {
 			shots->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
 		}
 	}
+	if (Input::KeySemicolon.clicked) life++;
+	if (Input::KeyMinus.clicked) life--;
 	cnt++;
 }
 

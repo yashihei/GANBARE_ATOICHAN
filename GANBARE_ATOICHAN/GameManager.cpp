@@ -25,7 +25,8 @@ GameManager::GameManager() {
 void GameManager::move() {
 	switch (state) {
 	case State::TITLE:
-		if (cnt % 1000 == 0) enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
+		if (enemyManager->getEnemies()->empty())
+			enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked) startInGame();
@@ -58,7 +59,7 @@ void GameManager::draw() {
 	switch (state) {
 	case State::TITLE:
 		FontAsset(L"titleFont").draw(L"‚ª‚ñ‚Î‚êI‚ ‚Æ‚¢‚¿‚á‚ñ", { 10, 300 }, Palette::White);
-		if (cnt % 20 < 10) FontAsset(L"font").draw(L"PUSH SHOT BUTTON", { 10, 350 }, Palette::White);
+		if (cnt % 20 < 10) FontAsset(L"font").draw(L"PRESS SHOT BUTTON", { 10, 350 }, Palette::White);
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		enemyManager->draw();
 		bulletManager->draw();

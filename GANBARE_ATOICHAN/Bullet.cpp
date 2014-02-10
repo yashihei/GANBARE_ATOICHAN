@@ -35,7 +35,7 @@ void Bullet::move() {
 void Bullet::draw() {
 	Circle c(pos, 8.0);
 	c.draw(color);
-	c.drawFrame(1.5, 0.0, Palette::White);//これのコスト大きい
+	//c.drawFrame(1.5, 0.0, Palette::White);//これのコスト大きい
 }
 
 void Bullet::burn() {

@@ -79,7 +79,7 @@ void Tossin::move() {
 	radian += Random(-0.2, 0.2);
 	double sp = 7.0;
 	const int interval = 5;
-	if (cnt % interval == 0) bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, { 0, 255, 255, 200 }, 0);
+	if (cnt % interval == 0) bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, { 0, 200, 255, 200 }, 0);
 
 	sp = 5.0;
 	radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
@@ -131,7 +131,7 @@ void Baramaki::move() {
 	const int interval = 15;
 	//TODO:Šp“x­‚È‚­
 	if (cnt % interval == 0) {
-		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 255, 255, 200 }, 1);
+		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, { 0, 200, 255, 200 }, 1);
 	}
 
 	pos.moveBy({ 1.0 * dir, 0.0 });
@@ -139,7 +139,7 @@ void Baramaki::move() {
 }
 
 Chubosu::Chubosu() {
-	hp = hpMax = 500;
+	hp = hpMax = 1000;
 	rad = 30.0;
 	color = Color{ 255, 255, 0, 200 };
 	isBoss = true;
@@ -152,13 +152,14 @@ void Chubosu::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
 	double sp = 3.0;
-	const int interval = 7;
 	const int sep = 10;
+	int interval = 8 * ((double)hp/hpMax);//HPŽc‚è’l‚É‚æ‚è”­‹¶
+	if (interval == 0) interval = 1;
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 5.0;
 		for (int i = 0; i < sep; i++) {
 			bulletManager->create(pos + Vec2(20.0, 0.0), { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, {255, 0, 200, 200}, 0);
-			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 255, 255, 200}, 0);
+			bulletManager->create(pos + Vec2(-20.0, 0.0), { Sin(-radian + PI2 / sep * i)*sp, Cos(-radian + PI2 / sep * i)*sp }, {0, 200, 255, 200}, 0);
 		}
 	}
 	/*
@@ -181,8 +182,6 @@ void Chubosu::move() {
 
 	if (cnt < 30) {
 		pos.moveBy({ 0.0, 3.0 });
-	} else if (cnt > 750) {
-		pos.moveBy({ 0.0, -6.0 });
 	}
 	if (hp < 0) gm->startClear();//“|‚µ‚½‚çƒQ[ƒ€ƒNƒŠƒA
 
@@ -224,7 +223,7 @@ ThreeWay::ThreeWay() {
 void ThreeWay::move() {
 	const double PI = 3.14;
 	const double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-	double sp = 7.0;
+	double sp = 6.0;
 	const int interval = 5;
 	if (cnt % interval == 0 &&
 		cnt % 50 < 25) {
@@ -234,6 +233,38 @@ void ThreeWay::move() {
 	}
 
 	pos.moveBy({ 2.0 * dir, 0.0 });
+	Enemy::defalutMove();
+}
+
+Galaxy::Galaxy() {
+	hp = 30;
+	rad = 20.0;
+	color = Color{ 255, 0, 0, 200 };
+	kakudo = 0;
+	score = 20000;
+}
+
+void Galaxy::move() {
+	const double PI2 = 6.28;
+	double radian = Radians(kakudo);
+	double sp = 4.0;
+	const int interval = 1;
+	const int sep = 5;
+
+	if (cnt > 30 && cnt % interval == 0) {
+		if ((cnt - 30) % 100 < 50) kakudo += 10;
+		else kakudo -= 10;
+		for (int i = 0; i < sep; i++) {
+			bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, { 0, 200, 255, 200 }, 0);
+		}
+	}
+
+	if (cnt < 30) {
+		pos.moveBy({ 0.0, 3.0 });
+	}
+	else if (cnt > 250) {
+		pos.moveBy({ 0.0, -6.0 });
+	}
 	Enemy::defalutMove();
 }
 
@@ -265,6 +296,8 @@ void EnemyManager::create(Vec2 pos, std::string type)
 	} else if (type == "threewayR") {
 		e = std::make_shared<ThreeWay>();
 		e->turnDir();
+	} else if (type == "galaxy") {
+		e = std::make_shared<Galaxy>();
 	} else {
 		LOG(L"name miss");
 		return;

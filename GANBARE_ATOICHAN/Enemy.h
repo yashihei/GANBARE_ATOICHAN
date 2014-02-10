@@ -107,6 +107,15 @@ public:
 	void move() override;
 };
 
+class Galaxy : public Enemy
+{
+public:
+	Galaxy();
+	void move() override;
+private:
+	double kakudo;
+};
+
 class EnemyManager
 {
 public:
