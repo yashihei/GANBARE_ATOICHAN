@@ -9,7 +9,7 @@ class Bullet
 {
 public:
 	Bullet(){};
-	void init(Vec2 pos, Vec2 vel, Color color, int moveType);
+	void init(Vec2 pos, Vec2 vel, int colorType, int moveType);
 	void move();
 	void draw();
 	void burn();
@@ -21,7 +21,7 @@ private:
 	Vec2 pos;
 	Vec2 vel;
 	double rad;
-	Color color;
+	int colorType;
 	int cnt;
 	bool enable=false;
 	std::function<void(Vec2* pos, Vec2* vel)> bulletMove;
@@ -34,7 +34,7 @@ public:
 	void clear();
 	void draw();
 	void move();
-	void create(Vec2 pos, Vec2 vel, Color color, int moveType);
+	void create(Vec2 pos, Vec2 vel, int colorType, int moveType);
 	const std::vector<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
 private:
 	std::vector<std::shared_ptr<Bullet>> bullets;

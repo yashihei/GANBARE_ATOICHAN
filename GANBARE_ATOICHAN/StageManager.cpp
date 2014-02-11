@@ -76,35 +76,27 @@ gm(gm)
 		{ 1570, { 350, 0 }, "tossin" },
 		{ 1650, { WIDTH/2, 0 }, "middle" },
 		//galaxy
-		//{ 1900, { 100, 0 }, "galaxy" },
-		//{ 1900, { 350, 0 }, "galaxy" },
-		//{ 2150, { 100, 0 }, "galaxy" },
-		//{ 2150, { 350, 0 }, "galaxy" },
-		//{ 2400, { 100, 0 }, "galaxy" },
-		//{ 2400, { 350, 0 }, "galaxy" },
-		//{ 2650, { 100, 0 }, "galaxy" },
-		//{ 2650, { 350, 0 }, "galaxy" },
+		{ 1900, { 100, 0 }, "galaxy" },
+		{ 1900, { 350, 0 }, "galaxy" },
+		{ 2150, { 100, 0 }, "galaxy" },
+		{ 2150, { 350, 0 }, "galaxy" },
 		////threewayL
-		{ 1850, { 0, 100 }, "threewayL" },
-		{ 1870, { 0, 100 }, "threewayL" },
-		{ 1890, { 0, 100 }, "threewayL" },
-		{ 1910, { 0, 100 }, "threewayL" },
-		{ 1930, { 0, 100 }, "threewayL" },
-		{ 1950, { 0, 100 }, "threewayL" },
-		{ 1970, { 0, 100 }, "threewayL" },
-		{ 1990, { 0, 100 }, "threewayL" },
+		{ 2400, { 0, 100 }, "threewayL" },
+		{ 2420, { 0, 100 }, "threewayL" },
+		{ 2440, { 0, 100 }, "threewayL" },
+		{ 2480, { 0, 100 }, "threewayL" },
+		{ 2500, { 0, 100 }, "threewayL" },
+		{ 2520, { 0, 100 }, "threewayL" },
 		////threewayR
-		{ 1850, { WIDTH, 100 }, "threewayR" },
-		{ 1870, { WIDTH, 100 }, "threewayR" },
-		{ 1890, { WIDTH, 100 }, "threewayR" },
-		{ 1910, { WIDTH, 100 }, "threewayR" },
-		{ 1930, { WIDTH, 100 }, "threewayR" },
-		{ 1950, { WIDTH, 100 }, "threewayR" },
-		{ 1970, { WIDTH, 100 }, "threewayR" },
-		{ 1990, { WIDTH, 100 }, "threewayR" },
+		{ 2400, { WIDTH, 100 }, "threewayR" },
+		{ 2420, { WIDTH, 100 }, "threewayR" },
+		{ 2440, { WIDTH, 100 }, "threewayR" },
+		{ 2480, { WIDTH, 100 }, "threewayR" },
+		{ 2500, { WIDTH, 100 }, "threewayR" },
+		{ 2520, { WIDTH, 100 }, "threewayR" },
 
 		//chubosu(‚±‚ê‚³‚¢‚²
-		{ 3600, { WIDTH / 2, 0 }, "chubosu" },
+		{ 2800, { WIDTH / 2, 0 }, "chubosu" },
 	};
 }
 
@@ -119,6 +111,9 @@ void StageManager::move() {
 		}
 	}
 	cnt++;
+	if (cnt > 2700 && cnt < 2800) {
+		FontAsset(L"waring").drawCenter(L"WARING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
+	}
 	if (Input::KeyR.clicked) cnt = 0;//reset
 	if (Input::KeyT.clicked) cnt = 1600;//reset
 }

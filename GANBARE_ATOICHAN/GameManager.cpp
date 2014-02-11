@@ -20,6 +20,10 @@ GameManager::GameManager() {
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
+	FontAsset::Register(L"waring", 30, Typeface::Black);
+	SoundAsset::Register(L"music", L"dat/Interceptor_rm.mp3", true);
+	TextureAsset::Register(L"bulletB", L"dat/bulletB.png");
+	TextureAsset::Register(L"bulletR", L"dat/bulletR.png");
 }
 
 void GameManager::move() {
