@@ -24,6 +24,7 @@ GameManager::GameManager() {
 	SoundAsset::Register(L"music", L"dat/Interceptor_rm.mp3", true);
 	TextureAsset::Register(L"bulletB", L"dat/bulletB.png");
 	TextureAsset::Register(L"bulletR", L"dat/bulletR.png");
+	TextureAsset::Register(L"particle", L"dat/particle.png");
 }
 
 void GameManager::move() {
@@ -62,7 +63,7 @@ void GameManager::move() {
 void GameManager::draw() {
 	switch (state) {
 	case State::TITLE:
-		FontAsset(L"titleFont").draw(L"Ç™ÇÒÇŒÇÍÅIÇ†Ç∆Ç¢ÇøÇ·ÇÒ", { 10, 300 }, Palette::White);
+		FontAsset(L"titleFont").draw(L"DANMAKU", { 10, 300 }, Palette::White);
 		if (cnt % 20 < 10) FontAsset(L"font").draw(L"PRESS SHOT BUTTON", { 10, 350 }, Palette::White);
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		enemyManager->draw();

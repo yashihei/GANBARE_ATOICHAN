@@ -6,7 +6,7 @@
 StageManager::StageManager(GameManager* gm):
 gm(gm)
 {
-	const int WIDTH = 450;
+	const int WIDTH = Window::Width();
 	//CSVReader csv(L"dat/stage.csv");
 	//for (int i = 0; i < csv.rows; i++) {
 	//	EnemiesData e;
@@ -20,16 +20,16 @@ gm(gm)
 		{ 0, { 30, 0 }, "tossin" },
 		{ 20, { 80, 0 }, "tossin" },
 		{ 40, { 130, 0 }, "tossin" },
-		{ 100, { 420, 0 }, "tossin" },
-		{ 120, { 370, 0 }, "tossin" },
-		{ 140, { 320, 0 }, "tossin" },
+		{ 100, { WIDTH - 30, 0 }, "tossin" },
+		{ 120, { WIDTH - 80, 0 }, "tossin" },
+		{ 140, { WIDTH - 130, 0 }, "tossin" },
 		//tossin2
 		{ 200, { 30, 0 }, "tossin" },
 		{ 220, { 80, 0 }, "tossin" },
 		{ 240, { 130, 0 }, "tossin" },
-		{ 300, { 420, 0 }, "tossin" },
-		{ 320, { 370, 0 }, "tossin" },
-		{ 340, { 320, 0 }, "tossin" },
+		{ 300, { WIDTH - 30, 0 }, "tossin" },
+		{ 320, { WIDTH - 80, 0 }, "tossin" },
+		{ 340, { WIDTH - 130, 0 }, "tossin" },
 		//middle
 		{ 400, { WIDTH/2, 0 }, "middle" },
 		//baramakiL1
@@ -62,24 +62,24 @@ gm(gm)
 		{ 1150, { WIDTH, 100 }, "baramakiR" },
 		//nerai
 		{ 650, { 100, 0 }, "nerai" },
-		{ 650, { 350, 0 }, "nerai" },
+		{ 650, { WIDTH - 100, 0 }, "nerai" },
 		{ 850, { 100, 0 }, "nerai" },
-		{ 850, { 350, 0 }, "nerai" },
+		{ 850, { WIDTH - 100, 0 }, "nerai" },
 		{ 1050, { 100, 0 }, "nerai" },
-		{ 1050, { 350, 0 }, "nerai" },
+		{ 1050, { WIDTH - 100, 0 }, "nerai" },
 		{ 1250, { 100, 0 }, "nerai" },
-		{ 1250, { 350, 0 }, "nerai" },
+		{ 1250, { WIDTH - 100, 0 }, "nerai" },
 		//tossin+middle
 		{ 1550, { 100, 0 }, "tossin" },
 		{ 1570, { 100, 0 }, "tossin" },
-		{ 1550, { 350, 0 }, "tossin" },
-		{ 1570, { 350, 0 }, "tossin" },
+		{ 1550, { WIDTH - 100, 0 }, "tossin" },
+		{ 1570, { WIDTH - 100, 0 }, "tossin" },
 		{ 1650, { WIDTH/2, 0 }, "middle" },
 		//galaxy
 		{ 1900, { 100, 0 }, "galaxy" },
-		{ 1900, { 350, 0 }, "galaxy" },
+		{ 1900, { WIDTH - 100, 0 }, "galaxy" },
 		{ 2150, { 100, 0 }, "galaxy" },
-		{ 2150, { 350, 0 }, "galaxy" },
+		{ 2150, { WIDTH - 100, 0 }, "galaxy" },
 		////threewayL
 		{ 2400, { 0, 100 }, "threewayL" },
 		{ 2420, { 0, 100 }, "threewayL" },

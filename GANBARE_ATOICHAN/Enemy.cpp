@@ -20,7 +20,7 @@ void Enemy::draw() {
 	c.drawFrame(2.0, 0.0, Palette::White);
 	if (isBoss) {
 		double t = (double)hp / (double)hpMax;
-		Rect hpBar({ 25, 50 }, { 400 * t, 15 });
+		Rect hpBar({ 25, 50 }, { (Window::Width() - 50) * t, 15 });
 		//hpBar.draw({ 255, 255, 255, 200 });
 		hpBar.draw(HSV(60 * t, 1.0, 1.0));
 		hpBar.drawFrame(0.0, 1.5, Palette::White);

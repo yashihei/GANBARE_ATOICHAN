@@ -21,10 +21,10 @@ private:
 	Vec2 pos;
 	Vec2 vel;
 	double rad;
-	int colorType;
 	int cnt;
 	bool enable=false;
 	std::function<void(Vec2* pos, Vec2* vel)> bulletMove;
+	Texture texture;
 };
 
 class BulletManager

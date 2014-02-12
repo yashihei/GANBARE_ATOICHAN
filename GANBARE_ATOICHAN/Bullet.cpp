@@ -15,7 +15,11 @@ namespace EnemyMove {
 void Bullet::init(Vec2 pos, Vec2 vel, int colorType, int moveType) {
 	this->pos = pos;
 	this->vel = vel;
-	this->colorType = colorType;
+	if (colorType == 0) {
+		texture = TextureAsset(L"bulletR");
+	} else {
+		texture = TextureAsset(L"bulletB");
+	}
 	if (moveType == 0) bulletMove = EnemyMove::tokasoku;
 	else if (moveType == 1) bulletMove = EnemyMove::juryoku;
 	cnt = 0;
@@ -33,13 +37,7 @@ void Bullet::move() {
 }
 
 void Bullet::draw() {
-	if (colorType == 0) {
-		TextureAsset(L"bulletR").drawAt(pos);
-	} else {
-		TextureAsset(L"bulletB").drawAt(pos);
-	}
-	//Circle c(pos, 8.0);
-	//c.draw(color);
+	texture.drawAt(pos);
 	//c.drawFrame(1.5, 0.0, Palette::White);//‚±‚ê‚ÌƒRƒXƒg‘å‚«‚¢
 }
 
