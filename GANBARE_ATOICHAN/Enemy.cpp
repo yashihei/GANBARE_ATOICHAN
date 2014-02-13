@@ -39,6 +39,7 @@ void Enemy::defalutMove() {
 		enable = false;
 		gm->addScore(score);
 		gm->createExplosion(pos, maxHp);
+		SoundAsset(L"burn").playMulti();
 	}
 	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
 		enable = false;

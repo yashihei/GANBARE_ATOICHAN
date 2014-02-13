@@ -39,6 +39,7 @@ void Ship::move() {
 			shots->create(pos + Vec2(-10.0, 0.0), { -5.0, -30.0 });
 			shots->create(pos + Vec2(10.0, 0.0), { 5.0, -30.0 });
 		}
+		SoundAsset(L"shoot").playMulti();
 	}
 	if (Input::KeySemicolon.clicked) life++;
 	if (Input::KeyMinus.clicked) life--;
@@ -59,6 +60,7 @@ void Ship::destory() {
 	LOG(L"ship destory!!");
 	pos = { Window::Width() / 2, Window::Height() + rad };
 	life--;
+	SoundAsset(L"damage").playMulti();
 	gm->getBullets()->clear();
 	comeBack = true;
 	comeBackCnt = 0;

@@ -21,11 +21,15 @@ GameManager::GameManager() {
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
-	FontAsset::Register(L"waring", 30, Typeface::Black);
-	SoundAsset::Register(L"music", L"dat/Interceptor_rm.mp3", true);
+	FontAsset::Register(L"waring", 40, Typeface::Black);
+	SoundAsset::Register(L"music", L"dat/16d001-01-dong-straycat.mp3", true);
+	SoundAsset::Preload(L"music");
+	SoundAsset::Register(L"burn", L"dat/burn.wav", true);
+	SoundAsset::Register(L"shoot", L"dat/shoot.wav", true);
+	SoundAsset::Register(L"damage", L"dat/damage.wav", true);
+	SoundAsset::Register(L"enemy_shoot", L"dat/enemy_shoot.wav", true);
 	TextureAsset::Register(L"bulletB", L"dat/bulletB.png");
 	TextureAsset::Register(L"bulletR", L"dat/bulletR.png");
-	TextureAsset::Register(L"particle", L"dat/particle.png");
 }
 
 void GameManager::move() {
@@ -48,15 +52,19 @@ void GameManager::move() {
 	case State::GAME_OVER:
 		enemyManager->move();
 		bulletManager->move();
-		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
 		break;
 	case State::GAME_CLEAR:
 		ship->move();
 		shotManager->move();
 		enemyManager->move();
 		bulletManager->move();
-		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
 		break;
+	}
+	if (state == State::GAME_CLEAR || state == State::GAME_OVER) {
+		if (Input::KeyZ.clicked || cnt > 300) {
+			SoundAsset(L"music").stop();
+			state = State::TITLE;
+		}
 	}
 	if (Input::MouseL.pressed) {
 		auto e = std::make_shared<Explosion>(Mouse::Pos(), 30);
@@ -107,6 +115,7 @@ void GameManager::startInGame() {
 	stageManager->init();
 	score = 0;
 	state = State::IN_GAME;
+	SoundAsset(L"music").play();
 }
 
 void GameManager::startGameOver() {

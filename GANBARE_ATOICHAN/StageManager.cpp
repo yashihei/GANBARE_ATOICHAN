@@ -101,7 +101,7 @@ gm(gm)
 }
 
 void StageManager::init() {
-	cnt = -100;//delay
+	cnt = -150;//delay
 }
 
 void StageManager::move() {
