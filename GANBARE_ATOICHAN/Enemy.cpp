@@ -19,7 +19,7 @@ void Enemy::draw() {
 	if (subCnt < 3) c.draw(Palette::White);
 	c.drawFrame(2.0, 0.0, Palette::White);
 	if (isBoss) {
-		double t = (double)hp / (double)hpMax;
+		double t = (double)hp / (double)maxHp;
 		Rect hpBar({ 25, 50 }, { (Window::Width() - 50) * t, 15 });
 		//hpBar.draw({ 255, 255, 255, 200 });
 		hpBar.draw(HSV(60 * t, 1.0, 1.0));
@@ -38,6 +38,10 @@ void Enemy::defalutMove() {
 	if (hp < 0) {
 		enable = false;
 		gm->addScore(score);
+		gm->createExplosion(pos, maxHp);
+	}
+	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
+		enable = false;
 	}
 }
 
@@ -67,7 +71,7 @@ void Enemy1::move() {
 }
 
 Tossin::Tossin() {
-	hp = 5;
+	hp = maxHp = 5;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 3939;
@@ -90,7 +94,7 @@ void Tossin::move() {
 }
 
 Middle::Middle() {
-	hp = hpMax = 100;
+	hp = maxHp = 100;
 	rad = 25.0;
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
@@ -121,7 +125,7 @@ void Middle::move() {
 }
 
 Baramaki::Baramaki() {
-	hp = 10;
+	hp = maxHp = 10;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 5000;
@@ -139,7 +143,7 @@ void Baramaki::move() {
 }
 
 Chubosu::Chubosu() {
-	hp = hpMax = 1000;
+	hp = maxHp = 1000;
 	rad = 30.0;
 	color = Color{ 255, 255, 0, 200 };
 	isBoss = true;
@@ -153,7 +157,7 @@ void Chubosu::move() {
 	double radian = Radians(kakudo);
 	double sp = 3.0;
 	const int sep = 10;
-	int interval = 8 * ((double)hp/hpMax);//HP残り値により発狂
+	int interval = 8 * ((double)hp/maxHp);//HP残り値により発狂
 	if (interval == 0) interval = 1;
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 5.0;
@@ -189,7 +193,7 @@ void Chubosu::move() {
 }
 
 Nerai::Nerai() {
-	hp = 30;
+	hp = maxHp = 30;
 	rad = 20.0;
 	color = Color{ 255, 0, 0, 200 };
 	score = 10000;
@@ -214,7 +218,7 @@ void Nerai::move() {
 }
 
 ThreeWay::ThreeWay() {
-	hp = 10;
+	hp = maxHp = 10;
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 10000;
@@ -237,7 +241,7 @@ void ThreeWay::move() {
 }
 
 Galaxy::Galaxy() {
-	hp = 30;
+	hp = maxHp = 30;
 	rad = 20.0;
 	color = Color{ 255, 0, 0, 200 };
 	kakudo = 0;
@@ -317,14 +321,20 @@ void EnemyManager::draw() {
 }
 
 void EnemyManager::move() {
-	for (auto it = enemies.begin(); it != enemies.end();) {
-		(*it)->move();
-		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
-			(*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0 ||
-			!(*it)->isEnable()) {
-			it = enemies.erase(it);
-			continue;
-		}
-		it++;
+	for (auto& enemy : enemies) {
+		enemy->move();
 	}
+	Erase_if(enemies, [](std::shared_ptr<Enemy> enemy) { return !enemy->isEnable(); });
+	//enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](std::shared_ptr<Enemy> enemy) { return !enemy->isEnable(); }), enemies.end());
+	//Erase_if(enemies, [](std::shared_ptr<Enemy> enemy) { return enemy->getPos().x > Window::Height() || enemy->getPos().x < 0 || enemy->getPos().y > Window::Height() || enemy->getPos().y < 0 || !enemy->isEnable(); });
+	//for (auto it = enemies.begin(); it != enemies.end();) {
+	//	(*it)->move();
+	//	if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
+	//		(*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0 ||
+	//		!(*it)->isEnable()) {
+	//		it = enemies.erase(it);
+	//		continue;
+	//	}
+	//	it++;
+	//}
 }

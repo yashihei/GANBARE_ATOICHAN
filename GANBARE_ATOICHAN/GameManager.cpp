@@ -7,6 +7,7 @@
 #include "StageManager.h"
 #include "CheckCollide.h"
 #include "Actor.h"
+#include "Explosion.h"
 
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
@@ -57,6 +58,12 @@ void GameManager::move() {
 		if (Input::KeyZ.clicked || cnt > 300) state = State::TITLE;
 		break;
 	}
+	if (Input::MouseL.pressed) {
+		auto e = std::make_shared<Explosion>(Mouse::Pos(), 30);
+		explosions.push_back(e);
+	}
+	for (auto& explotion : explosions) explotion->move();
+	Erase_if(explosions, [](std::shared_ptr<Explosion> explotion) { return !explotion->isEnable(); });
 	cnt++;
 }
 
@@ -89,6 +96,7 @@ void GameManager::draw() {
 		FontAsset(L"font").drawCenter(L"GAME CLEAR", { Window::Width()/2, 300 }, Palette::White);
 		break;
 	}
+	for (auto& explotion : explosions) explotion->draw();
 }
 
 void GameManager::startInGame() {
@@ -152,4 +160,10 @@ void GameManager::drawState() {
 	//score
 	FontAsset(L"font").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::White);
 	FontAsset(L"font").draw(Format(L"FPS:", Profiler::FPS()), { Window::Width() - 100, Window::Height() - 50 }, Palette::White);
+}
+
+void GameManager::createExplosion(Vec2 pos, int num)
+{
+	auto e = std::make_shared<Explosion>(pos, num);
+	explosions.push_back(e);
 }

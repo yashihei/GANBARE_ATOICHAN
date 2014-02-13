@@ -39,7 +39,7 @@ protected:
 	int cnt = 0;
 	int subCnt = 3;//”ñƒ_ƒ•\¦—p
 	int hp;
-	int hpMax;
+	int maxHp;
 	bool enable = true;
 	int dir = 1;
 	int score;

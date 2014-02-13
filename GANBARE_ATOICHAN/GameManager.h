@@ -1,12 +1,14 @@
 #pragma once
 #include <Siv3D.hpp>
 #include <memory>
+#include <list>
 
 class Ship;
 class ShotManager;
 class EnemyManager;
 class BulletManager;
 class StageManager;
+class Explosion;
 
 class GameManager
 {
@@ -25,6 +27,7 @@ public:
 	void addScore(int val) { this->score += val; };
 	void startGameOver();
 	void startClear();
+	void createExplosion(Vec2 pos, int num);
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }
 	ShotManager* getShots() { return shotManager.get(); }
@@ -36,6 +39,7 @@ private:
 	std::shared_ptr<EnemyManager> enemyManager;
 	std::shared_ptr<BulletManager> bulletManager;
 	std::shared_ptr<StageManager> stageManager;
+	std::list<std::shared_ptr<Explosion>> explosions;
 private:
 	void checkHit();
 	void drawState();
