@@ -5,10 +5,14 @@
 Shot::Shot(Vec2 pos, Vec2 vel):
 pos(pos), vel(vel)
 {
+	enable = true;
 }
 
 void Shot::move() {
 	pos.moveBy(vel);
+	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < -100) {
+		enable = false;
+	}
 }
 
 void Shot::draw() {
@@ -28,17 +32,10 @@ void ShotManager::create(Vec2 pos, Vec2 vel)
 }
 
 void ShotManager::move() {
-	for (auto it = shots.begin(); it != shots.end();) {
-		(*it)->move();
-		if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
-			(*it)->getPos().y > Window::Height() || (*it)->getPos().y < -100 ||
-			!(*it)->getEnable())
-		{
-			it = shots.erase(it);
-			continue;
-		}
-		it++;
+	for (auto& shot : shots) {
+		shot->move();
 	}
+	Erase_if(shots, [](std::shared_ptr<Shot> shot) {return !shot->getEnable(); });
 }
 
 void ShotManager::draw() {

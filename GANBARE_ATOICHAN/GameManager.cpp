@@ -22,12 +22,11 @@ GameManager::GameManager() {
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
 	FontAsset::Register(L"waring", 40, Typeface::Black);
-	SoundAsset::Register(L"music", L"dat/16d001-01-dong-straycat.mp3", true);
+	SoundAsset::Register(L"music", L"dat/nc82030.wav", true);
 	SoundAsset::Preload(L"music");
 	SoundAsset::Register(L"burn", L"dat/burn.wav", true);
 	SoundAsset::Register(L"shoot", L"dat/shoot.wav", true);
 	SoundAsset::Register(L"damage", L"dat/damage.wav", true);
-	SoundAsset::Register(L"enemy_shoot", L"dat/enemy_shoot.wav", true);
 	TextureAsset::Register(L"bulletB", L"dat/bulletB.png");
 	TextureAsset::Register(L"bulletR", L"dat/bulletR.png");
 }
@@ -116,6 +115,7 @@ void GameManager::startInGame() {
 	score = 0;
 	state = State::IN_GAME;
 	SoundAsset(L"music").play();
+	SoundAsset(L"music").setVolume(0.5);
 }
 
 void GameManager::startGameOver() {

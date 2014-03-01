@@ -39,7 +39,7 @@ void Enemy::defalutMove() {
 		enable = false;
 		gm->addScore(score);
 		gm->createExplosion(pos, maxHp);
-		SoundAsset(L"burn").playMulti();
+		SoundAsset(L"burn").playMulti(0.5);
 	}
 	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
 		enable = false;
@@ -326,16 +326,4 @@ void EnemyManager::move() {
 		enemy->move();
 	}
 	Erase_if(enemies, [](std::shared_ptr<Enemy> enemy) { return !enemy->isEnable(); });
-	//enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](std::shared_ptr<Enemy> enemy) { return !enemy->isEnable(); }), enemies.end());
-	//Erase_if(enemies, [](std::shared_ptr<Enemy> enemy) { return enemy->getPos().x > Window::Height() || enemy->getPos().x < 0 || enemy->getPos().y > Window::Height() || enemy->getPos().y < 0 || !enemy->isEnable(); });
-	//for (auto it = enemies.begin(); it != enemies.end();) {
-	//	(*it)->move();
-	//	if ((*it)->getPos().x > Window::Width() || (*it)->getPos().x < 0 ||
-	//		(*it)->getPos().y > Window::Height() || (*it)->getPos().y < 0 ||
-	//		!(*it)->isEnable()) {
-	//		it = enemies.erase(it);
-	//		continue;
-	//	}
-	//	it++;
-	//}
 }

@@ -30,15 +30,14 @@ void Bullet::init(Vec2 pos, Vec2 vel, int colorType, int moveType) {
 void Bullet::move() {
 	bulletMove(&pos, &vel);
 	cnt++;
-	if (pos.x > Window::Width() + rad || pos.x < 0 - rad ||
-		pos.y > Window::Height() + rad || pos.y < 0 - rad) {
+	if (pos.x > Window::Width() + 30 || pos.x < 0 - 30 ||
+		pos.y > Window::Height() + 30 || pos.y < 0 - 30) {
 		burn();
 	}
 }
 
 void Bullet::draw() {
 	texture.drawAt(pos);
-	//c.drawFrame(1.5, 0.0, Palette::White);//‚±‚ê‚ÌƒRƒXƒg‘å‚«‚¢
 }
 
 void Bullet::burn() {

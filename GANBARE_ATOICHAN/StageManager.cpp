@@ -112,8 +112,6 @@ void StageManager::move() {
 	}
 	cnt++;
 	if (cnt > 2700 && cnt < 2800) {
-		FontAsset(L"waring").drawCenter(L"WARING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
+		FontAsset(L"waring").drawCenter(L"WARNING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
 	}
-	if (Input::KeyR.clicked) cnt = 0;//reset
-	if (Input::KeyT.clicked) cnt = 1600;//reset
 }

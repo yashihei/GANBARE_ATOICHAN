@@ -57,7 +57,6 @@ void Ship::draw() {
 
 void Ship::destory() {
 	if (muteki) return;
-	LOG(L"ship destory!!");
 	pos = { Window::Width() / 2, Window::Height() + rad };
 	life--;
 	SoundAsset(L"damage").playMulti();
