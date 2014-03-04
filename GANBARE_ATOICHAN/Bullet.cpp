@@ -16,9 +16,9 @@ void Bullet::init(Vec2 pos, Vec2 vel, int colorType, int moveType) {
 	this->pos = pos;
 	this->vel = vel;
 	if (colorType == 0) {
-		texture = TextureAsset(L"bulletR");
+		texture = TextureAsset(L"bullet")(0, 0, 16, 16);
 	} else {
-		texture = TextureAsset(L"bulletB");
+		texture = TextureAsset(L"bullet")(16, 16, 16, 16);
 	}
 	if (moveType == 0) bulletMove = EnemyMove::tokasoku;
 	else if (moveType == 1) bulletMove = EnemyMove::juryoku;
@@ -44,37 +44,28 @@ void Bullet::burn() {
 	enable = false;
 }
 
-BulletManager::BulletManager() {
-	bullets.resize(500);
-	for (auto& bullet : bullets) {
-		bullet = std::make_shared<Bullet>();
-	}
-}
+BulletManager::BulletManager() {}
 
 void BulletManager::create(Vec2 pos, Vec2 vel, int colorType, int moveType)
 {
-	for (const auto& bullet : bullets) {
-		if (!bullet->getEnable()) {
-			bullet->init(pos, vel, colorType, moveType);
-			break;
-		}
-	}
+	auto b = std::make_shared<Bullet>();
+	b->init(pos, vel, colorType, moveType);
+	bullets.push_back(b);
 }
 
 void BulletManager::clear() {
-	for (const auto& bullet : bullets) {
-		bullet->burn();
-	}
+	bullets.clear();
 }
 
 void BulletManager::draw() {
 	for (const auto& bullet : bullets) {
-		if (bullet->getEnable()) bullet->draw();
+		bullet->draw();
 	}
 }
 
 void BulletManager::move() {
 	for (const auto& bullet : bullets) {
-		if (bullet->getEnable()) bullet->move();
+		 bullet->move();
 	}
+	Erase_if(bullets, [](std::shared_ptr<Bullet> bullet) {return !bullet->getEnable(); });
 }

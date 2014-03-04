@@ -173,12 +173,12 @@ void Chubosu::move() {
 		if (shotCnt % 10 < 5) {
 			kakudo += 1;
 			for (int i = 0; i < sep; i++) {
-				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, { 255, 0, 200, 200 }, 5.0, 0);
+				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, 0, 0);
 			}
 		} else {
 			kakudo -= 1;
 			for (int i = 0; i < sep; i++) {
-				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, { 0, 255, 255, 200 }, 5.0, 0);
+				bulletManager->create(pos, { Sin(radian + PI2 / sep * i)*sp, Cos(radian + PI2 / sep * i)*sp }, 1, 0);
 			}
 		}
 		shotCnt++;

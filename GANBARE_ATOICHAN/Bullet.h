@@ -1,6 +1,6 @@
 #pragma once
 #include <Siv3D.hpp>
-#include <vector>
+#include <list>
 #include <memory>
 #include <functional>
 #include "Actor.h"
@@ -24,7 +24,7 @@ private:
 	int cnt;
 	bool enable=false;
 	std::function<void(Vec2* pos, Vec2* vel)> bulletMove;
-	Texture texture;
+	TextureRegion texture;
 };
 
 class BulletManager
@@ -35,7 +35,7 @@ public:
 	void draw();
 	void move();
 	void create(Vec2 pos, Vec2 vel, int colorType, int moveType);
-	const std::vector<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
+	const std::list<std::shared_ptr<Bullet>>* getBullets() const { return &bullets; };
 private:
-	std::vector<std::shared_ptr<Bullet>> bullets;
+	std::list<std::shared_ptr<Bullet>> bullets;
 };

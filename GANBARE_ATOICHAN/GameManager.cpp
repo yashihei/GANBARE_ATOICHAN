@@ -27,8 +27,7 @@ GameManager::GameManager() {
 	SoundAsset::Register(L"burn", L"dat/burn.wav", true);
 	SoundAsset::Register(L"shoot", L"dat/shoot.wav", true);
 	SoundAsset::Register(L"damage", L"dat/damage.wav", true);
-	TextureAsset::Register(L"bulletB", L"dat/bulletB.png");
-	TextureAsset::Register(L"bulletR", L"dat/bulletR.png");
+	TextureAsset::Register(L"bullet", L"dat/bullet.png");
 }
 
 void GameManager::move() {
@@ -104,6 +103,9 @@ void GameManager::draw() {
 		break;
 	}
 	for (auto& explotion : explosions) explotion->draw();
+	//Graphics::Set2DBlendState(BlendState::Default());
+	//RectF({ 0, 0 }, { 100, Window::Height() }).draw(Palette::Black);
+	//Graphics::Set2DBlendState(BlendState::Additive());
 }
 
 void GameManager::startInGame() {
@@ -146,7 +148,6 @@ void GameManager::checkHit() {
 	}
 	//bullets and ship
 	for (auto b = bullets->begin(); b != bullets->end(); ++b) {
-		if (!(*b)->getEnable()) continue;
 		Line line((*b)->getPos(), (*b)->getPos() + (*b)->getVel());
 		Circle circle(ship->getPos(), ship->getRad());
 		if (Geometry::Intersect(line, circle)) {

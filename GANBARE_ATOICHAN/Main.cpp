@@ -17,9 +17,9 @@ void Main()
 	//	LOG(L"ディスプレイサイズあってないー");
 	//	return; // targetSize が含まれていない場合終了
 	//}
-	//Window::SetFullscreen(true, targetSize);
+	Window::SetFullscreen(true, targetSize);
 
-	Window::Resize(450, 600);
+	Window::Resize(480, 640);
 	Window::SetTitle(L"DANMAKU");
 	Graphics::Set2DBlendState(BlendState::Additive());
 

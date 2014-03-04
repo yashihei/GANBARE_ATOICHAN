@@ -114,4 +114,5 @@ void StageManager::move() {
 	if (cnt > 2700 && cnt < 2800) {
 		FontAsset(L"waring").drawCenter(L"WARNING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
 	}
+	if (Input::KeyP.clicked) cnt += 100;
 }
