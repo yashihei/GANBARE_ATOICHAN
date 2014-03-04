@@ -22,7 +22,6 @@ void Particle::draw() {
 	const double size = 8.0;
 	unsigned int alpha = 200 - cnt * 2;
 	Circle(pos, size).draw({ 255, 255, 255 , alpha});
-	//texure.resize({size, size}).drawAt(pos);
 }
 
 Explosion::Explosion(const Vec2& pos, int num):

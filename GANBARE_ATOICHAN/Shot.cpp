@@ -18,6 +18,7 @@ void Shot::move() {
 void Shot::draw() {
 	Line l(pos, pos + vel);
 	l.draw(3.0, { 255, 255, 255, 200 });
+	TextureAsset(L"shot").drawAt(pos);
 }
 
 void Shot::burn()

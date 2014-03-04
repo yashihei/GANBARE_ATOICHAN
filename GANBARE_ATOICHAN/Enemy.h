@@ -29,6 +29,7 @@ public:
 	Vec2 getPos() const { return this->pos; };
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
+	bool getIsBoss() const { return this->isBoss; };
 protected:
 	GameManager* gm;
 	BulletManager* bulletManager;

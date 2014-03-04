@@ -21,7 +21,6 @@ void Main()
 
 	Window::Resize(480, 640);
 	Window::SetTitle(L"DANMAKU");
-	Graphics::Set2DBlendState(BlendState::Additive());
 
 	auto gm = std::make_shared<GameManager>();
 	while (System::Update())

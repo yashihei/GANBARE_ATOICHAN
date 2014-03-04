@@ -28,6 +28,7 @@ public:
 	void startGameOver();
 	void startClear();
 	void createExplosion(Vec2 pos, int num);
+	void drawBack();
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }
 	ShotManager* getShots() { return shotManager.get(); }
@@ -47,4 +48,5 @@ private:
 	State state;
 	int score;
 	int cnt;
+	int scrollCnt;
 };

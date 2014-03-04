@@ -18,13 +18,6 @@ void Enemy::draw() {
 	c.draw(color);
 	if (subCnt < 3) c.draw(Palette::White);
 	c.drawFrame(2.0, 0.0, Palette::White);
-	if (isBoss) {
-		double t = (double)hp / (double)maxHp;
-		Rect hpBar({ 25, 50 }, { (Window::Width() - 50) * t, 15 });
-		//hpBar.draw({ 255, 255, 255, 200 });
-		hpBar.draw(HSV(60 * t, 1.0, 1.0));
-		hpBar.drawFrame(0.0, 1.5, Palette::White);
-	}
 }
 
 void Enemy::damage() {
