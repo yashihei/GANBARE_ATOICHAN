@@ -23,6 +23,7 @@ public:
 	StageManager(GameManager* gm);
 	void init();
 	void move();
+	int getCnt() { return cnt; };
 private:
 	int cnt = 0;
 	int stage;

@@ -31,6 +31,7 @@ GameManager::GameManager() {
 	TextureAsset::Register(L"bullet", L"dat/bullet.png");
 	TextureAsset::Register(L"back", L"dat/back.png");
 	TextureAsset::Register(L"shot", L"dat/shot.png");
+	TextureAsset::Register(L"enemy1", L"dat/enemy1.png");
 }
 
 void GameManager::move() {
@@ -156,6 +157,7 @@ void GameManager::checkHit() {
 	}
 }
 
+//Ç¢ÇÒÇ”ÇßÇﬂÅ[ÇµÇÂÇÒ
 void GameManager::drawState() {
 	//life num
 	for (int i = 0; i < ship->getLife(); i++) {
@@ -166,6 +168,12 @@ void GameManager::drawState() {
 		t.draw({ 255, 50, 50, 255 });
 		t.drawFrame(2.0, Palette::White);
 	}
+	//WARNING
+	int t = stageManager->getCnt();
+	if (t > 2700 && t < 2800) {
+		FontAsset(L"waring").drawCenter(L"WARNING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
+	}
+	//TODO:HPÉoÅ[èàóù
 	//auto e = enemyManager->getEnemies->back();
 	if (false) {
 		//double t = (double)hp / (double)maxHp;
@@ -176,8 +184,10 @@ void GameManager::drawState() {
 		hpBar.drawFrame(0.0, 1.5, Palette::White);
 	}
 	//score
-	FontAsset(L"font").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::Darkgray);
-	FontAsset(L"font").draw(Format(L"FPS:", Profiler::FPS()), { Window::Width() - 100, Window::Height() - 50 }, Palette::Darkgray);
+	FontAsset(L"font").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::Black);
+	FontAsset(L"font").draw(Format(L"SCORE:", score), { 8, 8 }, Palette::White);
+	FontAsset(L"font").draw(Format(L"FPS:", Profiler::FPS()), { Window::Width() - 100, Window::Height() - 50 }, Palette::Black);
+	FontAsset(L"font").draw(Format(L"FPS:", Profiler::FPS()), { Window::Width() - 100 - 2, Window::Height() - 50 - 2 }, Palette::White);
 	//FontAsset(L"font").draw(Format(bulletManager->getBullets()->size()), { 10, 100 }, Palette::Black);
 }
 

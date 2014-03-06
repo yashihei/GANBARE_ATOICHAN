@@ -18,6 +18,7 @@ void Enemy::draw() {
 	c.draw(color);
 	if (subCnt < 3) c.draw(Palette::White);
 	c.drawFrame(2.0, 0.0, Palette::White);
+	//TextureAsset(L"enemy1").drawAt(pos);
 }
 
 void Enemy::damage() {
