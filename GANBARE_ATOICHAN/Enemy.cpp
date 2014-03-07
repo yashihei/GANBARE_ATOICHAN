@@ -14,11 +14,7 @@ void Enemy::setParam(GameManager* gm, Vec2 pos)
 }
 
 void Enemy::draw() {
-	Circle c(pos, rad);
-	c.draw(color);
-	if (subCnt < 3) c.draw(Palette::White);
-	c.drawFrame(2.0, 0.0, Palette::White);
-	//TextureAsset(L"enemy1").drawAt(pos);
+	texure.drawAt(pos);
 }
 
 void Enemy::damage() {
@@ -32,7 +28,7 @@ void Enemy::defalutMove() {
 	if (hp < 0) {
 		enable = false;
 		gm->addScore(score);
-		gm->createExplosion(pos, maxHp);
+		gm->createExplosion(pos);
 		SoundAsset(L"burn").playMulti(0.5);
 	}
 	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
@@ -70,6 +66,7 @@ Tossin::Tossin() {
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 3939;
+	texure = TextureAsset(L"enemy")(0, 0, 64, 64);
 }
 
 void Tossin::move() {
@@ -94,6 +91,7 @@ Middle::Middle() {
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
 	score = 30000;
+	texure = TextureAsset(L"enemy")(64, 0, 64, 64);
 }
 
 void Middle::move() {
@@ -124,6 +122,7 @@ Baramaki::Baramaki() {
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 5000;
+	texure = TextureAsset(L"enemy")(0, 0, 64, 64);
 }
 
 void Baramaki::move() {
@@ -145,6 +144,7 @@ Chubosu::Chubosu() {
 	score = 100000;
 	shotCnt = 0;
 	kakudo = 0;
+	texure = TextureAsset(L"enemy")(128, 0, 64, 64);
 }
 
 void Chubosu::move() {
@@ -192,6 +192,7 @@ Nerai::Nerai() {
 	rad = 20.0;
 	color = Color{ 255, 0, 0, 200 };
 	score = 10000;
+	texure = TextureAsset(L"enemy")(64, 0, 64, 64);
 }
 
 void Nerai::move() {
@@ -217,6 +218,7 @@ ThreeWay::ThreeWay() {
 	rad = 15.0;
 	color = Color{ 255, 255, 255, 200 };
 	score = 10000;
+	texure = TextureAsset(L"enemy")(0, 0, 64, 64);
 }
 
 void ThreeWay::move() {
@@ -241,6 +243,7 @@ Galaxy::Galaxy() {
 	color = Color{ 255, 0, 0, 200 };
 	kakudo = 0;
 	score = 20000;
+	texure = TextureAsset(L"enemy")(64, 0, 64, 64);
 }
 
 void Galaxy::move() {

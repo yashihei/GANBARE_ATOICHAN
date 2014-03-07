@@ -37,6 +37,7 @@ protected:
 	Vec2 pos;
 	double rad;
 	Color color;
+	TextureRegion texure;
 	int cnt = 0;
 	int subCnt = 3;//”ñƒ_ƒ•\¦—p
 	int hp;

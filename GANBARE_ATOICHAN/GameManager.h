@@ -27,7 +27,7 @@ public:
 	void addScore(int val) { this->score += val; };
 	void startGameOver();
 	void startClear();
-	void createExplosion(Vec2 pos, int num);
+	void createExplosion(Vec2 pos);
 	void drawBack();
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }

@@ -23,7 +23,7 @@ GameManager::GameManager() {
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
 	FontAsset::Register(L"waring", 40, Typeface::Black);
-	SoundAsset::Register(L"music", L"dat/.wav", true);
+	SoundAsset::Register(L"music", L"dat/music.mp3", true);
 	SoundAsset::Preload(L"music");
 	SoundAsset::Register(L"burn", L"dat/burn.wav", true);
 	SoundAsset::Register(L"shoot", L"dat/shoot.wav", true);
@@ -31,7 +31,10 @@ GameManager::GameManager() {
 	TextureAsset::Register(L"bullet", L"dat/bullet.png");
 	TextureAsset::Register(L"back", L"dat/back.png");
 	TextureAsset::Register(L"shot", L"dat/shot.png");
-	TextureAsset::Register(L"enemy1", L"dat/enemy1.png");
+	TextureAsset::Register(L"title", L"dat/title.png");
+	TextureAsset::Register(L"start", L"dat/start.png");
+	TextureAsset::Register(L"enemy", L"dat/enemy.png");
+	TextureAsset::Register(L"explosion", L"dat/explosion.png");
 }
 
 void GameManager::move() {
@@ -41,6 +44,7 @@ void GameManager::move() {
 		if (enemyManager->getEnemies()->empty()) {
 			enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
 		}
+		//stageManager->move();
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked) startInGame();
@@ -81,8 +85,8 @@ void GameManager::draw() {
 	case State::TITLE:
 		enemyManager->draw();
 		bulletManager->draw();
-		FontAsset(L"titleFont").draw(L"DANMAKU", { 10, 300 }, Palette::White);
-		if (cnt % 20 < 10) FontAsset(L"font").draw(L"PRESS SHOT BUTTON", { 10, 350 }, Palette::White);
+		TextureAsset(L"title").draw( 0, 300 );
+		if (cnt % 50 < 25) TextureAsset(L"start").draw( 0, 360 );
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		break;
 	case State::IN_GAME:
@@ -191,9 +195,9 @@ void GameManager::drawState() {
 	//FontAsset(L"font").draw(Format(bulletManager->getBullets()->size()), { 10, 100 }, Palette::Black);
 }
 
-void GameManager::createExplosion(Vec2 pos, int num)
+void GameManager::createExplosion(Vec2 pos)
 {
-	auto e = std::make_shared<Explosion>(pos, num);
+	auto e = std::make_shared<Explosion>(pos);
 	explosions.push_back(e);
 }
 
