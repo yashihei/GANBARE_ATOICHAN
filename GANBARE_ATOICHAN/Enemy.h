@@ -30,6 +30,7 @@ public:
 	double getRad() const { return this->rad; };
 	bool isEnable() const { return this->enable; };
 	bool getIsBoss() const { return this->isBoss; };
+	double getPerHp() const { return (double)hp / (double)maxHp; };
 protected:
 	GameManager* gm;
 	BulletManager* bulletManager;

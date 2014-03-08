@@ -15,6 +15,7 @@ void Enemy::setParam(GameManager* gm, Vec2 pos)
 
 void Enemy::draw() {
 	texure.drawAt(pos);
+	if (subCnt < 3) texure.drawAt(pos, { 255, 0, 0 });
 }
 
 void Enemy::damage() {
@@ -29,7 +30,7 @@ void Enemy::defalutMove() {
 		enable = false;
 		gm->addScore(score);
 		gm->createExplosion(pos);
-		SoundAsset(L"burn").playMulti(0.5);
+		SoundAsset(L"burn").playMulti(0.3);
 	}
 	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
 		enable = false;

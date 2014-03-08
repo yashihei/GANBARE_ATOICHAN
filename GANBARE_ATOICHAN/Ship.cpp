@@ -47,12 +47,11 @@ void Ship::move() {
 }
 
 void Ship::draw() {
-	double num = rad * 3;
-	Triangle t({ pos.x, pos.y - num }, { pos.x + num, pos.y + num }, { pos.x - num, pos.y + num });
-	if (muteki) t.draw({ 255, 50, 50, 100 });
-	else t.draw({255, 50, 50, 255});
-	t.drawFrame(2.0, Palette::White);
-	if (slowMove) Circle(pos, rad).draw({255, 255, 255, 255});
+	int a = 255;
+	if (muteki) a = 150;
+	if (cnt % 10 < 5) TextureAsset(L"atoi")(0, 0, 300, 430).scale(0.2).drawAt(pos, Alpha(a));
+	else TextureAsset(L"atoi")(300, 0, 300, 430).scale(0.2).drawAt(pos, Alpha(a));
+	if (slowMove) Circle(pos, rad).draw({ 255, 0, 0, 255 });
 }
 
 void Ship::destory() {

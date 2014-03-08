@@ -35,6 +35,7 @@ GameManager::GameManager() {
 	TextureAsset::Register(L"start", L"dat/start.png");
 	TextureAsset::Register(L"enemy", L"dat/enemy.png");
 	TextureAsset::Register(L"explosion", L"dat/explosion.png");
+	TextureAsset::Register(L"atoi", L"dat/atoi.png");
 }
 
 void GameManager::move() {
@@ -42,9 +43,9 @@ void GameManager::move() {
 	case State::TITLE:
 		//if (cnt % 120 == 0) enemyManager->create({ Random(0, Window::Width()), 0 }, "chubosu");
 		if (enemyManager->getEnemies()->empty()) {
-			enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
+			//enemyManager->create({ Window::Width() / 2, 0 }, "chubosu");
 		}
-		//stageManager->move();
+		stageManager->move();
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked) startInGame();
@@ -90,25 +91,27 @@ void GameManager::draw() {
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
 		break;
 	case State::IN_GAME:
-		ship->draw();
 		shotManager->draw();
 		enemyManager->draw();
+		ship->draw();
 		bulletManager->draw();
+		drawState();
 		break;
 	case State::GAME_OVER:
 		enemyManager->draw();
 		bulletManager->draw();
-		FontAsset(L"font").drawCenter(L"GAME OVER", { Window::Width()/2, 300 }, Palette::White);
+		FontAsset(L"font").drawCenter(L"GAME OVER", { Window::Width() / 2, 300 }, Palette::Black);
+		FontAsset(L"font").drawCenter(L"GAME OVER", { Window::Width() / 2 - 2, 300 - 2 }, Palette::White);
 		break;
 	case State::GAME_CLEAR:
 		ship->draw();
 		shotManager->draw();
 		enemyManager->draw();
 		bulletManager->draw();
-		FontAsset(L"font").drawCenter(L"GAME CLEAR", { Window::Width()/2, 300 }, Palette::White);
+		FontAsset(L"font").drawCenter(L"GAME CLEAR", { Window::Width() / 2, 300 }, Palette::Black);
+		FontAsset(L"font").drawCenter(L"GAME CLEAR", { Window::Width() / 2 - 2, 300 - 2 }, Palette::White);
 		break;
 	}
-	drawState();
 	for (auto& explotion : explosions) explotion->draw();
 }
 
@@ -165,12 +168,7 @@ void GameManager::checkHit() {
 void GameManager::drawState() {
 	//life num
 	for (int i = 0; i < ship->getLife(); i++) {
-		double n = ship->getRad() * 3;
-		double x = (n + 20) * i + 30;
-		double y = Window::Height() - 30;
-		Triangle t({ x, y - n }, { x + n, y + n }, { x - n, y + n });
-		t.draw({ 255, 50, 50, 255 });
-		t.drawFrame(2.0, Palette::White);
+		TextureAsset(L"atoi")(0, 0, 300, 430).scale(0.15).drawAt(30 + i * 30, Window::Height() - 35);
 	}
 	//WARNING
 	int t = stageManager->getCnt();
@@ -178,14 +176,16 @@ void GameManager::drawState() {
 		FontAsset(L"waring").drawCenter(L"WARNING", { Window::Width() / 2, Window::Height() / 2 }, { 255, 0, 0, 255 });
 	}
 	//TODO:HPバー処理
-	//auto e = enemyManager->getEnemies->back();
-	if (false) {
-		//double t = (double)hp / (double)maxHp;
-		double t = 0.5;
-		Rect hpBar({ 25, 50 }, { (Window::Width() - 50) * t, 15 });
-		//hpBar.draw({ 255, 255, 255, 200 });
-		hpBar.draw(HSV(60 * t, 1.0, 1.0));
-		hpBar.drawFrame(0.0, 1.5, Palette::White);
+	auto enemies = enemyManager->getEnemies();
+	if (!enemies->empty()) {
+		//ボスならばHPバー表示
+		if (enemies->back()->getIsBoss()) {
+			double t = enemies->back()->getPerHp();
+			Rect hpBar({ 25, 50 }, { (Window::Width() - 50) * t, 15 });
+			//hpBar.draw({ 255, 255, 255, 200 });
+			hpBar.draw(HSV(60 * t, 1.0, 1.0));
+			hpBar.drawFrame(0.0, 1.5, Palette::White);
+		}
 	}
 	//score
 	FontAsset(L"font").draw(Format(L"SCORE:", score), { 10, 10 }, Palette::Black);
@@ -204,6 +204,6 @@ void GameManager::createExplosion(Vec2 pos)
 void GameManager::drawBack() {
 	TextureAsset(L"back").draw(0, scrollCnt);
 	TextureAsset(L"back").draw(0, -Window::Height() + scrollCnt);
-	scrollCnt += 5;
+	scrollCnt += 10;
 	if (scrollCnt > Window::Height()) scrollCnt = 0;
 }
