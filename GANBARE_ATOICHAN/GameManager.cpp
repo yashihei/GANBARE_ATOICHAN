@@ -195,9 +195,9 @@ void GameManager::drawState() {
 	//FontAsset(L"font").draw(Format(bulletManager->getBullets()->size()), { 10, 100 }, Palette::Black);
 }
 
-void GameManager::createExplosion(Vec2 pos)
+void GameManager::createExplosion(Vec2 pos, double size)
 {
-	auto e = std::make_shared<Explosion>(pos);
+	auto e = std::make_shared<Explosion>(pos, size);
 	explosions.push_back(e);
 }
 

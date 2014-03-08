@@ -29,7 +29,12 @@ void Enemy::defalutMove() {
 	if (hp < 0) {
 		enable = false;
 		gm->addScore(score);
-		gm->createExplosion(pos);
+		double t;
+		if (maxHp <= 15) t = 0.7;
+		else if (maxHp <= 50) t = 1.0;
+		else if (maxHp <= 100) t = 1.5;
+		else t = 2.0;
+		gm->createExplosion(pos, t);
 		SoundAsset(L"burn").playMulti(0.3);
 	}
 	if (pos.x > Window::Height() || pos.x < 0 || pos.y > Window::Height() || pos.y < 0) {
@@ -92,7 +97,7 @@ Middle::Middle() {
 	color = Color{ 0, 0, 255, 200 };
 	kakudo = 0.0;
 	score = 30000;
-	texure = TextureAsset(L"enemy")(64, 0, 64, 64);
+	texure = TextureAsset(L"enemy")(64, 0, 64, 64).scale(1.3);
 }
 
 void Middle::move() {
@@ -145,7 +150,7 @@ Chubosu::Chubosu() {
 	score = 100000;
 	shotCnt = 0;
 	kakudo = 0;
-	texure = TextureAsset(L"enemy")(128, 0, 64, 64);
+	texure = TextureAsset(L"enemy")(128, 0, 64, 64).scale(1.5);
 }
 
 void Chubosu::move() {
