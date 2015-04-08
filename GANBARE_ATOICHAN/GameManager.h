@@ -29,7 +29,8 @@ public:
 	void startClear();
 	void createExplosion(Vec2 pos, double size);
 	void drawBack();
-	bool getEasyFlag() { return easyFlag; }
+	bool isEasy() { return easyFlag; }
+	std::shared_ptr<XInput> getController() { return controller; }
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }
 	ShotManager* getShots() { return shotManager.get(); }
@@ -51,4 +52,5 @@ private:
 	int cnt;
 	int scrollCnt;
 	bool easyFlag;
+	std::shared_ptr<XInput> controller;
 };

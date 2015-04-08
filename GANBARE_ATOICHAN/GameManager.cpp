@@ -19,6 +19,7 @@ GameManager::GameManager() {
 	cnt = 0;
 	scrollCnt = 0;
 	easyFlag = false;
+	controller = std::make_shared<XInput>(0);
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
@@ -48,7 +49,7 @@ void GameManager::move() {
 		stageManager->move();
 		enemyManager->move();
 		bulletManager->move();
-		if (Input::KeyZ.clicked) {
+		if (Input::KeyZ.clicked || controller->buttonX.clicked) {
 			easyFlag = true;
 			startInGame();
 		} else if (Input::KeyX.clicked) {

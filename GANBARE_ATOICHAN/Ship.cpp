@@ -28,7 +28,7 @@ void Ship::move() {
 	}
 
 	//fire
-	if (Input::KeyZ.pressed && cnt % 3 == 0) {
+	if ((Input::KeyZ.pressed || gm->getController()->buttonX.pressed) && cnt % 3 == 0) {
 		auto shots = gm->getShots();
 		shots->create(pos + Vec2(-10.0, 0.0), { 0.0, -30.0 });
 		shots->create(pos + Vec2(10.0, 0.0), { 0.0, -30.0 });
@@ -70,16 +70,19 @@ void Ship::destory() {
 void Ship::moveControl() {
 	const double ROOT2 = 1.414;
 
-	//Joypad j(0);//‰¼ó‘Ô
-	if (Input::KeyShift.pressed) slowMove = true;
+	auto controller = gm->getController();
+
+	if (Input::KeyShift.pressed || controller->buttonRB.pressed) slowMove = true;
 	else slowMove = false;
 
 	Vec2 vel = { 0, 0 };
 	const double speed = 5.5;
-	if (Input::KeyLeft.pressed) vel.x -= speed;
-	if (Input::KeyRight.pressed) vel.x = speed;
-	if (Input::KeyUp.pressed) vel.y -= speed;
-	if (Input::KeyDown.pressed) vel.y = speed;
+	//“ËŠÑHŽ–
+	const double limit = 0.3;
+	if (Input::KeyLeft.pressed || controller->buttonLeft.pressed || (controller->leftThumbX < -limit)) vel.x -= speed;
+	if (Input::KeyRight.pressed || controller->buttonRight.pressed || (controller->leftThumbX > limit)) vel.x = speed;
+	if (Input::KeyUp.pressed || controller->buttonUp.pressed || (controller->leftThumbY > limit)) vel.y -= speed;
+	if (Input::KeyDown.pressed || controller->buttonDown.pressed || (controller->leftThumbY < -limit)) vel.y = speed;
 	if (vel.x != 0 && vel.y != 0) {
 		vel.x /= ROOT2;
 		vel.y /= ROOT2;
