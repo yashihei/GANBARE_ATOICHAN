@@ -29,6 +29,7 @@ public:
 	void startClear();
 	void createExplosion(Vec2 pos, double size);
 	void drawBack();
+	bool getEasyFlag() { return easyFlag; }
 	//TODO:getter
 	Ship* getShip() { return ship.get(); }
 	ShotManager* getShots() { return shotManager.get(); }
@@ -49,4 +50,5 @@ private:
 	int score;
 	int cnt;
 	int scrollCnt;
+	bool easyFlag;
 };

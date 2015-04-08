@@ -80,9 +80,8 @@ void Tossin::move() {
 	double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	radian += Random(-0.2, 0.2);
 	double sp = 7.0;
-	const int interval = 5;
+	int interval = 5;
 	if (cnt % interval == 0) bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, 1, 0);
-
 	sp = 5.0;
 	radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	if (pos.y + 100 < ship->getPos().y) vel = { Sin(radian)*sp, Cos(radian)*sp };

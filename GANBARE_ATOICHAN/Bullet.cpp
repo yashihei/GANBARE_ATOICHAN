@@ -39,7 +39,7 @@ void Bullet::move() {
 void Bullet::draw() {
 	//Graphics::Set2DBlendState(BlendState::Additive());
 	texture.scale(1.3).drawAt(pos);
-	Graphics::Set2DBlendState(BlendState::Default());
+	Graphics2D::SetBlendState(BlendState::Default);
 }
 
 void Bullet::burn() {

@@ -9,6 +9,7 @@
 
 GameManager::GameManager() {
 	shotManager = std::make_shared<ShotManager>();
+
 	bulletManager = std::make_shared<BulletManager>();
 	ship = std::make_shared<Ship>(this);
 	enemyManager = std::make_shared<EnemyManager>(this);
@@ -17,15 +18,16 @@ GameManager::GameManager() {
 	score = 0;
 	cnt = 0;
 	scrollCnt = 0;
+	easyFlag = false;
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
 	FontAsset::Register(L"metaFont", 10, Typeface::Black);
 	FontAsset::Register(L"waring", 40, Typeface::Black);
-	SoundAsset::Register(L"music", L"dat/music.mp3", true);
+	SoundAsset::Register(L"music", L"dat/music.mp3");
 	SoundAsset::Preload(L"music");
-	SoundAsset::Register(L"burn", L"dat/burn.wav", true);
-	SoundAsset::Register(L"shoot", L"dat/shoot.wav", true);
-	SoundAsset::Register(L"damage", L"dat/damage.wav", true);
+	SoundAsset::Register(L"burn", L"dat/burn.wav");
+	SoundAsset::Register(L"shoot", L"dat/shoot.wav");
+	SoundAsset::Register(L"damage", L"dat/damage.wav");
 	TextureAsset::Register(L"bullet", L"dat/bullet.png");
 	TextureAsset::Register(L"back", L"dat/back.png");
 	TextureAsset::Register(L"shot", L"dat/shot.png");
@@ -46,7 +48,12 @@ void GameManager::move() {
 		stageManager->move();
 		enemyManager->move();
 		bulletManager->move();
-		if (Input::KeyZ.clicked) startInGame();
+		if (Input::KeyZ.clicked) {
+			easyFlag = true;
+			startInGame();
+		} else if (Input::KeyX.clicked) {
+			startInGame();
+		}
 		break;
 	case State::IN_GAME:
 		ship->move();
@@ -82,8 +89,8 @@ void GameManager::draw() {
 	drawBack();
 	switch (state) {
 	case State::TITLE:
-		enemyManager->draw();
 		bulletManager->draw();
+		enemyManager->draw();
 		TextureAsset(L"title").draw( 0, 300 );
 		if (cnt % 50 < 25) TextureAsset(L"start").draw( 0, 360 );
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
@@ -145,7 +152,7 @@ void GameManager::checkHit() {
 		for (auto e = enemies->begin(); e != enemies->end(); ++e) {
 			Line line((*s)->getPos(), (*s)->getPos() + (*s)->getVel());
 			Circle circle((*e)->getPos(), (*e)->getRad());
-			if (Geometry::Intersect(line, circle)) {
+			if (Geometry2D::Intersect(line, circle)) {
 				(*e)->damage();
 				(*s)->burn();
 			}
@@ -155,7 +162,7 @@ void GameManager::checkHit() {
 	for (auto b = bullets->begin(); b != bullets->end(); ++b) {
 		Line line((*b)->getPos(), (*b)->getPos() + (*b)->getVel());
 		Circle circle(ship->getPos(), ship->getRad());
-		if (Geometry::Intersect(line, circle)) {
+		if (Geometry2D::Intersect(line, circle)) {
 			ship->destory();
 			break;
 		}
