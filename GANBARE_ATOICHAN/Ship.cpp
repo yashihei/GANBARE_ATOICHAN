@@ -13,6 +13,7 @@ gm(gm)
 
 void Ship::init() {
 	life = 3;
+	if (gm->isEasy()) life = 5;
 	pos = { Window::Width() / 2, Window::Height() - 100 };
 	cnt = 0;
 	comeBack = false;
@@ -78,7 +79,7 @@ void Ship::moveControl() {
 	Vec2 vel = { 0, 0 };
 	const double speed = 5.5;
 	//“ËŠÑH–
-	const double limit = 0.3;
+	const double limit = 0.4;
 	if (Input::KeyLeft.pressed || controller->buttonLeft.pressed || (controller->leftThumbX < -limit)) vel.x -= speed;
 	if (Input::KeyRight.pressed || controller->buttonRight.pressed || (controller->leftThumbX > limit)) vel.x = speed;
 	if (Input::KeyUp.pressed || controller->buttonUp.pressed || (controller->leftThumbY > limit)) vel.y -= speed;

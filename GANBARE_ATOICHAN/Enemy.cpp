@@ -81,10 +81,16 @@ void Tossin::move() {
 	radian += Random(-0.2, 0.2);
 	double sp = 7.0;
 	int interval = 5;
+	double moveSp = 5.0;
+	//easymode
+	if (gm->isEasy()) {
+		sp = 5.0;
+		interval = 10;
+		moveSp = 3.0;
+	}
 	if (cnt % interval == 0) bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, 1, 0);
-	sp = 5.0;
 	radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
-	if (pos.y + 100 < ship->getPos().y) vel = { Sin(radian)*sp, Cos(radian)*sp };
+	if (pos.y + 100 < ship->getPos().y) vel = { Sin(radian)*moveSp, Cos(radian)*moveSp };
 	pos.moveBy(vel);
 
 	Enemy::defalutMove();
@@ -104,8 +110,14 @@ void Middle::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
 	double sp = 5.0;
-	const int interval = 3;
-	const int sep = 10;
+	int interval = 3;
+	int sep = 10;
+
+	if (gm->isEasy()) {
+		sp = 3.0;
+		interval = 6;
+		sep = 5;
+	}
 
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 15.0;
@@ -131,7 +143,12 @@ Baramaki::Baramaki() {
 }
 
 void Baramaki::move() {
-	const int interval = 15;
+	int interval = 15;
+
+	if (gm->isEasy()) {
+		interval = 30;
+	}
+
 	//TODO:角度少なく
 	if (cnt % interval == 0) {
 		bulletManager->create(pos, { Random(-1.5, 1.5), -2.0 }, 1, 1);
@@ -156,9 +173,17 @@ void Chubosu::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
 	double sp = 3.0;
-	const int sep = 10;
-	int interval = 8 * ((double)hp/maxHp);//HP残り値により発狂
-	if (interval == 0) interval = 1;
+	int sep = 10;
+	int interval = (int)(8 * ((double)hp/maxHp));//HP残り値により発狂
+	if (interval <= 1) interval = 1;
+
+	if (gm->isEasy()) {
+		//sep = 5;
+		sp = 2.0;
+		interval = (int)(15 * ((double)hp / maxHp));//HP残り値により発狂
+		if (interval <= 3) interval = 3;
+	}
+
 	if (cnt > 30 && cnt % interval == 0) {
 		kakudo += 5.0;
 		for (int i = 0; i < sep; i++) {
@@ -204,7 +229,14 @@ void Nerai::move() {
 	const double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 2.0 + (cnt - 30) / 10;
 	if (sp > 10.0) sp = 10.0;
-	const int interval = 5;
+	int interval = 5;
+
+	if (gm->isEasy()) {
+		sp = 2.0 + (cnt - 30) / 20;
+		if (sp > 5.0) sp = 5.0;
+		interval = 7;
+	}
+
 	if (cnt % interval == 0 &&
 		cnt > 30 && cnt < 150)
 		bulletManager->create(pos, { Sin(radian)*sp, Cos(radian)*sp }, 0, 0);
@@ -230,7 +262,12 @@ void ThreeWay::move() {
 	const double PI = 3.14;
 	const double radian = Atan2(ship->getPos().x - pos.x, ship->getPos().y - pos.y);
 	double sp = 6.0;
-	const int interval = 5;
+	int interval = 5;
+
+	if (gm->isEasy()) {
+		sp = 5.0;
+	}
+
 	if (cnt % interval == 0 &&
 		cnt % 50 < 25) {
 		for (int i = -1; i < 2; i++) {
@@ -255,8 +292,13 @@ void Galaxy::move() {
 	const double PI2 = 6.28;
 	double radian = Radians(kakudo);
 	double sp = 4.0;
-	const int interval = 1;
-	const int sep = 5;
+	int interval = 1;
+	int sep = 5;
+
+	if (gm->isEasy()) {
+		interval = 4;
+		sp = 2.0;
+	}
 
 	if (cnt > 30 && cnt % interval == 0) {
 		if ((cnt - 30) % 100 < 50) kakudo += 10;
