@@ -5,8 +5,6 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "StageManager.h"
-#include "CheckCollide.h"
-#include "Actor.h"
 #include "Explosion.h"
 
 GameManager::GameManager() {

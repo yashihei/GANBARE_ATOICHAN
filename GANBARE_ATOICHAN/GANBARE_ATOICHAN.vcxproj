@@ -41,13 +41,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SIV3D_20140100)\Inc;$(SIV3D_20140100)\Inc\boostMinimal;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SIV3D_20140100)\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SIV3D_20140100)\Inc;$(SIV3D_20140100)\Inc\boostMinimal;$(IncludePath);C:\Siv3DPackage(January2014)\Inc;C:\Siv3DPackage(January2014)\Inc\boostMinimal</IncludePath>
+    <LibraryPath>$(SIV3D_20140100)\Lib;$(LibraryPath);C:\Siv3DPackage(January2014)\Lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SIV3D_20140100)\Inc;$(SIV3D_20140100)\Inc\boostMinimal;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SIV3D_20140100)\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SIV3D_20140100)\Inc;$(SIV3D_20140100)\Inc\boostMinimal;$(IncludePath);C:\Siv3DPackage(January2014)\Inc;C:\Siv3DPackage(January2014)\Inc\boostMinimal</IncludePath>
+    <LibraryPath>$(SIV3D_20140100)\Lib;$(LibraryPath);C:\Siv3DPackage(January2014)\Lib</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

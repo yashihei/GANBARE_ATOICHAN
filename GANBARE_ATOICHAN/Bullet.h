@@ -3,7 +3,6 @@
 #include <list>
 #include <memory>
 #include <functional>
-#include "Actor.h"
 
 class Bullet
 {
