@@ -26,14 +26,15 @@ void Enemy::damage() {
 void Enemy::defalutMove() {
 	cnt++;
 	subCnt++;
+	//€‚ñ‚¾Œã“G‚ÉŠÖ‚·‚éˆ—‚ğŒp‘±‚³‚¹‚é‚Æ‚«‚±‚ê‚¾‚Æ•s•Ö
 	if (hp < 0) {
 		enable = false;
 		gm->addScore(score);
 		double t;
-		if (maxHp <= 15) t = 0.7;
-		else if (maxHp <= 50) t = 1.0;
-		else if (maxHp <= 100) t = 1.5;
-		else t = 2.0;
+		if (maxHp <= 15) t = 0.35;
+		else if (maxHp <= 50) t = 0.5;
+		else if (maxHp <= 100) t = 0.75;
+		else t = 1.0;
 		gm->createExplosion(pos, t);
 		SoundAsset(L"burn").playMulti(0.3);
 	}
@@ -115,8 +116,7 @@ void Middle::move() {
 
 	if (gm->isEasy()) {
 		sp = 3.0;
-		interval = 6;
-		sep = 5;
+		interval = 5;
 	}
 
 	if (cnt > 30 && cnt % interval == 0) {

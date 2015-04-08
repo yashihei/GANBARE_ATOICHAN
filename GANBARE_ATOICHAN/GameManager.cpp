@@ -91,8 +91,8 @@ void GameManager::draw() {
 	drawBack();
 	switch (state) {
 	case State::TITLE:
-		bulletManager->draw();
 		enemyManager->draw();
+		bulletManager->draw();
 		TextureAsset(L"title").draw( 0, 300 );
 		if (cnt % 50 < 25) TextureAsset(L"start").draw( 0, 360 );
 		FontAsset(L"metaFont").draw(L"", { 280, 570 }, Palette::White);
@@ -204,7 +204,7 @@ void GameManager::drawState() {
 
 void GameManager::createExplosion(Vec2 pos, double size)
 {
-	auto e = std::make_shared<Explosion>(pos, size);
+	auto e = std::make_shared<Explosion>(this, pos, size);
 	explosions.push_back(e);
 }
 
