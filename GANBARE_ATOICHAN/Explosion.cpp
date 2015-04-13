@@ -12,7 +12,7 @@ gm(gm), pos(pos), size(size)
 void Explosion::move()
 {
 	double t = size - cnt / 30;
-	gm->getController()->setVibration(t, t);
+	//gm->getController()->setVibration(t, t);
 	cnt++;
 	if (cnt > 30) {
 		enable = false;

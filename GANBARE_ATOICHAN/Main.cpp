@@ -17,10 +17,10 @@ void Main()
 	//	LOG(L"ディスプレイサイズあってないー");
 	//	return; // targetSize が含まれていない場合終了
 	//}
-	Window::SetFullscreen(true, targetSize);
+	//Window::SetFullscreen(true, targetSize);
 
 	Window::Resize(480, 640);
-	Window::SetTitle(L"DANMAKU");
+	Window::SetTitle(L"がんばれ！あといちゃん");
 
 	auto gm = std::make_shared<GameManager>();
 	while (System::Update())
