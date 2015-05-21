@@ -157,3 +157,5 @@ $RECYCLE.BIN/
 /GANBARE_ATOICHAN/engine
 /GANBARE_ATOICHAN/Example
 /GANBARE_ATOICHAN/Screenshot
+ignore_dat/
+*_log.html
