@@ -18,7 +18,7 @@ GameManager::GameManager() {
 	score = 0;
 	cnt = 0;
 	scrollCnt = 0;
-	easyFlag = true;
+	easyFlag = false;
 	controller = std::make_shared<XInput>(0);
 	FontAsset::Register(L"font", 15, Typeface::Black);
 	FontAsset::Register(L"titleFont", 20, Typeface::Black);
@@ -50,10 +50,10 @@ void GameManager::move() {
 		enemyManager->move();
 		bulletManager->move();
 		if (Input::KeyZ.clicked || controller->buttonX.clicked) {
-			easyFlag = true;
+			easyFlag = false;
 			startInGame();
 		} else if (Input::KeyX.clicked || controller->buttonA.clicked) {
-			easyFlag = false;
+			easyFlag = true;
 			startInGame();
 		}
 		break;
